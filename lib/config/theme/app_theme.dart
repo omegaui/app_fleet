@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static const textButtonBackground = Color(0xFF000000);
-  static final textButtonStyle =
-      fontBold.copyWith(fontSize: 20, color: Colors.white);
-
   static TextStyle get fontBold => const TextStyle(
         fontFamily: "Sen",
         fontWeight: FontWeight.bold,
