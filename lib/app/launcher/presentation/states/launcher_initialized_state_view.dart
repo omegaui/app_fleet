@@ -181,10 +181,16 @@ class _LauncherInitializedStateViewState
                                   ),
                                 ),
                               ),
-                              const SizedBox(width: 4.0),
-                              Text(
-                                "App Fleet (launcher mode)",
-                                style: AppTheme.fontSize(16).makeBold(),
+                              AppTooltipBuilder.wrap(
+                                text: "Reload from Disk",
+                                child: IconButton(
+                                  onPressed: () {
+                                    widget.controller.reloadFromDisk();
+                                  },
+                                  icon: const Icon(
+                                    Icons.refresh,
+                                  ),
+                                ),
                               ),
                             ],
                           ),
@@ -219,7 +225,7 @@ class _LauncherInitializedStateViewState
                 ),
               ),
               bottomBar(
-                text: "Workspace Launcher",
+                text: "App Fleet",
               ),
             ],
           ),
