@@ -15,7 +15,7 @@ elif [ "$mode" == "update" ]; then
   echo "Starting Integration in Update Mode ..."
   rm -rf $HOME/app-fleet/data
   rm -rf $HOME/app-fleet/lib
-  rm $HOME/app-fleet/app_fleet
+  rm $HOME/app-fleet/app-fleet
 else
   echo "Unknown integration mode: \"$mode\""
   exit 127
