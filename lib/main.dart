@@ -63,7 +63,7 @@ class AppFleet extends StatefulWidget {
 class _AppFleetState extends State<AppFleet> {
   bool initialized = false;
   late RouteService routeService;
-  late StreamSubscription<ConnectivityResult> connectivitySubscription;
+  StreamSubscription<ConnectivityResult>? connectivitySubscription;
 
   @override
   void initState() {
@@ -73,8 +73,10 @@ class _AppFleetState extends State<AppFleet> {
         DependencyInjection.find<AppSession>().addListener(() {
           showBugReports();
         });
-        connectivitySubscription =
-            DependencyInjection.find<AppUpdater>().init();
+        if (!launcherMode) {
+          connectivitySubscription =
+              DependencyInjection.find<AppUpdater>().init();
+        }
         initialized = true;
       }),
     );
@@ -88,7 +90,7 @@ class _AppFleetState extends State<AppFleet> {
 
   @override
   void dispose() {
-    connectivitySubscription.cancel();
+    connectivitySubscription?.cancel();
     super.dispose();
   }
 
