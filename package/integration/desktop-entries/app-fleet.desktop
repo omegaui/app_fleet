@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=App Fleet
+Exec=app-fleet
+Icon=app-fleet
+Version=1.0
+Type=Application
+Categories=Utility
+Terminal=false

@@ -1,0 +1,1 @@
+class UnrecognizedStateException extends Error {}

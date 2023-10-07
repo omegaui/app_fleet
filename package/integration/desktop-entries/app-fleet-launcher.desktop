@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=App Fleet (Launcher)
+Exec=app-fleet --mode launcher
+Icon=app-fleet
+Version=1.0
+Type=Application
+Categories=Utility
+Terminal=false
