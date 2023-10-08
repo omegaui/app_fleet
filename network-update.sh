@@ -13,5 +13,5 @@ echo ">> Step 4: Authorize to make the updater executable ..."
 cd app-fleet-bundle
 sudo chmod 0755 update.sh integration/integrate.sh
 echo ">> Step 5: Starting Updater ..."
-./install.sh
+./updater.sh
 echo ">> Thank you for updating App Fleet!"
