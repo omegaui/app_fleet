@@ -1,3 +1,3 @@
 #!/bin/bash
-cd package/integration
+cd integration
 ./integrate.sh update
