@@ -63,7 +63,7 @@ curl https://raw.githubusercontent.com/omegaui/app-fleet/main/network-install.sh
 
 ```shell
 git clone https://github.com/omegaui/app-fleet
-cd app-fleet
+cd app-fleet/package
 ./install.sh
 ```
 
@@ -71,7 +71,7 @@ cd app-fleet
 
 ```shell
 git clone https://github.com/omegaui/app-fleet
-cd app-fleet
+cd app-fleet/package
 ./install-from-source.sh
 ```
 
@@ -93,7 +93,7 @@ curl https://raw.githubusercontent.com/omegaui/app-fleet/main/network-update.sh 
 
 ```shell
 git clone https://github.com/omegaui/app-fleet
-cd app-fleet
+cd app-fleet/package
 ./update.sh
 ```
 
@@ -101,7 +101,7 @@ cd app-fleet
 
 ```shell
 git clone https://github.com/omegaui/app-fleet
-cd app-fleet
+cd app-fleet/package
 ./update-from-source.sh
 ```
 
