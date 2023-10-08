@@ -9,7 +9,13 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
+bool _visible = false;
+
 void showBugReports() {
+  if (_visible) {
+    return;
+  }
+  _visible = true;
   debugPrintApp(">> Showing Bug Report Dialog");
   showDialog(
     context: RouteService.navigatorKey.currentContext!,
@@ -42,6 +48,7 @@ void showBugReports() {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 20.0),
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image.asset(
                               AppIcons.bug,
@@ -98,6 +105,7 @@ void showBugReports() {
                         child: appWindowButton(
                           color: Colors.red,
                           onPressed: () {
+                            _visible = false;
                             Navigator.pop(context);
                           },
                         ),
