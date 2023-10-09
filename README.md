@@ -189,6 +189,10 @@ its called the <strong><a href="https://github.com/omegaui/floating_action_bar">
 which can be used to quickly launch anything on any Modern Desktop Environment.
 </p>
 
+## What's next?
+
+See what is [**planned**](https://github.com/omegaui/app_fleet/milestone/1) for the next release.
+
 <div align="center">
     <h3 style="font-family: Sen">
         App Designed and Crafted by <strong><a href="https://github.com/omegaui">@omegaui</a></strong>
