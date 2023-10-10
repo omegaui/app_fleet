@@ -68,8 +68,9 @@ class AppUpdater {
         error: error,
         stackTrace: stackTrace,
       );
+      return;
     }
-    response = response!;
+    response = response;
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body);
       final latestVersion = body['latest'];

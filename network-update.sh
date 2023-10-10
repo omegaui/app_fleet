@@ -15,4 +15,7 @@ echo ">> Step 4: Authorize to make the updater executable ..."
 sudo chmod 0755 update.sh integration/integrate.sh
 echo ">> Step 5: Starting Installer ..."
 ./update.sh
+echo ">> Step 6: Removing Extracted Bundle ..."
+cd ..
+rm -rf app-fleet-bundle
 echo ">> Thank you for updating App Fleet!"

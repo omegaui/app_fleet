@@ -95,9 +95,6 @@ void showAppDialog({
                                       children: [
                                         GestureDetector(
                                           onTap: () async {
-                                            if (app.internallyGenerated) {
-                                              return;
-                                            }
                                             FilePickerResult? result =
                                                 await FilePicker.platform
                                                     .pickFiles(
