@@ -189,6 +189,36 @@ its called the <strong><a href="https://github.com/omegaui/floating_action_bar">
 which can be used to quickly launch anything on any Modern Desktop Environment.
 </p>
 
+## Know Issues and their Fixes
+
+### Update Notifier
+If you are getting a bug report generated saying
+
+```shell
+ClientException with SocketException: Connection reset by peer (OS Error: Connection reset by peer, errno = 104), address = raw.githubusercontent.com, port = 55610, uri=https://raw.githubusercontent.com/omegaui/app-fleet/main/updates/latest.json
+```
+
+This can be fixed by adding `185.199.108.133 raw.githubusercontent.com`
+to the end of `/etc/hosts` file on your system.
+
+(1) Open the /etc/hosts file using
+
+```
+sudo nano /etc/hosts
+```
+
+2)Enter your password.
+
+3)Add the following IP address at the end of the file:
+
+```
+185.199.108.133 raw.githubusercontent.com
+```
+
+4)Save and close the file.
+
+Although, hard-coding ip addresses isn't a solution but it fixes this bug.
+
 ## What's next?
 
 See what is [**planned**](https://github.com/omegaui/app_fleet/milestone/1) for the next release.
