@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
+  AppTheme._();
+
   static TextStyle get fontBold => const TextStyle(
         fontFamily: "Sen",
         fontWeight: FontWeight.bold,

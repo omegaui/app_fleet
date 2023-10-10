@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class AppStorageManager {
+  AppStorageManager._();
+
   static void initSpace() {
     mkdir(combinePath([".config"]), "Initializing App Settings Storage ...");
     mkdir(combinePath([".config", "workspaces"]),

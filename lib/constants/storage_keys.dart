@@ -1,4 +1,6 @@
 class StorageKeys {
+  StorageKeys._();
+
   static const workspacesKey = 'workspaces';
   static const nameKey = 'name';
   static const iconPathKey = 'icon';

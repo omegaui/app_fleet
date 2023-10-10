@@ -70,7 +70,6 @@ class AppUpdater {
       );
       return;
     }
-    response = response;
     if (response.statusCode == 200) {
       final body = jsonDecode(response.body);
       final latestVersion = body['latest'];

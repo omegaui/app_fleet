@@ -6,3 +6,4 @@ Version=1.0
 Type=Application
 Categories=Utility
 Terminal=false
+StartupWMClass=app-fleet

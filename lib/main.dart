@@ -137,6 +137,7 @@ class _AppFleetState extends State<AppFleet> {
   }
 }
 
+// Honestly, this splash never comes up on performant machines
 Widget _splash(BuildContext context) {
   return Scaffold(
     backgroundColor: Colors.transparent,
