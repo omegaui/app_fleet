@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:app_fleet/app/config/domain/workspace_entity.dart';
 import 'package:app_fleet/main.dart';
+import 'package:flutter/foundation.dart';
 
 class LinuxAppFinder {
   static Set<App> apps = {};
@@ -24,10 +25,37 @@ class LinuxAppFinder {
 
     debugPrintApp("[LinuxAppFinder] Loading Apps ...");
 
-    _addAppsFrom('/usr/share/applications');
-    _addAppsFrom(
-        '/var/lib/snapd/desktop/applications'); // if system has snaps installed
-    _addAppsFrom('${Platform.environment['HOME']}/.local/share/applications');
+    // Finding Global Applications
+    _addAppsFrom('/usr/share/applications', onNotExistEvent: () {
+      debugPrintApp(
+          "[LinuxAppFinder] Unable to find any global applications ...");
+    });
+
+    // Finding Local Snap Applications
+    _addAppsFrom('${Platform.environment['HOME']}/.local/share/applications',
+        onNotExistEvent: () {
+      debugPrintApp("[LinuxAppFinder] Unable to find local applications ...");
+    });
+
+    // Finding Global Snap Applications
+    _addAppsFrom('/var/lib/snapd/desktop/applications', onNotExistEvent: () {
+      debugPrintApp(
+          "[LinuxAppFinder] Unable to find any global snap applications ...");
+    });
+
+    // Finding Global Flatpak Applications
+    _addAppsFrom('/var/lib/flatpak/exports/share/applications',
+        onNotExistEvent: () {
+      debugPrintApp(
+          "[LinuxAppFinder] Unable to find any global flatpak applications ...");
+    });
+
+    // Finding Local Flatpak Applications
+    _addAppsFrom('${Platform.environment['HOME']}/.local/share/flatpak',
+        onNotExistEvent: () {
+      debugPrintApp(
+          "[LinuxAppFinder] Unable to find any user level flatpak applications ...");
+    });
 
     debugPrintApp("[LinuxAppFinder] Loading Apps ... Done!");
 
@@ -51,8 +79,12 @@ class LinuxAppFinder {
     }
   }
 
-  void _addAppsFrom(String path) {
+  void _addAppsFrom(String path, {required VoidCallback onNotExistEvent}) {
     Directory systemApplicationsDir = Directory(path);
+    if (!systemApplicationsDir.existsSync()) {
+      onNotExistEvent();
+      return;
+    }
     var entries = systemApplicationsDir.listSync();
     for (var entity in entries) {
       if (entity.statSync().type == FileSystemEntityType.file) {

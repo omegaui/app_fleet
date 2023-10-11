@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:app_fleet/app/config/domain/workspace_entity.dart';
+import 'package:app_fleet/config/assets/app_icons.dart';
 import 'package:app_fleet/config/theme/app_theme.dart';
 import 'package:app_fleet/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,12 @@ class _WorkspaceTileState extends State<WorkspaceTile> {
 
   Image getWorkspaceIcon(icon) {
     final iconPath = icon;
+    if (iconPath.isEmpty) {
+      return Image.asset(
+        AppIcons.unknown,
+        width: 96,
+      );
+    }
     if (iconPath.startsWith('assets/icons/picker')) {
       return Image.asset(
         iconPath,

@@ -24,6 +24,8 @@ final class DependencyManager {
 }
 
 final class DependencyInjection {
+  DependencyInjection._();
+
   static final DependencyManager _manager = DependencyManager();
 
   static void injectDependencies(VoidCallback onRebuildRequested) {

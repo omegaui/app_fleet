@@ -7,6 +7,8 @@ import 'package:intl/intl.dart';
 import 'package:linux_plus/linux_plus.dart';
 
 class AppBugReport {
+  AppBugReport._();
+
   static final AppSession _session = DependencyInjection.find<AppSession>();
   static final List<String> reportIDs = [];
 

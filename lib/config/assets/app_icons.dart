@@ -1,6 +1,8 @@
 import 'package:flutter/services.dart';
 
 class AppIcons {
+  AppIcons._();
+
   static const appFleet = 'assets/icons/app-icon.png';
   static const unknown = 'assets/icons/unknown.png';
   static const magic = 'assets/icons/magic.png';
