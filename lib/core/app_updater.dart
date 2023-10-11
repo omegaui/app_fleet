@@ -52,42 +52,44 @@ class AppUpdater {
 
   void checkForUpdates({
     required void Function(UpdateData? data, RequestStatus status) onComplete,
-  }) async {
+  }) {
     if (_checked) {
       return;
     }
-    Response? response;
-    try {
-      response = await get(Uri.parse(updateDataUrl));
-    } catch (error, stackTrace) {
-      debugPrintApp('[AppUpdater] Unable to fetch update data');
-      AppBugReport.createReport(
-        message: "Unable to fetch update data.",
-        source: "`AppUpdater` - `checkForUpdates()`",
-        additionalDescription: "Possibly due to bad request or invalid url.",
-        error: error,
-        stackTrace: stackTrace,
-      );
-      return;
-    }
-    if (response.statusCode == 200) {
-      final body = jsonDecode(response.body);
-      final latestVersion = body['latest'];
-      if (AppMetaInfo.version != latestVersion) {
-        onComplete(UpdateData(latestVersion), RequestStatus.success);
-      } else {
-        onComplete(UpdateData.alreadyLatest(), RequestStatus.success);
-      }
-    } else {
-      onComplete(null, RequestStatus.failed);
-      AppBugReport.createReport(
-        message: "An error occurred while checking for updates.",
-        source: "`AppUpdater` - `checkForUpdates()`",
-        additionalDescription: "Possibly due to parse error.",
-        error: Exception('Got a response code: ${response.statusCode}'),
-        stackTrace: StackTrace.fromString(response.body),
-      );
-    }
     _checked = true;
+    Future.delayed(const Duration(seconds: 5), () async {
+      Response? response;
+      try {
+        response = await get(Uri.parse(updateDataUrl));
+      } catch (error, stackTrace) {
+        debugPrintApp('[AppUpdater] Unable to fetch update data');
+        AppBugReport.createReport(
+          message: "Unable to fetch update data.",
+          source: "`AppUpdater` - `checkForUpdates()`",
+          additionalDescription: "Possibly due to bad request or invalid url.",
+          error: error,
+          stackTrace: stackTrace,
+        );
+        return;
+      }
+      if (response.statusCode == 200) {
+        final body = jsonDecode(response.body);
+        final latestVersion = body['latest'];
+        if (AppMetaInfo.version != latestVersion) {
+          onComplete(UpdateData(latestVersion), RequestStatus.success);
+        } else {
+          onComplete(UpdateData.alreadyLatest(), RequestStatus.success);
+        }
+      } else {
+        onComplete(null, RequestStatus.failed);
+        AppBugReport.createReport(
+          message: "An error occurred while checking for updates.",
+          source: "`AppUpdater` - `checkForUpdates()`",
+          additionalDescription: "Possibly due to parse error.",
+          error: Exception('Got a response code: ${response.statusCode}'),
+          stackTrace: StackTrace.fromString(response.body),
+        );
+      }
+    });
   }
 }
