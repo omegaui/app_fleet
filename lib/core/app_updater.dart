@@ -53,7 +53,7 @@ class AppUpdater {
   void checkForUpdates({
     required void Function(UpdateData? data, RequestStatus status) onComplete,
   }) {
-    if (_checked) {
+    if (debugMode || _checked) {
       return;
     }
     _checked = true;

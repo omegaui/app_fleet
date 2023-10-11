@@ -2,9 +2,12 @@ import 'package:app_fleet/app/config/domain/workspace_entity.dart';
 import 'package:app_fleet/app/launcher/data/launcher_repository.dart';
 import 'package:app_fleet/core/app_session_status.dart';
 import 'package:app_fleet/core/dependency_manager.dart';
+import 'package:app_fleet/core/route_service.dart';
 import 'package:app_fleet/main.dart';
 import 'package:app_fleet/utils/utils.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class WorkspaceLauncher {
   bool launchStared = false;
@@ -31,6 +34,10 @@ class WorkspaceLauncher {
             debugPrintApp(status);
             onProgress("$launchFinishedTag $status");
             appWindow.close();
+            SystemNavigator.pop();
+            if (RouteService.navigatorKey.currentContext != null) {
+              Navigator.pop(RouteService.navigatorKey.currentContext!);
+            }
           }
         },
       );

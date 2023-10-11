@@ -7,6 +7,7 @@ import 'package:app_fleet/utils/app_window_buttons.dart';
 import 'package:app_fleet/utils/show_app_info_dialog.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 Widget appBar(BuildContext context) {
   return Padding(
@@ -71,6 +72,8 @@ Widget appBar(BuildContext context) {
                       color: Colors.red,
                       onPressed: () {
                         appWindow.close();
+                        SystemNavigator.pop();
+                        Navigator.pop(context);
                       },
                     ),
                   ],

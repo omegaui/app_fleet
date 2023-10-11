@@ -24,13 +24,6 @@ static void my_application_activate(GApplication* application) {
   GtkWindow* window =
       GTK_WINDOW(gtk_application_window_new(GTK_APPLICATION(application)));
 
-  // Use a header bar when running in GNOME as this is the common style used
-  // by applications and is the setup most users will be using (e.g. Ubuntu
-  // desktop).
-  // If running on X and not using GNOME then just use a traditional title bar
-  // in case the window manager does more exotic layout, e.g. tiling.
-  // If running on Wayland assume the header bar will work (may need changing
-  // if future cases occur).
   gboolean use_header_bar = TRUE;
 #ifdef GDK_WINDOWING_X11
   GdkScreen* screen = gtk_window_get_screen(window);
@@ -54,10 +47,10 @@ static void my_application_activate(GApplication* application) {
   bdw->setCustomFrame(true);
   if (global_argv != NULL) {
     if(global_argv[1] != NULL && global_argv[2] != NULL && g_strcmp0(global_argv[1], "--mode") == 0 && g_strcmp0(global_argv[2], "launcher") == 0){
-      g_print("Window size set to %dx%d\n", 530, 300);
+//      g_print("Window size set to %dx%d\n", 530, 300);
       gtk_window_set_default_size(window, 530, 300);
     } else {
-      g_print("Window size set to %dx%d\n", 750, 600);
+//      g_print("Window size set to %dx%d\n", 750, 600);
       gtk_window_set_default_size(window, 750, 600);
     }
   }
@@ -114,10 +107,10 @@ static void my_application_class_init(MyApplicationClass* klass) {
 static void my_application_init(MyApplication* self) {}
 
 MyApplication* my_application_new(int argc, char** argv) {
-  std::cout << "Program name: " << argv[0] << std::endl;
-  for (int i = 1; i < argc; ++i) {
-    std::cout << "Argument " << i << ": " << argv[i] << std::endl;
-  }
+//  std::cout << "Execution Point: " << argv[0] << std::endl;
+//  for (int i = 1; i < argc; ++i) {
+//    std::cout << "Argument " << i << ": " << argv[i] << std::endl;
+//  }
 
   return MY_APPLICATION(g_object_new(my_application_get_type(),
                                      "application-id", APPLICATION_ID,

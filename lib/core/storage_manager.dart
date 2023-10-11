@@ -54,60 +54,68 @@ class AppStorageManager {
             ],
           );
           await Future.delayed(const Duration(seconds: 2));
-          Navigator.pop(context);
+          void closeEventScriptsDialog() {
+            Navigator.pop(context);
+          }
+
+          closeEventScriptsDialog();
         },
       );
-      showDialog(
-        context: context,
-        barrierColor: Colors.transparent,
-        builder: (context) {
-          return Scaffold(
-            backgroundColor: Colors.transparent,
-            body: MoveWindow(
-              onDoubleTap: () {
-                // this will prevent maximize operation
-              },
-              child: Align(
-                child: FittedBox(
-                  child: Container(
-                    width: 250,
-                    height: 175,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.4),
-                          blurRadius: 16,
-                        )
-                      ],
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Making Event Scripts executable",
-                            textAlign: TextAlign.center,
-                            style: AppTheme.fontSize(14).makeBold(),
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          const CircularProgressIndicator(
-                            color: Colors.pinkAccent,
-                          ),
+      void showEventScriptsDialog() {
+        showDialog(
+          context: context,
+          barrierColor: Colors.transparent,
+          builder: (context) {
+            return Scaffold(
+              backgroundColor: Colors.transparent,
+              body: MoveWindow(
+                onDoubleTap: () {
+                  // this will prevent maximize operation
+                },
+                child: Align(
+                  child: FittedBox(
+                    child: Container(
+                      width: 250,
+                      height: 175,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.4),
+                            blurRadius: 16,
+                          )
                         ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Making Event Scripts executable",
+                              textAlign: TextAlign.center,
+                              style: AppTheme.fontSize(14).makeBold(),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            const CircularProgressIndicator(
+                              color: Colors.pinkAccent,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-          );
-        },
-      );
+            );
+          },
+        );
+      }
+
+      showEventScriptsDialog();
     }
   }
 }

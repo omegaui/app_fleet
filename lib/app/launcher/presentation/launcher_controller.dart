@@ -17,8 +17,8 @@ class LauncherController {
     reloadFromDisk();
   }
 
-  Set<WorkspaceEntity> getWorkspaces() {
-    return _repository.getWorkspaces();
+  Set<WorkspaceEntity> getWorkspaces({required bool reload}) {
+    return _repository.getWorkspaces(reload: reload);
   }
 
   RequestStatus launchWorkspaceManager() {
@@ -31,7 +31,7 @@ class LauncherController {
   }
 
   void reloadFromDisk() {
-    final workspaces = getWorkspaces();
+    final workspaces = getWorkspaces(reload: true);
     if (workspaces.isNotEmpty) {
       onEvent(LauncherInitializedEvent(workspaces: workspaces));
     } else if (_currentState.runtimeType != LauncherEmptyEvent) {

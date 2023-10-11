@@ -185,13 +185,17 @@ class _WorkspaceIconBoxState extends State<WorkspaceIconBox> {
                             text: "Choose from system files",
                             child: GestureDetector(
                               onTap: () async {
+                                void closeDialog() {
+                                  Navigator.pop(context);
+                                }
+
                                 FilePickerResult? result =
                                     await FilePicker.platform.pickFiles(
                                   type: FileType.image,
                                 );
                                 if (result != null) {
                                   onSelected(result.files.single.path!);
-                                  Navigator.pop(context);
+                                  closeDialog();
                                 }
                               },
                               child: StatefulBuilder(

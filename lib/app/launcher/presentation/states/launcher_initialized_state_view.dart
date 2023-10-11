@@ -12,6 +12,7 @@ import 'package:app_fleet/utils/bottom_bar.dart';
 import 'package:app_fleet/utils/utils.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class LauncherInitializedStateView extends StatefulWidget {
   const LauncherInitializedStateView({
@@ -34,7 +35,7 @@ class _LauncherInitializedStateViewState
   @override
   void initState() {
     super.initState();
-    workspaces = widget.controller.getWorkspaces();
+    workspaces = widget.controller.getWorkspaces(reload: false);
   }
 
   Image getWorkspaceIcon(icon) {
@@ -215,6 +216,7 @@ class _LauncherInitializedStateViewState
                             color: Colors.red,
                             onPressed: () {
                               appWindow.close();
+                              SystemNavigator.pop();
                               Navigator.pop(context);
                             },
                           ),

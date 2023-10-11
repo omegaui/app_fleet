@@ -50,6 +50,10 @@ class JsonConfigurator {
     // called when the config file is auto created!
   }
 
+  void reload() {
+    _load();
+  }
+
   void overwriteAndReload(String content) {
     File file = File(configPath);
     if (!file.existsSync()) {
