@@ -221,7 +221,15 @@ Although, hard-coding ip addresses isn't a solution but it fixes this bug.
 
 ## What's next?
 
-See what is [**planned**](https://github.com/omegaui/app_fleet/milestone/1) for the next release.
+You can even try the latest beta by selecting the branch with `latest` version number in the branches popup.
+
+<div align="center">
+    <img src="github/images/branches.png" />
+</div>
+
+then, you need to [**install from source**](https://github.com/omegaui/app_fleet/tree/main#install-from-source).
+
+#### See what is [**planned**](https://github.com/omegaui/app_fleet/milestone/1) for the next release.
 
 <div align="center">
     <h3 style="font-family: Sen">
