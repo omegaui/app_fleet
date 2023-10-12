@@ -9,6 +9,10 @@ import 'package:flutter/services.dart';
 class AppStorageManager {
   AppStorageManager._();
 
+  static bool _eventsScriptsChecked = false;
+
+  static bool get storageReady => _eventsScriptsChecked;
+
   static void initSpace() {
     mkdir(combinePath([".config"]), "Initializing App Settings Storage ...");
     mkdir(combinePath([".config", "workspaces"]),
@@ -56,6 +60,7 @@ class AppStorageManager {
           await Future.delayed(const Duration(seconds: 2));
           void closeEventScriptsDialog() {
             Navigator.pop(context);
+            _eventsScriptsChecked = true;
           }
 
           closeEventScriptsDialog();
@@ -116,6 +121,8 @@ class AppStorageManager {
       }
 
       showEventScriptsDialog();
+    } else {
+      _eventsScriptsChecked = true;
     }
   }
 }

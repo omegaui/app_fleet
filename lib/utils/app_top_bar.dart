@@ -5,6 +5,7 @@ import 'package:app_fleet/core/dependency_manager.dart';
 import 'package:app_fleet/utils/app_tooltip_builder.dart';
 import 'package:app_fleet/utils/app_window_buttons.dart';
 import 'package:app_fleet/utils/show_app_info_dialog.dart';
+import 'package:app_fleet/utils/show_settings_dialog.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -65,6 +66,21 @@ Widget appBar(BuildContext context) {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
+                Column(
+                  children: [
+                    const SizedBox(height: 1),
+                    IconButton(
+                      onPressed: () {
+                        showSettingsDialog(context);
+                      },
+                      icon: Icon(
+                        Icons.settings,
+                        color: Colors.grey.shade800,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(width: 4.0),
                 Column(
                   children: [
                     const SizedBox(height: 10),
