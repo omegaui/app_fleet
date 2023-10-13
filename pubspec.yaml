@@ -39,6 +39,7 @@ flutter:
     - assets/icons/picker/
     - assets/animations/
     - assets/scripts/
+    - assets/themes/
   fonts:
     - family: Sen
       fonts:

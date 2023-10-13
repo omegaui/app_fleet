@@ -27,7 +27,7 @@ void debugPrintApp(String data) {
   }
 }
 
-void main(List<String> args) {
+void main(List<String> args) async {
   if (args.isNotEmpty) {
     launcherMode = args.contains("--mode") && args.contains("launcher");
     debugMode = args.contains("--debug");
@@ -50,7 +50,7 @@ void main(List<String> args) {
     appWindow.show();
   });
 
-  AppStorageManager.initSpace();
+  await AppStorageManager.initSpace();
 
   runApp(AppFleet(launcherMode: launcherMode));
 }
@@ -73,7 +73,9 @@ class _AppFleetState extends State<AppFleet> {
   void initState() {
     super.initState();
     DependencyInjection.injectDependencies(
-      () => setState(() {
+      onRebuildRequested: () => setState(() {}),
+      onInjectorFinished: () async {
+        AppTheme.initTheme();
         DependencyInjection.find<AppSession>().addListener(() {
           showBugReports();
         });
@@ -82,7 +84,8 @@ class _AppFleetState extends State<AppFleet> {
               DependencyInjection.find<AppUpdater>().init();
         }
         initialized = true;
-      }),
+        setState(() {});
+      },
     );
     routeService = DependencyInjection.find<RouteService>();
     if (!launcherMode) {

@@ -23,11 +23,11 @@ void showSettingsDialog(BuildContext context) {
                   width: 400,
                   height: 300,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: AppTheme.background,
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.4),
+                        color: AppTheme.dialogDropShadow,
                         blurRadius: 16,
                       )
                     ],

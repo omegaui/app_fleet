@@ -70,7 +70,8 @@ class _WorkspaceAppBoxState extends State<WorkspaceAppBox> {
                           margin: const EdgeInsets.symmetric(horizontal: 2.0),
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
                           decoration: BoxDecoration(
-                            color: Colors.grey.withOpacity(hover ? 0.4 : 0.2),
+                            color: AppTheme.appTileBackground
+                                .withOpacity(hover ? 0.4 : 0.2),
                             borderRadius: BorderRadius.circular(40),
                           ),
                           child: Padding(
@@ -102,15 +103,14 @@ class _WorkspaceAppBoxState extends State<WorkspaceAppBox> {
                           width: 20,
                           height: 20,
                           decoration: BoxDecoration(
-                            color: Colors.green.shade700,
+                            color: AppTheme.appWorkspaceIndicatorBackground,
                             borderRadius: BorderRadius.circular(30),
                           ),
                           child: Center(
                             child: Text(
                               "${app.priority + 1}",
-                              style: AppTheme.fontSize(13)
-                                  .makeBold()
-                                  .withColor(Colors.white),
+                              style: AppTheme.fontSize(13).makeBold().withColor(
+                                  AppTheme.appWorkspaceIndicatorForeground),
                             ),
                           ),
                         ),
@@ -138,7 +138,7 @@ class _WorkspaceAppBoxState extends State<WorkspaceAppBox> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.grey.withOpacity(0.2),
+                  color: AppTheme.configLabelBackground,
                   borderRadius: BorderRadius.circular(30),
                 ),
                 padding:
@@ -147,7 +147,7 @@ class _WorkspaceAppBoxState extends State<WorkspaceAppBox> {
                   "Workspace Apps",
                   style: AppTheme.fontSize(16)
                       .makeBold()
-                      .withColor(Colors.grey.shade800),
+                      .withColor(AppTheme.cancelLabelForeground),
                 ),
               ),
               Padding(
@@ -168,11 +168,11 @@ class _WorkspaceAppBoxState extends State<WorkspaceAppBox> {
                     );
                   },
                   style: IconButton.styleFrom(
-                    backgroundColor: Colors.greenAccent.withOpacity(0.2),
+                    backgroundColor: AppTheme.addAppButtonBackground,
                   ),
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.add,
-                    color: Colors.black,
+                    color: AppTheme.addAppButtonForeground,
                   ),
                 ),
               ),
@@ -196,11 +196,11 @@ class _WorkspaceAppBoxState extends State<WorkspaceAppBox> {
                     );
                   },
                   style: IconButton.styleFrom(
-                    backgroundColor: Colors.blueAccent.withOpacity(0.2),
+                    backgroundColor: AppTheme.selectAppButtonBackground,
                   ),
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.my_location,
-                    color: Colors.black,
+                    color: AppTheme.selectAppButtonForeground,
                   ),
                 ),
               ),
@@ -216,11 +216,11 @@ class _WorkspaceAppBoxState extends State<WorkspaceAppBox> {
                       });
                     },
                     style: IconButton.styleFrom(
-                      backgroundColor: Colors.redAccent.withOpacity(0.2),
+                      backgroundColor: AppTheme.removeAppsButtonBackground,
                     ),
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.playlist_remove_rounded,
-                      color: Colors.black,
+                      color: AppTheme.removeAppsButtonForeground,
                     ),
                   ),
                 ),

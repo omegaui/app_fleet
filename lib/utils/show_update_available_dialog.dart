@@ -26,11 +26,11 @@ void showUpdateAvailableDialog({required UpdateData data}) {
                 width: 450,
                 height: 350,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppTheme.background,
                   borderRadius: BorderRadius.circular(30),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.blueGrey.withOpacity(0.4),
+                      color: AppTheme.windowDropShadow,
                       blurRadius: 16,
                     ),
                   ],
@@ -72,14 +72,15 @@ void showUpdateAvailableDialog({required UpdateData data}) {
                             Navigator.pop(context);
                           },
                           style: TextButton.styleFrom(
-                            backgroundColor: Colors.red.withOpacity(0.1),
-                            foregroundColor: Colors.redAccent,
+                            backgroundColor:
+                                AppTheme.recommendedOptionBackground,
+                            foregroundColor:
+                                AppTheme.recommendedOptionForeground,
                           ),
                           child: Text(
                             "See updating",
-                            style: AppTheme.fontSize(14)
-                                .makeBold()
-                                .withColor(Colors.redAccent),
+                            style: AppTheme.fontSize(14).makeBold().withColor(
+                                AppTheme.recommendedOptionForeground),
                           ),
                         ),
                         TextButton(
@@ -87,14 +88,14 @@ void showUpdateAvailableDialog({required UpdateData data}) {
                             Navigator.pop(context);
                           },
                           style: TextButton.styleFrom(
-                            backgroundColor: Colors.green.withOpacity(0.1),
-                            foregroundColor: Colors.greenAccent,
+                            backgroundColor: AppTheme.negativeOptionBackground,
+                            foregroundColor: AppTheme.negativeOptionForeground,
                           ),
                           child: Text(
                             "Ignore",
                             style: AppTheme.fontSize(14)
                                 .makeBold()
-                                .withColor(Colors.green),
+                                .withColor(AppTheme.negativeOptionForeground),
                           ),
                         ),
                       ],

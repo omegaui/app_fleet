@@ -35,11 +35,11 @@ void showDiscardEditsDialog({
                 width: 450,
                 height: 350,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppTheme.background,
                   borderRadius: BorderRadius.circular(30),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.blueGrey.withOpacity(0.4),
+                      color: AppTheme.windowDropShadow,
                       blurRadius: 16,
                     ),
                   ],
@@ -70,41 +70,42 @@ void showDiscardEditsDialog({
                         TextButton(
                           onPressed: () => selectOption(DiscardMode.save),
                           style: TextButton.styleFrom(
-                            backgroundColor: Colors.blue.withOpacity(0.2),
-                            foregroundColor: Colors.blueAccent,
+                            backgroundColor: AppTheme.safeOptionBackground,
+                            foregroundColor: AppTheme.safeOptionForeground,
                           ),
                           child: Text(
                             "Save",
                             style: AppTheme.fontSize(14)
                                 .makeBold()
-                                .withColor(Colors.blueAccent),
+                                .withColor(AppTheme.safeOptionForeground),
                           ),
                         ),
                         TextButton(
                           onPressed: () =>
                               selectOption(DiscardMode.continueEditing),
                           style: TextButton.styleFrom(
-                            backgroundColor: Colors.green.withOpacity(0.2),
-                            foregroundColor: Colors.greenAccent,
+                            backgroundColor:
+                                AppTheme.recommendedOptionBackground,
+                            foregroundColor:
+                                AppTheme.recommendedOptionForeground,
                           ),
                           child: Text(
                             "Continue Editing",
-                            style: AppTheme.fontSize(14)
-                                .makeBold()
-                                .withColor(Colors.green),
+                            style: AppTheme.fontSize(14).makeBold().withColor(
+                                AppTheme.recommendedOptionForeground),
                           ),
                         ),
                         TextButton(
                           onPressed: () => selectOption(DiscardMode.discard),
                           style: TextButton.styleFrom(
-                            backgroundColor: Colors.red.withOpacity(0.2),
-                            foregroundColor: Colors.redAccent,
+                            backgroundColor: AppTheme.negativeOptionBackground,
+                            foregroundColor: AppTheme.negativeOptionForeground,
                           ),
                           child: Text(
                             "Discard",
                             style: AppTheme.fontSize(14)
                                 .makeBold()
-                                .withColor(Colors.redAccent),
+                                .withColor(AppTheme.negativeOptionForeground),
                           ),
                         ),
                       ],

@@ -56,11 +56,11 @@ class _WorkspaceTileState extends State<WorkspaceTile> {
             count != 0 ? EdgeInsets.only(left: (count * 25)) : EdgeInsets.zero,
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: AppTheme.floatingAppTileColor,
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.8),
+                color: AppTheme.floatingAppTileDropShadowColor,
                 blurRadius: 16,
               )
             ],
@@ -107,7 +107,7 @@ class _WorkspaceTileState extends State<WorkspaceTile> {
               padding: const EdgeInsets.all(16.0),
               margin: const EdgeInsets.all(16.0),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppTheme.workspaceTileColor,
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(

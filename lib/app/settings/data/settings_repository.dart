@@ -9,6 +9,10 @@ import 'package:http/http.dart';
 class SettingsRepository {
   final storage = DependencyInjection.find<AppConfiguration>();
 
+  String getThemeMode() {
+    return storage.get('theme-mode') ?? 'light';
+  }
+
   bool isAutostartEnabled() {
     return storage.get('autostart') ??
         File(combinePath([

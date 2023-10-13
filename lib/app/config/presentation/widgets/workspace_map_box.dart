@@ -103,7 +103,8 @@ class _WorkspaceMapBoxState extends State<WorkspaceMapBox> {
                   margin: const EdgeInsets.symmetric(horizontal: 2.0),
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(hover ? 0.4 : 0.2),
+                    color: AppTheme.configLabelBackground
+                        .withOpacity(hover ? 0.4 : 0.2),
                     borderRadius: BorderRadius.circular(40),
                   ),
                   child: Center(

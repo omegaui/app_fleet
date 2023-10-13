@@ -17,8 +17,8 @@
   "switch-color": "0xFF6750A4",
   "negative-option-background": "0x33F44336",
   "negative-option-foreground": "0xFFFF5252",
-  "recommended-option-background": "0x334CAF50",
-  "recommended-option-foreground": "0xFF69F0AE",
+  "recommended-option-background": "0x1A4CAF50",
+  "recommended-option-foreground": "0xFF00C853",
   "safe-option-background": "0x332196F3",
   "safe-option-foreground": "0xFF448AFF",
   "add-app-button-background": "0x3369F0AE",
@@ -45,6 +45,6 @@
   "cancel-label-foreground": "0xFFFFFFFF",
   "field-enabled-color": "0xFF9E9E9E",
   "field-disabled-color": "0xFFFFFFFF",
-  "field-focussed-color": "0xFF4CAF50",
+  "field-focused-color": "0xFF4CAF50",
   "field-primary-color": "0xFF2196F3"
 }

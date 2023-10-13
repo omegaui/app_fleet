@@ -91,11 +91,11 @@ class _ConfigInitializedStateViewState
                       width: 700,
                       height: 500,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: AppTheme.background,
                         borderRadius: BorderRadius.circular(30),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.blueGrey.withOpacity(0.4),
+                            color: AppTheme.windowDropShadow,
                             blurRadius: 16,
                           ),
                         ],
@@ -232,31 +232,38 @@ class _ConfigInitializedStateViewState
                                             enabledBorder: UnderlineInputBorder(
                                               borderRadius:
                                                   BorderRadius.circular(10),
-                                              borderSide: const BorderSide(
-                                                  color: Colors.grey, width: 2),
+                                              borderSide: BorderSide(
+                                                  color: AppTheme
+                                                      .fieldEnabledColor,
+                                                  width: 2),
                                             ),
                                             focusedBorder: UnderlineInputBorder(
                                               borderRadius:
                                                   BorderRadius.circular(10),
-                                              borderSide: const BorderSide(
-                                                  color: Colors.green,
+                                              borderSide: BorderSide(
+                                                  color: AppTheme
+                                                      .fieldFocusedColor,
                                                   width: 4),
                                             ),
                                             disabledBorder:
                                                 UnderlineInputBorder(
                                               borderRadius:
                                                   BorderRadius.circular(10),
-                                              borderSide: const BorderSide(
-                                                  color: Colors.white,
+                                              borderSide: BorderSide(
+                                                  color: AppTheme
+                                                      .fieldDisabledColor,
                                                   width: 2),
                                             ),
                                             border: UnderlineInputBorder(
                                               borderRadius:
                                                   BorderRadius.circular(10),
-                                              borderSide: const BorderSide(
-                                                  color: Colors.blue, width: 2),
+                                              borderSide: BorderSide(
+                                                  color: AppTheme
+                                                      .fieldPrimaryColor,
+                                                  width: 2),
                                             ),
                                             hintText: "e.g: 'Its Hero Time'",
+                                            hintStyle: AppTheme.fontSize(15),
                                           ),
                                         ),
                                       ),

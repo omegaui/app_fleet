@@ -48,9 +48,9 @@ Widget appBar(BuildContext context) {
                     onTap: () {
                       showAppInfo(context);
                     },
-                    child: const Icon(
+                    child: Icon(
                       Icons.info_outlined,
-                      color: Colors.black,
+                      color: AppTheme.infoIconColor,
                       size: 20,
                     ),
                   ),
@@ -75,7 +75,7 @@ Widget appBar(BuildContext context) {
                       },
                       icon: Icon(
                         Icons.settings,
-                        color: Colors.grey.shade800,
+                        color: AppTheme.settingsIconColor,
                       ),
                     ),
                   ],

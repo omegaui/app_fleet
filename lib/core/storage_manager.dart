@@ -13,12 +13,39 @@ class AppStorageManager {
 
   static bool get storageReady => _eventsScriptsChecked;
 
-  static void initSpace() {
+  static Future<void> initSpace() async {
     mkdir(combinePath([".config"]), "Initializing App Settings Storage ...");
     mkdir(combinePath([".config", "workspaces"]),
         "Initializing Workspace Storage ...");
+    mkdir(combinePath([".config", "themes"]), "Initializing Theme Storage ...");
     mkdir(combinePath([".config", "bug-reports"]),
         "Initializing Bug Reports Storage ...");
+    await checkThemes();
+  }
+
+  static Future<void> checkThemes() async {
+    final lightTheme = File(combinePath([
+      ".config",
+      "themes",
+      'light.json',
+    ]));
+    final darkTheme = File(combinePath([
+      ".config",
+      "themes",
+      'dark.json',
+    ]));
+    if (!lightTheme.existsSync()) {
+      lightTheme.writeAsStringSync(
+        await rootBundle.loadString('assets/themes/light.json'),
+        flush: true,
+      );
+    }
+    if (!darkTheme.existsSync()) {
+      darkTheme.writeAsStringSync(
+        await rootBundle.loadString('assets/themes/dark.json'),
+        flush: true,
+      );
+    }
   }
 
   static void checkScripts({required BuildContext context}) async {
@@ -40,7 +67,7 @@ class AppStorageManager {
         flush: true,
       );
       Future.delayed(
-        const Duration(milliseconds: 100),
+        const Duration(seconds: 2),
         () async {
           await Process.run(
             'pkexec',

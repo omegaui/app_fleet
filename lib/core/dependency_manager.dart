@@ -29,7 +29,10 @@ final class DependencyInjection {
 
   static final DependencyManager _manager = DependencyManager();
 
-  static void injectDependencies(VoidCallback onRebuildRequested) {
+  static void injectDependencies({
+    required VoidCallback onRebuildRequested,
+    required VoidCallback onInjectorFinished,
+  }) {
     _manager.put<RouteService>(
         RouteService.withState(onRebuildRequested: onRebuildRequested));
 
@@ -48,7 +51,7 @@ final class DependencyInjection {
     _manager.put<HomeRepository>(HomeRepository());
     _manager.put<ConfigRepository>(ConfigRepository());
     _manager.put<LauncherRepository>(LauncherRepository());
-    onRebuildRequested();
+    onInjectorFinished();
   }
 
   static T find<T>() {
