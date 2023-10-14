@@ -70,7 +70,7 @@ class _WorkspaceAppBoxState extends State<WorkspaceAppBox> {
                           margin: const EdgeInsets.symmetric(horizontal: 2.0),
                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
                           decoration: BoxDecoration(
-                            color: AppTheme.appTileBackground
+                            color: AppTheme.configLabelBackground
                                 .withOpacity(hover ? 0.4 : 0.2),
                             borderRadius: BorderRadius.circular(40),
                           ),

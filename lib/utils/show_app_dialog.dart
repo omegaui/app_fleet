@@ -166,6 +166,8 @@ void showAppDialog({
                                           child: TextField(
                                             controller: waitTimeController,
                                             textAlign: TextAlign.center,
+                                            style: AppTheme.fontSize(14)
+                                                .makeBold(),
                                             decoration: InputDecoration(
                                               enabledBorder:
                                                   UnderlineInputBorder(

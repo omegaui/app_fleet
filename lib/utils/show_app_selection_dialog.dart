@@ -139,8 +139,9 @@ void showAppSelectionDialog({
                             focusNode: focusNode,
                             textAlign: TextAlign.center,
                             style: AppTheme.fontSize(14).makeBold(),
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               hintText: "Search by Name",
+                              hintStyle: AppTheme.fontSize(14).makeBold(),
                             ),
                             onChanged: (value) {
                               setState(() {

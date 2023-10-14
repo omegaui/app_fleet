@@ -33,7 +33,7 @@ void showConfirmDeleteDialog({
                   borderRadius: BorderRadius.circular(30),
                   boxShadow: [
                     BoxShadow(
-                      color: AppTheme.windowDropShadow,
+                      color: AppTheme.dialogDropShadow,
                       blurRadius: 16,
                     ),
                   ],
