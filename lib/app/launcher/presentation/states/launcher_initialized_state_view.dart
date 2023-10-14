@@ -40,6 +40,16 @@ class _LauncherInitializedStateViewState
   @override
   void initState() {
     super.initState();
+    onUpdate();
+  }
+
+  @override
+  void didUpdateWidget(covariant LauncherInitializedStateView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    onUpdate();
+  }
+
+  void onUpdate() {
     workspaces = widget.controller.getWorkspaces(reload: false);
     final defaultWorkspaceName = settingsRepo.getDefaultWorkspace();
     if (defaultWorkspaceName != null) {

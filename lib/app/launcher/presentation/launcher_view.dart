@@ -28,7 +28,6 @@ class _LauncherViewState extends State<LauncherView> {
     final currentState = controller.getCurrentState();
     switch (currentState.runtimeType) {
       case LauncherEmptyState:
-        controller.reloadFromDisk();
         return LauncherEmptyStateView(controller: controller);
       case LauncherInitializedState:
         return LauncherInitializedStateView(controller: controller);
