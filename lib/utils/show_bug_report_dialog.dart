@@ -12,7 +12,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 bool _visible = false;
 
 void showBugReports() {
-  if (_visible) {
+  if (_visible || RouteService.navigatorKey.currentContext == null) {
     return;
   }
   _visible = true;

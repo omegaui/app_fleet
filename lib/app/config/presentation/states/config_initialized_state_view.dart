@@ -56,6 +56,9 @@ class _ConfigInitializedStateViewState
   }
 
   void saveConfig() {
+    if (workspaceEntity.name.trim().isEmpty) {
+      return;
+    }
     if (widget.workspaceEntity.name == settingsRepo.getDefaultWorkspace()) {
       settingsRepo.setDefaultWorkspace(workspaceEntity.name);
     }

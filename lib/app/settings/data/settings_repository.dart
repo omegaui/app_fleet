@@ -18,7 +18,7 @@ class SettingsRepository {
   }
 
   String getThemeMode() {
-    return storage.get('theme-mode') ?? 'system';
+    return storage.get('theme-mode') ?? 'light';
   }
 
   void setThemeMode(String mode) {

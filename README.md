@@ -6,7 +6,7 @@
 
 <p style="font-family: Sen">
 App Fleet is a workspace management tool <strong>written entirely for the Linux Desktops</strong>,
-designed and finely tested on GNOME.
+designed and finely tested on GNOME .
 It offers creation of workspace configurations that can later be launched using a startup workspace launcher.
 </p>
 
@@ -46,6 +46,14 @@ Here comes App Fleet,
 <p style="font-family: Sen">
 <strong>App Fleet is written using The Flutter Framework.</strong>
 </p>
+
+## What's New in v1.0.0+4
+
+- Now, you can mark a workspace as default and the launcher will automatically start executing it.
+- Dark Mode Support \- Support for System Theme Detection.
+- Manage Auto Update Notifier through Settings.
+- Option to turn off autostart through Settings.
+- A dedicated Preferences Dialog.
 
 ## Install (Advanced Installation Options)
 
@@ -103,6 +111,15 @@ cd app-fleet/package
 git clone https://github.com/omegaui/app-fleet
 cd app-fleet/package
 ./update-from-source.sh
+```
+
+### Uninstalling
+
+If you have already installed **App Fleet**, and now you want to uninstall,
+then, you can do that by running the following (independent of install the method) :
+
+```shell
+curl https://raw.githubusercontent.com/omegaui/app-fleet/main/network-uninstall.sh | bash
 ```
 
 ## Contributing

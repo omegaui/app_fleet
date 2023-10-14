@@ -30,7 +30,7 @@ void showUpdateAvailableDialog({required UpdateData data}) {
                   borderRadius: BorderRadius.circular(30),
                   boxShadow: [
                     BoxShadow(
-                      color: AppTheme.windowDropShadow,
+                      color: AppTheme.dialogDropShadow,
                       blurRadius: 16,
                     ),
                   ],
