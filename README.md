@@ -55,6 +55,8 @@ Here comes App Fleet,
 - Option to turn off autostart through Settings.
 - A dedicated Preferences Dialog.
 
+See [**CHANGELOG**](https://github.com/omegaui/app_fleet/blob/main/CHANGELOG.md) for full feature list.
+
 ## Install (Advanced Installation Options)
 
 ### Install using your shell

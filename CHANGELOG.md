@@ -1,3 +1,10 @@
+## v1.0.0+4
+
+- Dark Mode Support + System Theme Detection
+- User Preferences Dialog
+- Option to mark a workspace as default
+- Enabling/Disabling launcher and updates from settings.
+
 ## v1.0.0+3
 - StartWMClass field added in desktop entries
 - Support for detecting Flatpak applications.
