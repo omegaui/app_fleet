@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:app_fleet/app/config/domain/workspace_entity.dart';
 import 'package:app_fleet/app/launcher/data/launcher_repository.dart';
 import 'package:app_fleet/app/launcher/presentation/launcher_controller.dart';
+import 'package:app_fleet/app/settings/data/settings_repository.dart';
 import 'package:app_fleet/config/assets/app_icons.dart';
 import 'package:app_fleet/config/theme/app_theme.dart';
+import 'package:app_fleet/core/dependency_manager.dart';
 import 'package:app_fleet/main.dart';
 import 'package:app_fleet/utils/app_tooltip_builder.dart';
 import 'package:app_fleet/utils/app_window_buttons.dart';
@@ -12,6 +14,7 @@ import 'package:app_fleet/utils/bottom_bar.dart';
 import 'package:app_fleet/utils/utils.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class LauncherInitializedStateView extends StatefulWidget {
   const LauncherInitializedStateView({
@@ -30,11 +33,33 @@ class _LauncherInitializedStateViewState
     extends State<LauncherInitializedStateView> {
   Set<WorkspaceEntity> workspaces = {};
   String? launchStatus;
+  bool launchStarted = false;
+
+  final settingsRepo = DependencyInjection.find<SettingsRepository>();
 
   @override
   void initState() {
     super.initState();
-    workspaces = widget.controller.getWorkspaces();
+    onUpdate();
+  }
+
+  @override
+  void didUpdateWidget(covariant LauncherInitializedStateView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    onUpdate();
+  }
+
+  void onUpdate() {
+    workspaces = widget.controller.getWorkspaces(reload: false);
+    final defaultWorkspaceName = settingsRepo.getDefaultWorkspace();
+    if (defaultWorkspaceName != null) {
+      for (final workspace in workspaces) {
+        if (workspace.name == defaultWorkspaceName) {
+          launchWorkspace(workspace);
+          break;
+        }
+      }
+    }
   }
 
   Image getWorkspaceIcon(icon) {
@@ -51,6 +76,31 @@ class _LauncherInitializedStateViewState
     );
   }
 
+  void launchWorkspace(WorkspaceEntity workspaceEntity) {
+    if (launchStarted) {
+      return;
+    }
+    launchStarted = true;
+    widget.controller.launch(
+      workspaceEntity,
+      onProgress: (status) {
+        if (status.startsWith(launchStartTag)) {
+          setState(() {
+            launchStatus = status.substring(launchStartTag.length).trim();
+          });
+        } else if (status.startsWith(launchProgressTag)) {
+          setState(() {
+            launchStatus = status.substring(launchProgressTag.length).trim();
+          });
+        } else {
+          setState(() {
+            launchStatus = null;
+          });
+        }
+      },
+    );
+  }
+
   Iterable<Widget> _buildContent() sync* {
     for (var workspaceEntity in workspaces) {
       bool hover = false;
@@ -58,26 +108,7 @@ class _LauncherInitializedStateViewState
         builder: (context, setContentState) {
           return GestureDetector(
             onTap: () {
-              widget.controller.launch(
-                workspaceEntity,
-                onProgress: (status) {
-                  if (status.startsWith(launchStartTag)) {
-                    setState(() {
-                      launchStatus =
-                          status.substring(launchStartTag.length).trim();
-                    });
-                  } else if (status.startsWith(launchProgressTag)) {
-                    setState(() {
-                      launchStatus =
-                          status.substring(launchProgressTag.length).trim();
-                    });
-                  } else {
-                    setState(() {
-                      launchStatus = null;
-                    });
-                  }
-                },
-              );
+              launchWorkspace(workspaceEntity);
             },
             child: MouseRegion(
               onEnter: (e) => setContentState(() => hover = true),
@@ -91,7 +122,7 @@ class _LauncherInitializedStateViewState
                   padding: const EdgeInsets.all(16.0),
                   margin: const EdgeInsets.all(16.0),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: AppTheme.background,
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
@@ -140,11 +171,11 @@ class _LauncherInitializedStateViewState
                           width: 500,
                           height: 200,
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: AppTheme.background,
                             borderRadius: BorderRadius.circular(30),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.blueGrey.withOpacity(0.4),
+                                color: AppTheme.windowDropShadow,
                                 blurRadius: 16,
                               ),
                             ],
@@ -187,8 +218,9 @@ class _LauncherInitializedStateViewState
                                   onPressed: () {
                                     widget.controller.reloadFromDisk();
                                   },
-                                  icon: const Icon(
+                                  icon: Icon(
                                     Icons.refresh,
+                                    color: AppTheme.foreground,
                                   ),
                                 ),
                               ),
@@ -215,6 +247,7 @@ class _LauncherInitializedStateViewState
                             color: Colors.red,
                             onPressed: () {
                               appWindow.close();
+                              SystemNavigator.pop();
                               Navigator.pop(context);
                             },
                           ),

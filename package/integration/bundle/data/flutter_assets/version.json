@@ -1,1 +1,6 @@
-{"app_name":"app_fleet","version":"1.0.0","build_number":"2","package_name":"app_fleet"}
+{
+  "app_name": "app_fleet",
+  "version": "1.0.0",
+  "build_number": "4",
+  "package_name": "app_fleet"
+}

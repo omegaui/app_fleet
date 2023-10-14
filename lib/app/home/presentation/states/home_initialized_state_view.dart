@@ -1,6 +1,9 @@
 import 'package:app_fleet/app/config/domain/workspace_entity.dart';
 import 'package:app_fleet/app/home/presentation/home_controller.dart';
 import 'package:app_fleet/app/home/presentation/widgets/workspace_tile.dart';
+import 'package:app_fleet/app/settings/data/settings_repository.dart';
+import 'package:app_fleet/config/theme/app_theme.dart';
+import 'package:app_fleet/core/dependency_manager.dart';
 import 'package:app_fleet/utils/app_top_bar.dart';
 import 'package:app_fleet/utils/bottom_bar.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +24,8 @@ class HomeInitializedStateView extends StatefulWidget {
 class _HomeInitializedStateViewState extends State<HomeInitializedStateView> {
   late Set<WorkspaceEntity> workspaces;
 
+  final settingsRepo = DependencyInjection.find<SettingsRepository>();
+
   @override
   void initState() {
     super.initState();
@@ -33,7 +38,10 @@ class _HomeInitializedStateViewState extends State<HomeInitializedStateView> {
         onTap: () {
           widget.controller.gotoCreateRoute(workspaceEntity: e);
         },
-        child: WorkspaceTile(workspaceEntity: e),
+        child: WorkspaceTile(
+          workspaceEntity: e,
+          isDefaultWorkspace: e.name == settingsRepo.getDefaultWorkspace(),
+        ),
       );
     }).toList();
   }
@@ -49,11 +57,11 @@ class _HomeInitializedStateViewState extends State<HomeInitializedStateView> {
               width: 700,
               height: 500,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppTheme.background,
                 borderRadius: BorderRadius.circular(30),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.blueGrey.withOpacity(0.4),
+                    color: AppTheme.windowDropShadow,
                     blurRadius: 16,
                   ),
                 ],
@@ -87,14 +95,15 @@ class _HomeInitializedStateViewState extends State<HomeInitializedStateView> {
                 onPressed: () {
                   widget.controller.gotoCreateRoute();
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.add,
-                  color: Colors.white,
+                  color: AppTheme.createNewButtonForeground,
                 ),
                 style: IconButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  shadowColor: Colors.cyanAccent,
-                  foregroundColor: Colors.white.withOpacity(0.2),
+                  backgroundColor: AppTheme.createNewButtonBackground,
+                  shadowColor: AppTheme.createNewButtonShadowColor,
+                  foregroundColor:
+                      AppTheme.createNewButtonForeground.withOpacity(0.2),
                   elevation: 10,
                 ),
               ),

@@ -41,11 +41,11 @@ void showAppDialog({
                     width: 450,
                     height: 350,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: AppTheme.background,
                       borderRadius: BorderRadius.circular(30),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.blueGrey.withOpacity(0.4),
+                          color: AppTheme.dialogDropShadow,
                           blurRadius: 16,
                         ),
                       ],
@@ -166,39 +166,47 @@ void showAppDialog({
                                           child: TextField(
                                             controller: waitTimeController,
                                             textAlign: TextAlign.center,
+                                            style: AppTheme.fontSize(14)
+                                                .makeBold(),
                                             decoration: InputDecoration(
                                               enabledBorder:
                                                   UnderlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10),
-                                                borderSide: const BorderSide(
-                                                    color: Colors.grey,
+                                                borderSide: BorderSide(
+                                                    color: AppTheme
+                                                        .fieldEnabledColor,
                                                     width: 2),
                                               ),
                                               focusedBorder:
                                                   UnderlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10),
-                                                borderSide: const BorderSide(
-                                                    color: Colors.green,
+                                                borderSide: BorderSide(
+                                                    color: AppTheme
+                                                        .fieldFocusedColor,
                                                     width: 4),
                                               ),
                                               disabledBorder:
                                                   UnderlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10),
-                                                borderSide: const BorderSide(
-                                                    color: Colors.white,
+                                                borderSide: BorderSide(
+                                                    color: AppTheme
+                                                        .fieldDisabledColor,
                                                     width: 2),
                                               ),
                                               border: UnderlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(10),
-                                                borderSide: const BorderSide(
-                                                    color: Colors.blue,
+                                                borderSide: BorderSide(
+                                                    color: AppTheme
+                                                        .fieldPrimaryColor,
                                                     width: 2),
                                               ),
                                               suffixText: "ms",
+                                              suffixStyle: AppTheme.fontSize(14)
+                                                  .makeBold(),
                                             ),
                                           ),
                                         ),
@@ -242,44 +250,40 @@ void showAppDialog({
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               10),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                              color:
-                                                                  Colors.grey,
-                                                              width: 2),
+                                                      borderSide: BorderSide(
+                                                          color: AppTheme
+                                                              .fieldEnabledColor,
+                                                          width: 2),
                                                     ),
                                                     focusedBorder:
                                                         UnderlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               10),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                              color:
-                                                                  Colors.green,
-                                                              width: 4),
+                                                      borderSide: BorderSide(
+                                                          color: AppTheme
+                                                              .fieldFocusedColor,
+                                                          width: 4),
                                                     ),
                                                     disabledBorder:
                                                         UnderlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               10),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                              color:
-                                                                  Colors.white,
-                                                              width: 2),
+                                                      borderSide: BorderSide(
+                                                          color: AppTheme
+                                                              .fieldDisabledColor,
+                                                          width: 2),
                                                     ),
                                                     border:
                                                         UnderlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               10),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                              color:
-                                                                  Colors.blue,
-                                                              width: 2),
+                                                      borderSide: BorderSide(
+                                                          color: AppTheme
+                                                              .fieldPrimaryColor,
+                                                          width: 2),
                                                     ),
                                                   ),
                                                 ),
@@ -315,44 +319,40 @@ void showAppDialog({
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               10),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                              color:
-                                                                  Colors.grey,
-                                                              width: 2),
+                                                      borderSide: BorderSide(
+                                                          color: AppTheme
+                                                              .fieldEnabledColor,
+                                                          width: 2),
                                                     ),
                                                     focusedBorder:
                                                         UnderlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               10),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                              color:
-                                                                  Colors.green,
-                                                              width: 4),
+                                                      borderSide: BorderSide(
+                                                          color: AppTheme
+                                                              .fieldFocusedColor,
+                                                          width: 4),
                                                     ),
                                                     disabledBorder:
                                                         UnderlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               10),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                              color:
-                                                                  Colors.white,
-                                                              width: 2),
+                                                      borderSide: BorderSide(
+                                                          color: AppTheme
+                                                              .fieldDisabledColor,
+                                                          width: 2),
                                                     ),
                                                     border:
                                                         UnderlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               10),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                              color:
-                                                                  Colors.blue,
-                                                              width: 2),
+                                                      borderSide: BorderSide(
+                                                          color: AppTheme
+                                                              .fieldPrimaryColor,
+                                                          width: 2),
                                                     ),
                                                   ),
                                                 ),
@@ -428,12 +428,13 @@ void showAppDialog({
                                           int.parse(waitTimeController.text));
                                   },
                                   style: TextButton.styleFrom(
-                                    backgroundColor: Colors.blueAccent,
+                                    backgroundColor:
+                                        AppTheme.saveLabelBackground,
                                   ),
                                   child: Text(
                                     "Save",
-                                    style: AppTheme.fontSize(14)
-                                        .withColor(Colors.white),
+                                    style: AppTheme.fontSize(14).withColor(
+                                        AppTheme.saveLabelForeground),
                                   ),
                                 ),
                                 const SizedBox(width: 10),
@@ -443,12 +444,13 @@ void showAppDialog({
                                     Navigator.pop(context);
                                   },
                                   style: TextButton.styleFrom(
-                                    backgroundColor: Colors.redAccent,
+                                    backgroundColor:
+                                        AppTheme.cancelLabelBackground,
                                   ),
                                   child: Text(
                                     "Cancel",
-                                    style: AppTheme.fontSize(14)
-                                        .withColor(Colors.white),
+                                    style: AppTheme.fontSize(14).withColor(
+                                        AppTheme.cancelLabelForeground),
                                   ),
                                 ),
                               ],

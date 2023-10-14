@@ -10,11 +10,11 @@ Widget bottomBar({required String text}) {
         child: Container(
           height: 30,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: AppTheme.background,
             borderRadius: BorderRadius.circular(30),
             boxShadow: [
               BoxShadow(
-                color: Colors.blueGrey.withOpacity(0.4),
+                color: AppTheme.windowDropShadow,
                 offset: const Offset(0, 2),
                 blurRadius: 2,
               ),

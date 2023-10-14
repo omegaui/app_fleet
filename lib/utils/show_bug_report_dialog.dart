@@ -12,7 +12,7 @@ import 'package:url_launcher/url_launcher_string.dart';
 bool _visible = false;
 
 void showBugReports() {
-  if (_visible) {
+  if (_visible || RouteService.navigatorKey.currentContext == null) {
     return;
   }
   _visible = true;
@@ -33,11 +33,11 @@ void showBugReports() {
                 width: 250,
                 height: 175,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppTheme.background,
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withOpacity(0.4),
+                      color: AppTheme.dialogDropShadow,
                       blurRadius: 16,
                     )
                   ],

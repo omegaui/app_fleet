@@ -24,8 +24,11 @@ class Assets {
   static const String pickerMovie = 'assets/icons/picker/movie.png';
   static const String pickerPlanets = 'assets/icons/picker/planets.png';
   static const String pickerSpace = 'assets/icons/picker/space.png';
+  static const String scriptsThemeDetector = 'assets/scripts/theme-detector.sh';
   static const String scriptsUnixProcessExecutor =
       'assets/scripts/unix-process-executor.sh';
   static const String scriptsWorkspaceSwitcher =
       'assets/scripts/workspace-switcher.sh';
+  static const String themesDark = 'assets/themes/dark.json';
+  static const String themesLight = 'assets/themes/light.json';
 }

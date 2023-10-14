@@ -7,13 +7,12 @@ import 'package:app_fleet/utils/utils.dart';
 
 class JsonConfigurator {
   final String configName;
-  String configPath;
+  late String configPath;
   dynamic config;
 
   JsonConfigurator({
     required this.configName,
     this.config,
-    this.configPath = "",
   }) {
     configPath = combinePath([".config", configName]);
     _load();
@@ -48,6 +47,10 @@ class JsonConfigurator {
 
   void onNewCreation() {
     // called when the config file is auto created!
+  }
+
+  void reload() {
+    _load();
   }
 
   void overwriteAndReload(String content) {

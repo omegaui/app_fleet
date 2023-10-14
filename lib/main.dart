@@ -5,7 +5,8 @@ import 'package:app_fleet/config/assets/app_icons.dart';
 import 'package:app_fleet/config/assets/generators/linux_app_finder.dart';
 import 'package:app_fleet/config/theme/app_theme.dart';
 import 'package:app_fleet/constants/app_meta_info.dart';
-import 'package:app_fleet/core/app_session_status.dart';
+import 'package:app_fleet/core/app_man_page.dart';
+import 'package:app_fleet/core/app_session.dart';
 import 'package:app_fleet/core/app_updater.dart';
 import 'package:app_fleet/core/dependency_manager.dart';
 import 'package:app_fleet/core/route_service.dart';
@@ -26,10 +27,13 @@ void debugPrintApp(String data) {
   }
 }
 
-void main(List<String> args) {
+void main(List<String> args) async {
   if (args.isNotEmpty) {
     launcherMode = args.contains("--mode") && args.contains("launcher");
     debugMode = args.contains("--debug");
+
+    AppManPage.handleHelpContext(args);
+
     if (launcherMode) {
       windowSize = const Size(530, 300);
     }
@@ -46,7 +50,7 @@ void main(List<String> args) {
     appWindow.show();
   });
 
-  AppStorageManager.initSpace();
+  await AppStorageManager.initSpace();
 
   runApp(AppFleet(launcherMode: launcherMode));
 }
@@ -69,7 +73,9 @@ class _AppFleetState extends State<AppFleet> {
   void initState() {
     super.initState();
     DependencyInjection.injectDependencies(
-      () => setState(() {
+      onRebuildRequested: () => setState(() {}),
+      onInjectorFinished: () async {
+        AppTheme.initTheme();
         DependencyInjection.find<AppSession>().addListener(() {
           showBugReports();
         });
@@ -78,7 +84,8 @@ class _AppFleetState extends State<AppFleet> {
               DependencyInjection.find<AppUpdater>().init();
         }
         initialized = true;
-      }),
+        setState(() {});
+      },
     );
     routeService = DependencyInjection.find<RouteService>();
     if (!launcherMode) {

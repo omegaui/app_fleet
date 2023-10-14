@@ -77,7 +77,9 @@ class _WorkspaceIconBoxState extends State<WorkspaceIconBox> {
           width: initialized ? 120 : 30,
           height: initialized ? 120 : 30,
           decoration: BoxDecoration(
-            color: initialized ? Colors.grey.shade100 : Colors.white,
+            color: initialized
+                ? AppTheme.foreground.withOpacity(0.06)
+                : AppTheme.background,
             borderRadius: BorderRadius.circular(100),
           ),
           margin: EdgeInsets.all(initialized ? 0 : 45),
@@ -112,11 +114,11 @@ class _WorkspaceIconBoxState extends State<WorkspaceIconBox> {
                   width: 400,
                   height: 300,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: AppTheme.background,
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.4),
+                        color: AppTheme.dialogDropShadow,
                         blurRadius: 16,
                       )
                     ],
@@ -185,13 +187,17 @@ class _WorkspaceIconBoxState extends State<WorkspaceIconBox> {
                             text: "Choose from system files",
                             child: GestureDetector(
                               onTap: () async {
+                                void closeDialog() {
+                                  Navigator.pop(context);
+                                }
+
                                 FilePickerResult? result =
                                     await FilePicker.platform.pickFiles(
                                   type: FileType.image,
                                 );
                                 if (result != null) {
                                   onSelected(result.files.single.path!);
-                                  Navigator.pop(context);
+                                  closeDialog();
                                 }
                               },
                               child: StatefulBuilder(
@@ -207,15 +213,15 @@ class _WorkspaceIconBoxState extends State<WorkspaceIconBox> {
                                       width: 50,
                                       height: 50,
                                       decoration: BoxDecoration(
-                                        color: Colors.blue
+                                        color: AppTheme.fieldPrimaryColor
                                             .withOpacity(hoverX ? 0.1 : 0.3),
                                         borderRadius: BorderRadius.circular(50),
                                       ),
-                                      child: const Padding(
-                                        padding: EdgeInsets.all(10.0),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(10.0),
                                         child: Icon(
                                           Icons.edit_location_alt,
-                                          color: Colors.blueAccent,
+                                          color: AppTheme.safeOptionForeground,
                                         ),
                                       ),
                                     ),

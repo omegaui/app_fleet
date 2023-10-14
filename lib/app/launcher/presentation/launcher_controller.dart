@@ -14,11 +14,11 @@ class LauncherController {
   LauncherController({required void Function() onRebuildRequested}) {
     _onRebuildRequested = onRebuildRequested;
     _currentState = LauncherEmptyState();
-    reloadFromDisk();
+    loadFromDisk();
   }
 
-  Set<WorkspaceEntity> getWorkspaces() {
-    return _repository.getWorkspaces();
+  Set<WorkspaceEntity> getWorkspaces({required bool reload}) {
+    return _repository.getWorkspaces(reload: reload);
   }
 
   RequestStatus launchWorkspaceManager() {
@@ -31,7 +31,16 @@ class LauncherController {
   }
 
   void reloadFromDisk() {
-    final workspaces = getWorkspaces();
+    final workspaces = getWorkspaces(reload: true);
+    if (workspaces.isNotEmpty) {
+      onEvent(LauncherInitializedEvent(workspaces: workspaces));
+    } else if (_currentState.runtimeType != LauncherEmptyEvent) {
+      onEvent(LauncherEmptyEvent());
+    }
+  }
+
+  void loadFromDisk() {
+    final workspaces = getWorkspaces(reload: false);
     if (workspaces.isNotEmpty) {
       onEvent(LauncherInitializedEvent(workspaces: workspaces));
     } else if (_currentState.runtimeType != LauncherEmptyEvent) {

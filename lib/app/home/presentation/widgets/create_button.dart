@@ -26,10 +26,11 @@ class _CreateButtonState extends State<CreateButton> {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 250),
           decoration: BoxDecoration(
-            color: Colors.blueAccent.withOpacity(0.2),
+            color: AppTheme.createButtonBackground,
             borderRadius: BorderRadius.circular(25),
             border: Border.all(
-              color: hover ? Colors.blueAccent : Colors.transparent,
+              color:
+                  hover ? AppTheme.createButtonBorderColor : Colors.transparent,
               width: 2,
             ),
           ),
@@ -38,7 +39,8 @@ class _CreateButtonState extends State<CreateButton> {
           child: Center(
             child: Text(
               "Create Now",
-              style: AppTheme.fontSize(18).withColor(Colors.blue),
+              style: AppTheme.fontSize(18)
+                  .withColor(AppTheme.createButtonForeground),
             ),
           ),
         ),

@@ -1,9 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:app_fleet/app/settings/data/settings_repository.dart';
 import 'package:app_fleet/constants/app_meta_info.dart';
 import 'package:app_fleet/constants/request_status.dart';
 import 'package:app_fleet/core/app_bug_report.dart';
+import 'package:app_fleet/core/dependency_manager.dart';
+import 'package:app_fleet/core/storage_manager.dart';
 import 'package:app_fleet/main.dart';
 import 'package:app_fleet/utils/show_update_available_dialog.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -53,10 +56,14 @@ class AppUpdater {
   void checkForUpdates({
     required void Function(UpdateData? data, RequestStatus status) onComplete,
   }) {
-    if (_checked) {
+    final settingsRepo = DependencyInjection.find<SettingsRepository>();
+    if (debugMode || !AppStorageManager.storageReady || _checked) {
       return;
     }
     _checked = true;
+    if (!settingsRepo.notifyAboutUpdates()) {
+      return;
+    }
     Future.delayed(const Duration(seconds: 5), () async {
       Response? response;
       try {

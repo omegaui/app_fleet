@@ -29,11 +29,11 @@ void showConfirmDeleteDialog({
                 width: 450,
                 height: 350,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppTheme.background,
                   borderRadius: BorderRadius.circular(30),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.blueGrey.withOpacity(0.4),
+                      color: AppTheme.dialogDropShadow,
                       blurRadius: 16,
                     ),
                   ],
@@ -64,27 +64,28 @@ void showConfirmDeleteDialog({
                         TextButton(
                           onPressed: () => selectOption(true),
                           style: TextButton.styleFrom(
-                            backgroundColor: Colors.red.withOpacity(0.1),
-                            foregroundColor: Colors.redAccent,
+                            backgroundColor: AppTheme.negativeOptionBackground,
+                            foregroundColor: AppTheme.negativeOptionForeground,
                           ),
                           child: Text(
                             "Yes, Delete it!",
                             style: AppTheme.fontSize(14)
                                 .makeBold()
-                                .withColor(Colors.redAccent),
+                                .withColor(AppTheme.negativeOptionForeground),
                           ),
                         ),
                         TextButton(
                           onPressed: () => selectOption(false),
                           style: TextButton.styleFrom(
-                            backgroundColor: Colors.green.withOpacity(0.1),
-                            foregroundColor: Colors.greenAccent,
+                            backgroundColor:
+                                AppTheme.recommendedOptionBackground,
+                            foregroundColor:
+                                AppTheme.recommendedOptionForeground,
                           ),
                           child: Text(
                             "No",
-                            style: AppTheme.fontSize(14)
-                                .makeBold()
-                                .withColor(Colors.green),
+                            style: AppTheme.fontSize(14).makeBold().withColor(
+                                AppTheme.recommendedOptionForeground),
                           ),
                         ),
                       ],

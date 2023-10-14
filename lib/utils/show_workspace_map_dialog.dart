@@ -41,7 +41,7 @@ List<Widget> _buildContent({
                         behavior: SnackBarBehavior.floating,
                         margin: const EdgeInsets.symmetric(
                             horizontal: 200, vertical: 200),
-                        backgroundColor: Colors.white,
+                        backgroundColor: AppTheme.background,
                         elevation: 3,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20)),
@@ -86,7 +86,8 @@ List<Widget> _buildContent({
                       margin: const EdgeInsets.symmetric(horizontal: 2.0),
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(hover ? 0.4 : 1.0),
+                        color: AppTheme.appTileForeground
+                            .withOpacity(hover ? 0.4 : 1.0),
                         borderRadius: BorderRadius.circular(40),
                       ),
                       child: Padding(
@@ -116,12 +117,12 @@ List<Widget> _buildContent({
                         width: 20,
                         height: 20,
                         decoration: BoxDecoration(
-                          color: Colors.green.shade700,
+                          color: AppTheme.selectedWorkspaceIndicatorBackground,
                           borderRadius: BorderRadius.circular(30),
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.done_rounded,
-                          color: Colors.white,
+                          color: AppTheme.selectedWorkspaceIndicatorForeground,
                           size: 16,
                         ),
                       ),
@@ -133,15 +134,16 @@ List<Widget> _buildContent({
                         width: 20,
                         height: 20,
                         decoration: BoxDecoration(
-                          color: Colors.greenAccent.shade700,
+                          color:
+                              AppTheme.unselectedWorkspaceIndicatorBackground,
                           borderRadius: BorderRadius.circular(30),
                         ),
                         child: Center(
                           child: Text(
                             "${app.priority + 1}",
-                            style: AppTheme.fontSize(13)
-                                .makeBold()
-                                .withColor(Colors.white),
+                            style: AppTheme.fontSize(13).makeBold().withColor(
+                                AppTheme
+                                    .unselectedWorkspaceIndicatorForeground),
                           ),
                         ),
                       ),
@@ -187,11 +189,11 @@ void showWorkspaceMapDialog({
                         width: 385,
                         height: 250,
                         decoration: BoxDecoration(
-                          color: Colors.greenAccent.shade100,
+                          color: AppTheme.workspaceDialogBackground,
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.grey.withOpacity(0.4),
+                              color: AppTheme.workspaceDialogDropShadowColor,
                               blurRadius: 16,
                             )
                           ],

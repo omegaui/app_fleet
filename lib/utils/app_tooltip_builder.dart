@@ -1,3 +1,4 @@
+import 'package:app_fleet/config/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class AppTooltipBuilder {
@@ -9,18 +10,18 @@ class AppTooltipBuilder {
       message: text,
       waitDuration: const Duration(milliseconds: 250),
       textAlign: TextAlign.center,
-      textStyle: const TextStyle(
+      textStyle: TextStyle(
         fontFamily: "Sen",
         fontSize: 14,
         fontWeight: FontWeight.bold,
-        color: Colors.black,
+        color: AppTheme.foreground,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppTheme.background,
         borderRadius: BorderRadius.circular(30),
         boxShadow: [
           BoxShadow(
-            color: Colors.greenAccent.withOpacity(0.4),
+            color: AppTheme.fieldFocusedColor.withOpacity(0.2),
             blurRadius: 16,
           ),
         ],

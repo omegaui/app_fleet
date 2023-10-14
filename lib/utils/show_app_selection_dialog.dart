@@ -34,11 +34,11 @@ void showAppSelectionDialog({
                 width: 500,
                 height: 400,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppTheme.background,
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withOpacity(0.4),
+                      color: AppTheme.dialogDropShadow,
                       blurRadius: 16,
                     )
                   ],
@@ -139,8 +139,9 @@ void showAppSelectionDialog({
                             focusNode: focusNode,
                             textAlign: TextAlign.center,
                             style: AppTheme.fontSize(14).makeBold(),
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               hintText: "Search by Name",
+                              hintStyle: AppTheme.fontSize(14).makeBold(),
                             ),
                             onChanged: (value) {
                               setState(() {

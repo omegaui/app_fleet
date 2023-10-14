@@ -103,7 +103,8 @@ class _WorkspaceMapBoxState extends State<WorkspaceMapBox> {
                   margin: const EdgeInsets.symmetric(horizontal: 2.0),
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(hover ? 0.4 : 0.2),
+                    color: AppTheme.configLabelBackground
+                        .withOpacity(hover ? 0.4 : 0.2),
                     borderRadius: BorderRadius.circular(40),
                   ),
                   child: Center(
@@ -129,7 +130,7 @@ class _WorkspaceMapBoxState extends State<WorkspaceMapBox> {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: Colors.grey.withOpacity(0.2),
+            color: AppTheme.configLabelBackground,
             borderRadius: BorderRadius.circular(30),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 3.0),
@@ -138,7 +139,7 @@ class _WorkspaceMapBoxState extends State<WorkspaceMapBox> {
             "Map Apps to specific Workspaces",
             style: AppTheme.fontSize(16)
                 .makeBold()
-                .withColor(Colors.grey.shade800),
+                .withColor(AppTheme.configLabelForeground),
           ).animate().shimmer(
               delay: const Duration(seconds: 1),
               duration: const Duration(seconds: 2)),

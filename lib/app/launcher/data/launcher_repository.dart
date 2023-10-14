@@ -27,7 +27,10 @@ class LauncherRepository {
     );
   }
 
-  Set<WorkspaceEntity> getWorkspaces() {
+  Set<WorkspaceEntity> getWorkspaces({required bool reload}) {
+    if (reload) {
+      storage.reload();
+    }
     // Calling the anyWorkspaceConfigExists() validates the configs
     if (homeRepository.anyWorkspaceConfigExists()) {
       return homeRepository.getWorkspaces();
