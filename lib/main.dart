@@ -6,7 +6,7 @@ import 'package:app_fleet/config/assets/generators/linux_app_finder.dart';
 import 'package:app_fleet/config/theme/app_theme.dart';
 import 'package:app_fleet/constants/app_meta_info.dart';
 import 'package:app_fleet/core/app_man_page.dart';
-import 'package:app_fleet/core/app_session_status.dart';
+import 'package:app_fleet/core/app_session.dart';
 import 'package:app_fleet/core/app_updater.dart';
 import 'package:app_fleet/core/dependency_manager.dart';
 import 'package:app_fleet/core/route_service.dart';

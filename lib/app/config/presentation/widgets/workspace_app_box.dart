@@ -147,7 +147,7 @@ class _WorkspaceAppBoxState extends State<WorkspaceAppBox> {
                   "Workspace Apps",
                   style: AppTheme.fontSize(16)
                       .makeBold()
-                      .withColor(AppTheme.cancelLabelForeground),
+                      .withColor(AppTheme.configLabelForeground),
                 ),
               ),
               Padding(

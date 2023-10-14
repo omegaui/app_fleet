@@ -36,11 +36,11 @@ class _LauncherEmptyStateViewState extends State<LauncherEmptyStateView> {
                   width: 500,
                   height: 200,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: AppTheme.background,
                     borderRadius: BorderRadius.circular(30),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.blueGrey.withOpacity(0.4),
+                        color: AppTheme.windowDropShadow,
                         blurRadius: 16,
                       ),
                     ],
@@ -94,8 +94,9 @@ class _LauncherEmptyStateViewState extends State<LauncherEmptyStateView> {
                           onPressed: () {
                             widget.controller.reloadFromDisk();
                           },
-                          icon: const Icon(
+                          icon: Icon(
                             Icons.refresh,
+                            color: AppTheme.foreground,
                           ),
                         ),
                       ),

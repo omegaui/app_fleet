@@ -3,12 +3,16 @@ import 'package:app_fleet/app/config/presentation/config_controller.dart';
 import 'package:app_fleet/app/config/presentation/widgets/workspace_app_box.dart';
 import 'package:app_fleet/app/config/presentation/widgets/workspace_icon_box.dart';
 import 'package:app_fleet/app/config/presentation/widgets/workspace_map_box.dart';
+import 'package:app_fleet/app/settings/data/settings_repository.dart';
 import 'package:app_fleet/config/theme/app_theme.dart';
+import 'package:app_fleet/core/dependency_manager.dart';
+import 'package:app_fleet/utils/app_tooltip_builder.dart';
 import 'package:app_fleet/utils/bottom_bar.dart';
 import 'package:app_fleet/utils/show_app_selection_dialog.dart';
 import 'package:app_fleet/utils/show_confirm_delete_dialog.dart';
 import 'package:app_fleet/utils/show_discard_edits_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 enum ConfigUIMode { edit, create }
 
@@ -39,6 +43,8 @@ class _ConfigInitializedStateViewState
 
   late TextEditingController workspaceNameController;
 
+  final settingsRepo = DependencyInjection.find<SettingsRepository>();
+
   @override
   void initState() {
     super.initState();
@@ -56,6 +62,8 @@ class _ConfigInitializedStateViewState
 
   @override
   Widget build(BuildContext context) {
+    bool isDefaultWorkspace =
+        settingsRepo.getDefaultWorkspace() == workspaceEntity.name;
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: CallbackShortcuts(
@@ -158,6 +166,34 @@ class _ConfigInitializedStateViewState
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
+                                      if (widget.configUIMode ==
+                                          ConfigUIMode.edit)
+                                        AppTooltipBuilder.wrap(
+                                          text: "Mark as Default Workspace",
+                                          child: IconButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                settingsRepo
+                                                    .setDefaultWorkspace(
+                                                        isDefaultWorkspace
+                                                            ? null
+                                                            : workspaceEntity
+                                                                .name);
+                                              });
+                                            },
+                                            icon: Icon(
+                                              isDefaultWorkspace
+                                                  ? Icons.star_border
+                                                  : Icons.star_border,
+                                              color: isDefaultWorkspace
+                                                  ? Colors.amber.shade700
+                                                  : Colors.grey,
+                                              size: 24,
+                                            ),
+                                          ).animate().scale(
+                                              delay:
+                                                  const Duration(seconds: 1)),
+                                        ),
                                       if (widget.configUIMode ==
                                           ConfigUIMode.edit)
                                         IconButton(

@@ -12,9 +12,11 @@ class WorkspaceTile extends StatefulWidget {
   const WorkspaceTile({
     super.key,
     required this.workspaceEntity,
+    required this.isDefaultWorkspace,
   });
 
   final WorkspaceEntity workspaceEntity;
+  final bool isDefaultWorkspace;
 
   @override
   State<WorkspaceTile> createState() => _WorkspaceTileState();
@@ -100,45 +102,47 @@ class _WorkspaceTileState extends State<WorkspaceTile> {
         margin: const EdgeInsets.only(bottom: 12.0),
         child: Stack(
           children: [
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 250),
-              width: 160,
-              height: 150,
-              padding: const EdgeInsets.all(16.0),
-              margin: const EdgeInsets.all(16.0),
-              decoration: BoxDecoration(
-                color: AppTheme.workspaceTileColor,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                    color: accentColorMap[
-                            widget.workspaceEntity.name[0].toUpperCase()]!
-                        .withOpacity(hover ? 0.6 : 0.2),
-                    blurRadius: 16,
-                  )
-                ],
-              ),
-              child: Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    AnimatedScale(
-                      duration: const Duration(milliseconds: 500),
-                      scale: hover ? 0.8 : 1.0,
-                      child: getWorkspaceIcon(
-                        widget.workspaceEntity.iconPath,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 190,
-                      child: Text(
-                        widget.workspaceEntity.name,
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.ellipsis,
-                        style: AppTheme.fontSize(14).makeBold(),
-                      ),
-                    ),
+            Align(
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 250),
+                width: 160,
+                height: 150,
+                padding: const EdgeInsets.all(16.0),
+                margin: const EdgeInsets.all(16.0),
+                decoration: BoxDecoration(
+                  color: AppTheme.workspaceTileColor,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: accentColorMap[
+                              widget.workspaceEntity.name[0].toUpperCase()]!
+                          .withOpacity(hover ? 0.6 : 0.2),
+                      blurRadius: 16,
+                    )
                   ],
+                ),
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      AnimatedScale(
+                        duration: const Duration(milliseconds: 500),
+                        scale: hover ? 0.8 : 1.0,
+                        child: getWorkspaceIcon(
+                          widget.workspaceEntity.iconPath,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 190,
+                        child: Text(
+                          widget.workspaceEntity.name,
+                          textAlign: TextAlign.center,
+                          overflow: TextOverflow.ellipsis,
+                          style: AppTheme.fontSize(14).makeBold(),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -148,6 +152,32 @@ class _WorkspaceTileState extends State<WorkspaceTile> {
                 child: _buildAppBar(),
               ),
             ),
+            if (widget.isDefaultWorkspace)
+              Align(
+                alignment: Alignment.topCenter,
+                child: AnimatedScale(
+                  duration: const Duration(milliseconds: 500),
+                  scale: hover ? 0.8 : 1.0,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: accentColorMap[widget.workspaceEntity.name[0]] ??
+                          Colors.amber.shade700,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppTheme.dialogDropShadow,
+                          blurRadius: 16,
+                        ),
+                      ],
+                    ),
+                    padding: const EdgeInsets.all(4.0),
+                    child: Icon(
+                      Icons.star,
+                      color: AppTheme.background,
+                    ),
+                  ),
+                ),
+              ),
           ],
         ),
       ),

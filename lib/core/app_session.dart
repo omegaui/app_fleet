@@ -1,4 +1,6 @@
+import 'package:app_fleet/config/theme/app_theme.dart';
 import 'package:app_fleet/main.dart';
+import 'package:flutter/foundation.dart';
 
 enum SessionState {
   dirty,
@@ -9,6 +11,14 @@ typedef AppSessionCallback = void Function();
 
 class AppSession {
   final List<AppSessionCallback> _listeners = [];
+  final VoidCallback onRebuildRequested;
+
+  AppSession({required this.onRebuildRequested});
+
+  void reloadTheme() {
+    AppTheme.initTheme();
+    onRebuildRequested();
+  }
 
   SessionState _state = SessionState.clean;
 

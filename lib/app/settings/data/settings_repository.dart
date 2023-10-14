@@ -9,8 +9,20 @@ import 'package:http/http.dart';
 class SettingsRepository {
   final storage = DependencyInjection.find<AppConfiguration>();
 
+  void setDefaultWorkspace(String? name) {
+    storage.put('default-workspace', name);
+  }
+
+  String? getDefaultWorkspace() {
+    return storage.get('default-workspace');
+  }
+
   String getThemeMode() {
-    return storage.get('theme-mode') ?? 'light';
+    return storage.get('theme-mode') ?? 'system';
+  }
+
+  void setThemeMode(String mode) {
+    storage.put('theme-mode', mode);
   }
 
   bool isAutostartEnabled() {

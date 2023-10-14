@@ -1,11 +1,14 @@
 import 'package:app_fleet/app/settings/data/settings_repository.dart';
 import 'package:app_fleet/config/theme/app_theme.dart';
+import 'package:app_fleet/core/app_session.dart';
 import 'package:app_fleet/core/dependency_manager.dart';
+import 'package:app_fleet/utils/app_tooltip_builder.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 
 void showSettingsDialog(BuildContext context) {
   final settingsRepo = DependencyInjection.find<SettingsRepository>();
+  final appSession = DependencyInjection.find<AppSession>();
   showDialog(
     context: context,
     barrierColor: Colors.transparent,
@@ -29,7 +32,7 @@ void showSettingsDialog(BuildContext context) {
                       BoxShadow(
                         color: AppTheme.dialogDropShadow,
                         blurRadius: 16,
-                      )
+                      ),
                     ],
                   ),
                   child: Stack(
@@ -49,17 +52,18 @@ void showSettingsDialog(BuildContext context) {
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: 20),
+                              const SizedBox(height: 10),
                               Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Text(
                                     "Show Launcher Window on Startup",
-                                    style: AppTheme.fontSize(15),
+                                    style: AppTheme.fontSize(14),
                                   ),
                                   const SizedBox(width: 20),
                                   Switch(
                                     value: settingsRepo.isAutostartEnabled(),
+                                    activeColor: AppTheme.switchColor,
                                     onChanged: (value) async {
                                       await settingsRepo
                                           .setAutostartEnabled(value);
@@ -73,15 +77,85 @@ void showSettingsDialog(BuildContext context) {
                                 children: [
                                   Text(
                                     "Notify me when an update arrives ",
-                                    style: AppTheme.fontSize(15),
+                                    style: AppTheme.fontSize(14),
                                   ),
                                   const SizedBox(width: 20),
                                   Switch(
                                     value: settingsRepo.notifyAboutUpdates(),
+                                    activeColor: AppTheme.switchColor,
                                     onChanged: (value) async {
                                       settingsRepo.setNotifyAboutUpdates(value);
                                       setModalState(() {});
                                     },
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    "Choose your theme",
+                                    style: AppTheme.fontSize(15),
+                                  ),
+                                  const SizedBox(width: 20),
+                                  DropdownButton<String>(
+                                    value: settingsRepo.getThemeMode(),
+                                    dropdownColor: AppTheme.background,
+                                    focusColor: AppTheme.fieldFocusedColor,
+                                    items: [
+                                      DropdownMenuItem<String>(
+                                        value: 'system',
+                                        child: Text(
+                                          'System',
+                                          style:
+                                              AppTheme.fontSize(14).makeBold(),
+                                        ),
+                                      ),
+                                      DropdownMenuItem<String>(
+                                        value: 'light',
+                                        child: Text(
+                                          'Light',
+                                          style:
+                                              AppTheme.fontSize(14).makeBold(),
+                                        ),
+                                      ),
+                                      DropdownMenuItem<String>(
+                                        value: 'dark',
+                                        child: Text(
+                                          'Dark',
+                                          style:
+                                              AppTheme.fontSize(14).makeBold(),
+                                        ),
+                                      ),
+                                    ],
+                                    onChanged: (value) {
+                                      final previousTheme =
+                                          settingsRepo.getThemeMode();
+                                      if (previousTheme ==
+                                          (value ?? 'system')) {
+                                        return;
+                                      }
+                                      setModalState(() {
+                                        settingsRepo
+                                            .setThemeMode(value ?? 'system');
+                                        appSession.reloadTheme();
+                                      });
+                                    },
+                                  ),
+                                  const SizedBox(width: 10),
+                                  AppTooltipBuilder.wrap(
+                                    text: "Refresh App",
+                                    child: IconButton(
+                                      onPressed: () {
+                                        setModalState(() {
+                                          appSession.reloadTheme();
+                                        });
+                                      },
+                                      icon: Icon(
+                                        Icons.refresh,
+                                        color: AppTheme.foreground,
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),

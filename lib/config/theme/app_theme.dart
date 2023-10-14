@@ -1,6 +1,7 @@
 import 'package:app_fleet/app/settings/data/settings_repository.dart';
 import 'package:app_fleet/core/dependency_manager.dart';
 import 'package:app_fleet/core/json_configurator.dart';
+import 'package:app_fleet/main.dart';
 import 'package:app_fleet/utils/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -61,10 +62,20 @@ class AppTheme {
 
   static void initTheme() {
     final settings = DependencyInjection.find<SettingsRepository>();
-    bool darkMode = settings.getThemeMode() == 'dark';
+    bool darkMode = false;
+    final userPreferred = settings.getThemeMode();
+    if (userPreferred == 'system') {
+      final systemTheme = getSystemTheme();
+      darkMode = systemTheme == 'dark';
+    } else {
+      darkMode = userPreferred == 'dark';
+    }
     if (darkMode) {
       _theme =
           JsonConfigurator(configName: combinePath(['themes', 'dark.json']));
+    } else if (_theme.configName.endsWith('dark.json')) {
+      _theme =
+          JsonConfigurator(configName: combinePath(['themes', 'light.json']));
     }
     background = _theme.getColor('background');
     foreground = _theme.getColor('foreground');
@@ -127,6 +138,7 @@ class AppTheme {
     fieldDisabledColor = _theme.getColor('field-disabled-color');
     fieldFocusedColor = _theme.getColor('field-focused-color');
     fieldPrimaryColor = _theme.getColor('field-primary-color');
+    debugPrintApp("[AppTheme] ${darkMode ? 'Dark' : 'Light'} Mode applied ...");
   }
 
   static TextStyle get fontBold => TextStyle(

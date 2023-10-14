@@ -66,6 +66,14 @@ class AppStorageManager {
         await rootBundle.loadString('assets/scripts/unix-process-executor.sh'),
         flush: true,
       );
+      // writing theme detector
+      File(combinePath([
+        ".config",
+        'theme-detector.sh',
+      ])).writeAsStringSync(
+        await rootBundle.loadString('assets/scripts/theme-detector.sh'),
+        flush: true,
+      );
       Future.delayed(
         const Duration(seconds: 2),
         () async {
@@ -81,6 +89,10 @@ class AppStorageManager {
               combinePath([
                 ".config",
                 'unix-process-executor.sh',
+              ], absolute: true),
+              combinePath([
+                ".config",
+                'theme-detector.sh',
               ], absolute: true),
             ],
           );
@@ -125,7 +137,7 @@ class AppStorageManager {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "Making Event Scripts executable",
+                              "Making Event Scripts Executable\n(please authorize)",
                               textAlign: TextAlign.center,
                               style: AppTheme.fontSize(14).makeBold(),
                             ),

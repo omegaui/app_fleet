@@ -1,6 +1,6 @@
 import 'package:app_fleet/app/config/domain/workspace_entity.dart';
 import 'package:app_fleet/app/launcher/data/launcher_repository.dart';
-import 'package:app_fleet/core/app_session_status.dart';
+import 'package:app_fleet/core/app_session.dart';
 import 'package:app_fleet/core/dependency_manager.dart';
 import 'package:app_fleet/core/route_service.dart';
 import 'package:app_fleet/main.dart';

@@ -80,6 +80,25 @@ Future<void> executeProcessExecutor(String command) async {
   }
 }
 
+String getSystemTheme() {
+  try {
+    final result = Process.runSync(
+      combinePath([
+        '.config',
+        'theme-detector.sh',
+      ]),
+      [],
+    );
+    int exitCode = result.exitCode;
+    return exitCode == 1 ? 'dark' : 'light';
+  } on Exception {
+    debugPrintApp(
+        "[WorkspaceSwitcher] Got an error when trying to identify System Theme");
+  }
+  // falling back to light if any error occurs
+  return 'light';
+}
+
 String combinePath(List<String> locations, {bool absolute = false}) {
   String path = locations.join(Platform.pathSeparator);
   return absolute ? File(path).absolute.path : path;

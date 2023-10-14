@@ -1,4 +1,4 @@
-import 'package:app_fleet/core/app_session_status.dart';
+import 'package:app_fleet/core/app_session.dart';
 import 'package:app_fleet/core/dependency_manager.dart';
 import 'package:app_fleet/main.dart';
 import 'package:app_fleet/utils/markdown_generator.dart';
