@@ -14,11 +14,17 @@
   "assets/icons/bug.png": [
     "assets/icons/bug.png"
   ],
+  "assets/icons/buy-me-a-coffee.png": [
+    "assets/icons/buy-me-a-coffee.png"
+  ],
   "assets/icons/delete.png": [
     "assets/icons/delete.png"
   ],
   "assets/icons/discard.png": [
     "assets/icons/discard.png"
+  ],
+  "assets/icons/github.png": [
+    "assets/icons/github.png"
   ],
   "assets/icons/magic.png": [
     "assets/icons/magic.png"
@@ -55,6 +61,12 @@
   ],
   "assets/icons/picker/space.png": [
     "assets/icons/picker/space.png"
+  ],
+  "assets/icons/qr-code.png": [
+    "assets/icons/qr-code.png"
+  ],
+  "assets/icons/star.png": [
+    "assets/icons/star.png"
   ],
   "assets/icons/unknown.png": [
     "assets/icons/unknown.png"

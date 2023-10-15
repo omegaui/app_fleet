@@ -5,6 +5,7 @@ import 'package:app_fleet/config/assets/app_icons.dart';
 import 'package:app_fleet/config/assets/generators/linux_app_finder.dart';
 import 'package:app_fleet/config/theme/app_theme.dart';
 import 'package:app_fleet/constants/app_meta_info.dart';
+import 'package:app_fleet/core/app_bug_report.dart';
 import 'package:app_fleet/core/app_man_page.dart';
 import 'package:app_fleet/core/app_session.dart';
 import 'package:app_fleet/core/app_updater.dart';
@@ -41,18 +42,34 @@ void main(List<String> args) async {
 
   debugPrintApp(launcherMode ? ">> Launcher Mode" : ">> Manager Mode");
 
-  WidgetsFlutterBinding.ensureInitialized();
-
-  doWhenWindowReady(() {
-    appWindow.minSize = windowSize;
-    appWindow.maxSize = windowSize;
-    appWindow.size = windowSize;
-    appWindow.show();
-  });
-
   await AppStorageManager.initSpace();
 
-  runApp(AppFleet(launcherMode: launcherMode));
+  if (debugMode) {
+    WidgetsFlutterBinding.ensureInitialized();
+    doWhenWindowReady(() {
+      appWindow.minSize = windowSize;
+      appWindow.maxSize = windowSize;
+      appWindow.size = windowSize;
+      appWindow.show();
+    });
+    runApp(AppFleet(launcherMode: launcherMode));
+  } else {
+    runZonedGuarded(() {
+      WidgetsFlutterBinding.ensureInitialized();
+      doWhenWindowReady(() {
+        appWindow.minSize = windowSize;
+        appWindow.maxSize = windowSize;
+        appWindow.size = windowSize;
+        appWindow.show();
+      });
+      runApp(AppFleet(launcherMode: launcherMode));
+    }, (error, stack) {
+      AppBugReport.createZoneReport(
+        error: error,
+        stackTrace: stack,
+      );
+    });
+  }
 }
 
 class AppFleet extends StatefulWidget {
