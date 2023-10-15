@@ -47,15 +47,24 @@ Here comes App Fleet,
 <strong>App Fleet is written using The Flutter Framework.</strong>
 </p>
 
-## What's New in v1.0.0+4
+## Support Me
 
-- Now, you can mark a workspace as default and the launcher will automatically start executing it.
-- Dark Mode Support \- Support for System Theme Detection.
-- Manage Auto Update Notifier through Settings.
-- Option to turn off autostart through Settings.
-- A dedicated Preferences Dialog.
+If you have really liked the project and want to support the development of App Fleet.
+Then, please consider buying me a coffee.
 
-See [**CHANGELOG**](https://github.com/omegaui/app_fleet/blob/main/CHANGELOG.md) for full feature list.
+<div>
+    <img src="github/images/qr-code.png" alt="GitHub Banner" width="350">
+</div>
+
+Scan this Qr Code or <br>
+
+Click the button below to Buy Me a Coffee.
+
+<a href="https://www.buymeacoffee.com/imarham" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
+## Features
+
+See [**CHANGELOG**](https://github.com/omegaui/app_fleet/blob/main/CHANGELOG.md) for a full feature list.
 
 ## Install (Advanced Installation Options)
 

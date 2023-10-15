@@ -12,6 +12,19 @@ class AppBugReport {
   static final AppSession _session = DependencyInjection.find<AppSession>();
   static final List<String> reportIDs = [];
 
+  static void createZoneReport({
+    required dynamic error,
+    required dynamic stackTrace,
+  }) {
+    createReport(
+      message: "Error Generated from unguarded block.",
+      source: "main",
+      additionalDescription: "Error caught by Zone Guard.",
+      error: error,
+      stackTrace: stackTrace,
+    );
+  }
+
   static void createReport({
     required String message,
     required String source,

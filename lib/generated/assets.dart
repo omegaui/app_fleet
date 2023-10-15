@@ -7,9 +7,13 @@ class Assets {
   static const String animationsUpdate = 'assets/animations/update.json';
   static const String iconsAppIcon = 'assets/icons/app-icon.png';
   static const String iconsBug = 'assets/icons/bug.png';
+  static const String iconsBuyMeACoffee = 'assets/icons/buy-me-a-coffee.png';
   static const String iconsDelete = 'assets/icons/delete.png';
   static const String iconsDiscard = 'assets/icons/discard.png';
+  static const String iconsGithub = 'assets/icons/github.png';
   static const String iconsMagic = 'assets/icons/magic.png';
+  static const String iconsQrCode = 'assets/icons/qr-code.png';
+  static const String iconsStar = 'assets/icons/star.png';
   static const String iconsUnknown = 'assets/icons/unknown.png';
   static const String pickerCoding = 'assets/icons/picker/coding.png';
   static const String pickerCodingOther =
