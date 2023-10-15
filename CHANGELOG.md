@@ -1,8 +1,6 @@
 ## v1.0.0+5
 
 - Added App Support Method (Buy Me a Coffee).
-- Added Zone Guard in production mode.
-- Zone Reports Generation for production mode.
 
 ## v1.0.0+4
 
