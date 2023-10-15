@@ -9,6 +9,10 @@ class AppIcons {
   static const bug = 'assets/icons/bug.png';
   static const discard = 'assets/icons/discard.png';
   static const delete = 'assets/icons/delete.png';
+  static const github = 'assets/icons/github.png';
+  static const star = 'assets/icons/star.png';
+  static const buyMeACoffee = 'assets/icons/buy-me-a-coffee.png';
+  static const qrCode = 'assets/icons/qr-code.png';
 
   static Future<List<String>> loadPickerIcons() async {
     final assetManifest = await AssetManifest.loadFromAssetBundle(rootBundle);
