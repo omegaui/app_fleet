@@ -22,4 +22,5 @@
 - Added Response Check in `AppUpdater`
 
 ## v1.0.0 - Initial Release
-- (the initial feature set)
+
+- (the initial feature set, visit [project website](https://omegaui.github.io/app_fleet_webpage/))
