@@ -5,27 +5,33 @@ import 'package:app_fleet/utils/utils.dart';
 class WorkspaceEntity {
   late String name;
   late String iconPath;
-  Set<App> apps = {};
+  int defaultWorkspace; // Since v1.0.0+6
+  Set<App> apps;
 
   WorkspaceEntity({
     required this.name,
     required this.iconPath,
+    int? defaultWorkspace,
     Set<App>? applications,
-  }) : apps = applications ?? {};
+  })  : apps = applications ?? {},
+        defaultWorkspace = defaultWorkspace ?? -1;
 
   WorkspaceEntity.clone(
     WorkspaceEntity entity, {
     String? name,
     String? iconPath,
+    int? defaultWorkspace,
     Set<App>? applications,
   })  : name = name ?? entity.name,
         iconPath = iconPath ?? entity.iconPath,
+        defaultWorkspace = defaultWorkspace ?? entity.defaultWorkspace,
         apps = (applications != null ? {...applications} : {...entity.apps});
 
   Map<String, dynamic> toMap() {
     return {
       StorageKeys.nameKey: name,
       StorageKeys.iconPathKey: iconPath,
+      StorageKeys.defaultWorkspaceKey: defaultWorkspace,
       StorageKeys.appsKey: apps.map((e) => e.toMap()).toList(),
     };
   }
@@ -47,6 +53,7 @@ class WorkspaceEntity {
     return WorkspaceEntity(
       name: data[StorageKeys.nameKey],
       iconPath: data[StorageKeys.iconPathKey],
+      defaultWorkspace: data[StorageKeys.defaultWorkspaceKey],
       applications: apps.toSet(),
     );
   }
@@ -55,7 +62,9 @@ class WorkspaceEntity {
   bool operator ==(Object other) {
     if (other.runtimeType == WorkspaceEntity) {
       other = other as WorkspaceEntity;
-      if (name == other.name && iconPath == other.iconPath) {
+      if (name == other.name &&
+          iconPath == other.iconPath &&
+          defaultWorkspace == other.defaultWorkspace) {
         if (apps.length != other.apps.length) {
           return false;
         }
@@ -76,7 +85,11 @@ class WorkspaceEntity {
 
   @override
   int get hashCode =>
-      super.hashCode ^ name.hashCode ^ iconPath.hashCode ^ apps.hashCode;
+      super.hashCode ^
+      name.hashCode ^
+      iconPath.hashCode ^
+      defaultWorkspace.hashCode ^
+      apps.hashCode;
 }
 
 class App {

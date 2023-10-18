@@ -208,7 +208,7 @@ void showWorkspaceMapDialog({
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Apps of #${priority + 1} Workspace",
+                                  "Apps of #${priority + 1} Workspace${workspaceEntity.defaultWorkspace == priority ? "(Default)" : ""}",
                                   style: AppTheme.fontSize(16).makeBold(),
                                 ),
                                 const SizedBox(height: 10.0),
@@ -247,6 +247,44 @@ void showWorkspaceMapDialog({
                             color: Colors.white,
                           ),
                           iconSize: 20,
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: AppTooltipBuilder.wrap(
+                          text: "Mark as Default Workspace",
+                          child: IconButton(
+                            onPressed: () {
+                              if (workspaceEntity.defaultWorkspace ==
+                                  priority) {
+                                workspaceEntity.defaultWorkspace = -1;
+                              } else {
+                                workspaceEntity.defaultWorkspace = priority;
+                              }
+                              setState(() {});
+                            },
+                            style: IconButton.styleFrom(
+                              backgroundColor:
+                                  workspaceEntity.defaultWorkspace == priority
+                                      ? Colors.blueAccent
+                                      : Colors.white,
+                              side: workspaceEntity.defaultWorkspace == priority
+                                  ? null
+                                  : const BorderSide(
+                                      color: Colors.blueAccent, width: 2),
+                            ),
+                            icon: Icon(
+                              Icons.push_pin_outlined,
+                              color:
+                                  workspaceEntity.defaultWorkspace == priority
+                                      ? Colors.white
+                                      : Colors.blueAccent,
+                            ),
+                            iconSize: 20,
+                          ),
                         ),
                       ),
                     ),

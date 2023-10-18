@@ -26,13 +26,18 @@ class WorkspaceLauncher {
     final workspaceMap = getMappedApps(workspaceEntity);
 
     void onComplete() {
+      if (workspaceEntity.defaultWorkspace >= 0) {
+        executeWorkspaceSwitcher(workspaceEntity.defaultWorkspace);
+      }
+      var status = session.isClean
+          ? "[WorkspaceLauncher] Workspace Successfully Launched"
+          : "[WorkspaceLauncher] Error Encountered during Workspace Launch!";
+      debugPrintApp(status);
+      onProgress("$launchFinishedTag $status");
       Future.delayed(
         const Duration(seconds: 5),
         () {
           if (session.isClean) {
-            var status = "[WorkspaceLauncher] My work is done, Bye!";
-            debugPrintApp(status);
-            onProgress("$launchFinishedTag $status");
             appWindow.close();
             SystemNavigator.pop();
             if (RouteService.navigatorKey.currentContext != null) {
