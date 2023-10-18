@@ -60,17 +60,27 @@ class AppTheme {
   static Color fieldFocusedColor = const Color(0xFF4CAF50);
   static Color fieldPrimaryColor = const Color(0xFF2196F3);
 
+  static bool _darkMode = false;
+
+  static bool isLightMode() {
+    return !_darkMode;
+  }
+
+  static bool isDarkMode() {
+    return _darkMode;
+  }
+
   static void initTheme() {
+    _darkMode = false;
     final settings = DependencyInjection.find<SettingsRepository>();
-    bool darkMode = false;
     final userPreferred = settings.getThemeMode();
     if (userPreferred == 'system') {
       final systemTheme = getSystemTheme();
-      darkMode = systemTheme == 'dark';
+      _darkMode = systemTheme == 'dark';
     } else {
-      darkMode = userPreferred == 'dark';
+      _darkMode = userPreferred == 'dark';
     }
-    if (darkMode) {
+    if (_darkMode) {
       _theme =
           JsonConfigurator(configName: combinePath(['themes', 'dark.json']));
     } else if (_theme.configName.endsWith('dark.json')) {
@@ -138,7 +148,8 @@ class AppTheme {
     fieldDisabledColor = _theme.getColor('field-disabled-color');
     fieldFocusedColor = _theme.getColor('field-focused-color');
     fieldPrimaryColor = _theme.getColor('field-primary-color');
-    debugPrintApp("[AppTheme] ${darkMode ? 'Dark' : 'Light'} Mode applied ...");
+    debugPrintApp(
+        "[AppTheme] ${_darkMode ? 'Dark' : 'Light'} Mode applied ...");
   }
 
   static TextStyle get fontBold => TextStyle(

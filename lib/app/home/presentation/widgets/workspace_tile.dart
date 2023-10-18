@@ -114,8 +114,10 @@ class _WorkspaceTileState extends State<WorkspaceTile> {
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                      color: accentColorMap[
-                              widget.workspaceEntity.name[0].toUpperCase()]!
+                      color: (AppTheme.isDarkMode()
+                              ? AppTheme.dialogDropShadow
+                              : accentColorMap[widget.workspaceEntity.name[0]
+                                  .toUpperCase()]!)
                           .withOpacity(hover ? 0.6 : 0.2),
                       blurRadius: 16,
                     )
