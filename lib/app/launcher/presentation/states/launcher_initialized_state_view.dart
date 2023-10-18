@@ -135,7 +135,8 @@ class _LauncherInitializedStateViewState
                           color: (AppTheme.isDarkMode()
                                   ? AppTheme.dialogDropShadow
                                   : accentColorMap[
-                                      workspaceEntity.name[0].toUpperCase()]!)
+                                      getAccentChar(workspaceEntity.name)
+                                          .toUpperCase()]!)
                               .withOpacity(hover ? 0.6 : 0.2),
                           blurRadius: 16,
                         )

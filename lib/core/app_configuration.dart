@@ -12,7 +12,7 @@ class AppConfiguration extends JsonConfigurator {
   void writeWorkspace(WorkspaceEntity workspaceEntity) {
     File(combinePath(
             ['.config', 'workspaces', toWorkspaceStorageName(workspaceEntity)]))
-        .writeAsStringSync(jsonEncode(workspaceEntity.toMap()));
+        .writeAsStringSync(jsonEncoder.convert(workspaceEntity.toMap()));
     add(StorageKeys.workspacesKey, toWorkspaceStorageName(workspaceEntity));
   }
 

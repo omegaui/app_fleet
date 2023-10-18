@@ -116,8 +116,9 @@ class _WorkspaceTileState extends State<WorkspaceTile> {
                     BoxShadow(
                       color: (AppTheme.isDarkMode()
                               ? AppTheme.dialogDropShadow
-                              : accentColorMap[widget.workspaceEntity.name[0]
-                                  .toUpperCase()]!)
+                              : accentColorMap[
+                                  getAccentChar(widget.workspaceEntity.name)
+                                      .toUpperCase()]!)
                           .withOpacity(hover ? 0.6 : 0.2),
                       blurRadius: 16,
                     ),
@@ -162,7 +163,9 @@ class _WorkspaceTileState extends State<WorkspaceTile> {
                   scale: hover ? 0.8 : 1.0,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: accentColorMap[widget.workspaceEntity.name[0]] ??
+                      color: accentColorMap[
+                              getAccentChar(widget.workspaceEntity.name)
+                                  .toUpperCase()] ??
                           Colors.amber.shade700,
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [

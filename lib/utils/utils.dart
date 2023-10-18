@@ -1,9 +1,12 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:app_fleet/app/config/domain/workspace_entity.dart';
 import 'package:app_fleet/core/app_bug_report.dart';
 import 'package:app_fleet/main.dart';
 import 'package:flutter/material.dart';
+
+const jsonEncoder = JsonEncoder.withIndent('  ');
 
 Map<String, Color> accentColorMap = {
   'A': Colors.redAccent,
@@ -132,4 +135,33 @@ void switchWorkspace(int number) {
 
 String getBugReportPath(String reportID) {
   return "file://${Platform.environment['HOME']}/app-fleet/.config/bug-reports/$reportID.md";
+}
+
+String getWorkspacePath(String workspaceName) {
+  return "file://${Platform.environment['HOME']}/app-fleet/.config/workspaces/$workspaceName.json";
+}
+
+bool launcherModeCapable() {
+  return debugMode ||
+      File('${Platform.environment['HOME']}/app-fleet/.config/app-settings.json')
+          .existsSync();
+}
+
+String getAccentChar(String name) {
+  var result = name[0];
+  String? maxOccurredChar;
+  int lastWeight = 0;
+  for (var char in name.characters) {
+    int weight = 0;
+    for (var charX in name.characters) {
+      if (charX == char) {
+        weight++;
+      }
+    }
+    if (weight > lastWeight) {
+      lastWeight = weight;
+      maxOccurredChar = char;
+    }
+  }
+  return maxOccurredChar ?? result;
 }

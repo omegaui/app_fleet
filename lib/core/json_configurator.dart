@@ -95,7 +95,8 @@ class JsonConfigurator {
 
   void save() {
     try {
-      File(configPath).writeAsStringSync(jsonEncode(config), flush: true);
+      File(configPath)
+          .writeAsStringSync(jsonEncoder.convert(config), flush: true);
     } catch (error, stackTrace) {
       debugPrintApp("Permission Denied when Saving Configuration: $configName");
       AppBugReport.createReport(
