@@ -240,7 +240,7 @@ void showWorkspaceMapDialog({
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: AppTooltipBuilder.wrap(
-                          text: "Pin to Workspace When Launch Completes",
+                          text: "Switch to Workspace When Launch Completes",
                           child: IconButton(
                             onPressed: () {
                               if (workspaceEntity.defaultWorkspace ==
