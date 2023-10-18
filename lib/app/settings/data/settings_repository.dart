@@ -9,6 +9,14 @@ import 'package:http/http.dart';
 class SettingsRepository {
   final storage = DependencyInjection.find<AppConfiguration>();
 
+  void setKeepAliveLauncher(bool value) {
+    storage.put('keep-alive-launcher', value);
+  }
+
+  bool getKeepAliveLauncher() {
+    return storage.get('keep-alive-launcher') ?? false;
+  }
+
   void setDefaultWorkspace(String? name) {
     storage.put('default-workspace', name);
   }
