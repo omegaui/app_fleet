@@ -255,7 +255,7 @@ void showWorkspaceMapDialog({
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: AppTooltipBuilder.wrap(
-                          text: "Mark as Default Workspace",
+                          text: "Pin to Workspace When Launch Completes",
                           child: IconButton(
                             onPressed: () {
                               if (workspaceEntity.defaultWorkspace ==
