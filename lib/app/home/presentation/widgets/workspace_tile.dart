@@ -120,7 +120,7 @@ class _WorkspaceTileState extends State<WorkspaceTile> {
                                   .toUpperCase()]!)
                           .withOpacity(hover ? 0.6 : 0.2),
                       blurRadius: 16,
-                    )
+                    ),
                   ],
                 ),
                 child: Center(

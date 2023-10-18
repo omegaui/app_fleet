@@ -29,11 +29,6 @@ class WorkspaceLauncher {
       if (workspaceEntity.defaultWorkspace >= 0) {
         executeWorkspaceSwitcher(workspaceEntity.defaultWorkspace);
       }
-      var status = session.isClean
-          ? "[WorkspaceLauncher] Workspace Successfully Launched"
-          : "[WorkspaceLauncher] Error Encountered during Workspace Launch!";
-      debugPrintApp(status);
-      onProgress("$launchFinishedTag $status");
       Future.delayed(
         const Duration(seconds: 5),
         () {
@@ -67,6 +62,13 @@ class WorkspaceLauncher {
             await app.launch();
           }
         }
+
+        var status = session.isClean
+            ? "Workspace Successfully Launched"
+            : "Error Encountered during Workspace Launch!";
+        debugPrintApp(status);
+        onProgress("$launchProgressTag $status");
+
         onComplete();
       },
     );

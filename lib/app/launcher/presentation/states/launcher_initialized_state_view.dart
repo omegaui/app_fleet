@@ -113,36 +113,49 @@ class _LauncherInitializedStateViewState
             child: MouseRegion(
               onEnter: (e) => setContentState(() => hover = true),
               onExit: (e) => setContentState(() => hover = false),
-              child: AppTooltipBuilder.wrap(
-                text: workspaceEntity.name,
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 250),
-                  width: 80,
-                  height: 80,
-                  padding: const EdgeInsets.all(16.0),
-                  margin: const EdgeInsets.all(16.0),
-                  decoration: BoxDecoration(
-                    color: AppTheme.background,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: accentColorMap[
-                                workspaceEntity.name[0].toUpperCase()]!
-                            .withOpacity(hover ? 0.6 : 0.2),
-                        blurRadius: 16,
-                      )
-                    ],
-                  ),
-                  child: Center(
-                    child: AnimatedScale(
-                      duration: const Duration(milliseconds: 500),
-                      scale: hover ? 0.8 : 1.0,
-                      child: getWorkspaceIcon(
-                        workspaceEntity.iconPath,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 250),
+                    width: 80,
+                    height: 80,
+                    padding: const EdgeInsets.all(16.0),
+                    margin: EdgeInsets.only(
+                      top: 16.0,
+                      bottom: hover ? 6.0 : 16.0,
+                      right: 16.0,
+                      left: 16.0,
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppTheme.background,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: (AppTheme.isDarkMode()
+                                  ? AppTheme.dialogDropShadow
+                                  : accentColorMap[
+                                      workspaceEntity.name[0].toUpperCase()]!)
+                              .withOpacity(hover ? 0.6 : 0.2),
+                          blurRadius: 16,
+                        )
+                      ],
+                    ),
+                    child: Center(
+                      child: AnimatedScale(
+                        duration: const Duration(milliseconds: 500),
+                        scale: hover ? 0.8 : 1.0,
+                        child: getWorkspaceIcon(
+                          workspaceEntity.iconPath,
+                        ),
                       ),
                     ),
                   ),
-                ),
+                  Text(
+                    workspaceEntity.name,
+                    style: AppTheme.fontSize(12).makeBold(),
+                  ),
+                ],
               ),
             ),
           );
@@ -230,12 +243,17 @@ class _LauncherInitializedStateViewState
                       ),
                       if (launchStatus != null)
                         Align(
-                          alignment: Alignment.bottomCenter,
+                          alignment: Alignment.topCenter,
                           child: Padding(
                             padding: const EdgeInsets.all(16.0),
-                            child: Text(
-                              launchStatus!,
-                              style: AppTheme.fontSize(14).makeBold(),
+                            child: SizedBox(
+                              width: 300,
+                              child: Text(
+                                launchStatus!,
+                                textAlign: TextAlign.center,
+                                overflow: TextOverflow.ellipsis,
+                                style: AppTheme.fontSize(13),
+                              ),
                             ),
                           ),
                         ),
