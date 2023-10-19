@@ -1,7 +1,9 @@
 import 'package:app_fleet/app/config/domain/workspace_entity.dart';
+import 'package:app_fleet/app/settings/data/settings_repository.dart';
 import 'package:app_fleet/config/assets/app_icons.dart';
 import 'package:app_fleet/config/assets/generators/linux_app_finder.dart';
 import 'package:app_fleet/config/theme/app_theme.dart';
+import 'package:app_fleet/core/dependency_manager.dart';
 import 'package:app_fleet/utils/app_tooltip_builder.dart';
 import 'package:app_fleet/utils/app_window_buttons.dart';
 import 'package:app_fleet/utils/utils.dart';
@@ -20,6 +22,7 @@ void showAppSelectionDialog({
     focusNode.requestFocus();
   });
   String title = "Pick an App (${LinuxAppFinder.apps.length} Detected)";
+  final settingsRepo = DependencyInjection.find<SettingsRepository>();
   showDialog(
     context: context,
     barrierColor: Colors.transparent,
@@ -80,9 +83,14 @@ void showAppSelectionDialog({
                                           return GestureDetector(
                                             onTap: () {
                                               onClick(e);
-                                              setState(() {
-                                                title = "Added ${e.name}";
-                                              });
+                                              if (!settingsRepo
+                                                  .getKeepAppPickerOpen()) {
+                                                Navigator.pop(context);
+                                              } else {
+                                                setState(() {
+                                                  title = "Added ${e.name}";
+                                                });
+                                              }
                                             },
                                             child: StatefulBuilder(
                                               builder: (context, setIconState) {
