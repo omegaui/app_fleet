@@ -11,7 +11,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 void showAppSelectionDialog({
   required BuildContext context,
-  required void Function(App? app) onClose,
+  required void Function(App? app) onClick,
 }) {
   String searchText = "";
   FocusNode focusNode = FocusNode();
@@ -72,8 +72,7 @@ void showAppSelectionDialog({
                                         bool hover = false;
                                         return GestureDetector(
                                           onTap: () {
-                                            onClose(e);
-                                            Navigator.pop(context);
+                                            onClick(e);
                                           },
                                           child: StatefulBuilder(
                                             builder: (context, setIconState) {
@@ -158,7 +157,7 @@ void showAppSelectionDialog({
                           child: appWindowButton(
                             color: Colors.red,
                             onPressed: () {
-                              onClose(null);
+                              onClick(null);
                               Navigator.pop(context);
                             },
                           ),

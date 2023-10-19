@@ -78,7 +78,7 @@ class _ConfigInitializedStateViewState
           const CharacterActivator('f', control: true): () {
             showAppSelectionDialog(
               context: context,
-              onClose: (app) {
+              onClick: (app) {
                 setState(
                   () {
                     if (app != null) {

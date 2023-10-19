@@ -2,6 +2,7 @@ import 'package:app_fleet/app/launcher/data/launcher_repository.dart';
 import 'package:app_fleet/config/assets/app_icons.dart';
 import 'package:app_fleet/config/theme/app_theme.dart';
 import 'package:app_fleet/core/dependency_manager.dart';
+import 'package:app_fleet/core/route_service.dart';
 import 'package:app_fleet/utils/app_tooltip_builder.dart';
 import 'package:app_fleet/utils/app_window_buttons.dart';
 import 'package:app_fleet/utils/show_app_info_dialog.dart';
@@ -66,6 +67,24 @@ Widget appBar(BuildContext context) {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
+                Column(
+                  children: [
+                    const SizedBox(height: 1.5),
+                    AppTooltipBuilder.wrap(
+                      text: "Reload from Disk",
+                      child: IconButton(
+                        onPressed: () {
+                          DependencyInjection.find<RouteService>().reloadApp();
+                        },
+                        icon: Icon(
+                          Icons.refresh_rounded,
+                          color: AppTheme.settingsIconColor.withOpacity(0.5),
+                        ),
+                        iconSize: 20,
+                      ),
+                    ),
+                  ],
+                ),
                 Column(
                   children: [
                     const SizedBox(height: 1),

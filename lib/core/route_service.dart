@@ -1,6 +1,8 @@
 import 'package:app_fleet/app/config/presentation/config_view.dart';
 import 'package:app_fleet/app/home/presentation/home_view.dart';
 import 'package:app_fleet/app/launcher/presentation/launcher_view.dart';
+import 'package:app_fleet/core/app_configuration.dart';
+import 'package:app_fleet/core/dependency_manager.dart';
 import 'package:flutter/material.dart';
 
 class RouteService {
@@ -56,6 +58,11 @@ class RouteService {
     currentRoute = route;
     _getRoute(currentRoute).arguments = arguments;
     onRebuildRequested();
+  }
+
+  void reloadApp() {
+    DependencyInjection.find<AppConfiguration>().reload();
+    gotoRoute(homeRoute);
   }
 
   Route getCurrentRoute() {
