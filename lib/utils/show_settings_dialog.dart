@@ -94,10 +94,10 @@ void showSettingsDialog(BuildContext context) {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Text(
-                                    "Always Keep Launcher Alive       ",
+                                    "Always Keep Launcher Alive",
                                     style: AppTheme.fontSize(14),
                                   ),
-                                  const SizedBox(width: 20),
+                                  const SizedBox(width: 67),
                                   Switch(
                                     value: settingsRepo.getKeepAliveLauncher(),
                                     activeColor: AppTheme.switchColor,
