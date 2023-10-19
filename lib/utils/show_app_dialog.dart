@@ -19,8 +19,8 @@ void showAppDialog({
   TextEditingController exeController = TextEditingController(text: app.exe);
   TextEditingController waitTimeController =
       TextEditingController(text: app.waitTime.toString());
-  Color tileColor =
-      accentColorMap[app.name.isNotEmpty ? app.name[0].toUpperCase() : 'A']!;
+  Color tileColor = accentColorMap[
+      app.name.isNotEmpty ? getAccentChar(app.name).toUpperCase() : 'A']!;
   String? errorText;
   showDialog(
     context: context,
@@ -239,9 +239,15 @@ void showAppDialog({
                                                           accentColorMap[app
                                                                   .name
                                                                   .isNotEmpty
-                                                              ? app.name[0]
+                                                              ? getAccentChar(
+                                                                      app.name)
                                                                   .toUpperCase()
                                                               : 'A']!;
+                                                      if (AppTheme
+                                                          .isDarkMode()) {
+                                                        tileColor = tileColor
+                                                            .withOpacity(0.2);
+                                                      }
                                                     });
                                                   },
                                                   decoration: InputDecoration(

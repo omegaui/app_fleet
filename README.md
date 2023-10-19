@@ -52,11 +52,9 @@ Here comes App Fleet,
 If you have really liked the project and want to support the development of App Fleet.
 Then, please consider buying me a coffee.
 
-<div>
-    <img src="github/images/qr-code.png" alt="GitHub Banner" width="350">
-</div>
+It helps me to work on the project in my free time.
 
-Scan this Qr Code or <br>
+Scan this [**Qr Code**](github/images/qr-code.png) or <br>
 
 Click the button below to Buy Me a Coffee.
 

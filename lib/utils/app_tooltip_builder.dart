@@ -21,7 +21,7 @@ class AppTooltipBuilder {
         borderRadius: BorderRadius.circular(30),
         boxShadow: [
           BoxShadow(
-            color: AppTheme.fieldFocusedColor.withOpacity(0.2),
+            color: AppTheme.dialogDropShadow.withOpacity(0.4),
             blurRadius: 16,
           ),
         ],

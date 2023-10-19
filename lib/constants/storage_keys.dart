@@ -4,6 +4,7 @@ class StorageKeys {
   static const workspacesKey = 'workspaces';
   static const nameKey = 'name';
   static const iconPathKey = 'icon';
+  static const defaultWorkspaceKey = 'defaultWorkspace';
   static const exeKey = 'exe';
   static const waitTimeKey = 'waitTime';
   static const priorityKey = 'priority';

@@ -3,6 +3,7 @@ import 'package:app_fleet/config/assets/app_icons.dart';
 import 'package:app_fleet/config/theme/app_theme.dart';
 import 'package:app_fleet/main.dart';
 import 'package:app_fleet/utils/app_tooltip_builder.dart';
+import 'package:app_fleet/utils/snack_bar_builder.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -36,29 +37,13 @@ List<Widget> _buildContent({
                 debugPrintApp("$priority $maxPriority");
                 if (priority > 0 && priority < maxPriority) {
                   if (workspaceMap[priority]!.length == 1) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        behavior: SnackBarBehavior.floating,
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 200, vertical: 200),
-                        backgroundColor: AppTheme.background,
-                        elevation: 3,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                        content: Row(
-                          children: [
-                            const Icon(
-                              Icons.info,
-                              color: Colors.redAccent,
-                            ),
-                            const SizedBox(width: 10.0),
-                            Text(
-                              "Only #${maxPriority + 1} Workspace can be left empty",
-                              style: AppTheme.fontSize(14),
-                            ),
-                          ],
-                        ),
+                    showSnackbar(
+                      icon: const Icon(
+                        Icons.info,
+                        color: Colors.redAccent,
                       ),
+                      message:
+                          "Only #${maxPriority + 1} Workspace can be left empty",
                     );
                     return;
                   }
@@ -208,7 +193,7 @@ void showWorkspaceMapDialog({
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Apps of #${priority + 1} Workspace",
+                                  "Apps of #${priority + 1} Workspace${workspaceEntity.defaultWorkspace == priority ? "(Default)" : ""}",
                                   style: AppTheme.fontSize(16).makeBold(),
                                 ),
                                 const SizedBox(height: 10.0),
@@ -247,6 +232,44 @@ void showWorkspaceMapDialog({
                             color: Colors.white,
                           ),
                           iconSize: 20,
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: AppTooltipBuilder.wrap(
+                          text: "Switch to Workspace When Launch Completes",
+                          child: IconButton(
+                            onPressed: () {
+                              if (workspaceEntity.defaultWorkspace ==
+                                  priority) {
+                                workspaceEntity.defaultWorkspace = -1;
+                              } else {
+                                workspaceEntity.defaultWorkspace = priority;
+                              }
+                              setState(() {});
+                            },
+                            style: IconButton.styleFrom(
+                              backgroundColor:
+                                  workspaceEntity.defaultWorkspace == priority
+                                      ? Colors.blueAccent
+                                      : Colors.white,
+                              side: workspaceEntity.defaultWorkspace == priority
+                                  ? null
+                                  : const BorderSide(
+                                      color: Colors.blueAccent, width: 2),
+                            ),
+                            icon: Icon(
+                              Icons.push_pin_outlined,
+                              color:
+                                  workspaceEntity.defaultWorkspace == priority
+                                      ? Colors.white
+                                      : Colors.blueAccent,
+                            ),
+                            iconSize: 20,
+                          ),
                         ),
                       ),
                     ),

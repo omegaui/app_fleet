@@ -1,5 +1,6 @@
 import 'package:app_fleet/app/config/domain/workspace_entity.dart';
 import 'package:app_fleet/app/launcher/data/launcher_repository.dart';
+import 'package:app_fleet/app/settings/data/settings_repository.dart';
 import 'package:app_fleet/core/app_session.dart';
 import 'package:app_fleet/core/dependency_manager.dart';
 import 'package:app_fleet/core/route_service.dart';
@@ -26,24 +27,30 @@ class WorkspaceLauncher {
     final workspaceMap = getMappedApps(workspaceEntity);
 
     void onComplete() {
-      Future.delayed(
-        const Duration(seconds: 5),
-        () {
-          if (session.isClean) {
-            var status = "[WorkspaceLauncher] My work is done, Bye!";
-            debugPrintApp(status);
-            onProgress("$launchFinishedTag $status");
-            appWindow.close();
-            SystemNavigator.pop();
-            if (RouteService.navigatorKey.currentContext != null) {
-              Navigator.pop(RouteService.navigatorKey.currentContext!);
+      if (workspaceEntity.defaultWorkspace >= 0) {
+        executeWorkspaceSwitcher(workspaceEntity.defaultWorkspace);
+      }
+      final settingsRepo = DependencyInjection.find<SettingsRepository>();
+      if (!settingsRepo.getKeepAliveLauncher()) {
+        Future.delayed(
+          const Duration(seconds: 5),
+          () {
+            if (session.isClean) {
+              appWindow.close();
+              SystemNavigator.pop();
+              if (RouteService.navigatorKey.currentContext != null) {
+                Navigator.pop(RouteService.navigatorKey.currentContext!);
+              }
             }
-          }
-        },
-      );
+          },
+        );
+      } else {
+        onProgress("$launchFinishedTag Done!");
+      }
     }
 
-    debugPrintApp("${workspaceMap.keys.length} workspaces to be launched.");
+    debugPrintApp(
+        "[Workspace Launcher] ${workspaceMap.keys.length} workspaces can be launched.");
 
     var entries = workspaceMap.entries;
     Future.delayed(
@@ -62,6 +69,13 @@ class WorkspaceLauncher {
             await app.launch();
           }
         }
+
+        var status = session.isClean
+            ? "Workspace Successfully Launched"
+            : "Error Encountered during Workspace Launch!";
+        debugPrintApp(status);
+        onProgress("$launchProgressTag $status");
+
         onComplete();
       },
     );

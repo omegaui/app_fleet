@@ -6,7 +6,9 @@ import 'package:app_fleet/main.dart';
 import 'package:app_fleet/utils/app_tooltip_builder.dart';
 import 'package:app_fleet/utils/app_window_buttons.dart';
 import 'package:app_fleet/utils/bottom_bar.dart';
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
 
 class LauncherEmptyStateView extends StatefulWidget {
@@ -114,6 +116,8 @@ class _LauncherEmptyStateViewState extends State<LauncherEmptyStateView> {
                   child: appWindowButton(
                     color: Colors.red,
                     onPressed: () {
+                      appWindow.close();
+                      SystemNavigator.pop();
                       Navigator.pop(context);
                     },
                   ),

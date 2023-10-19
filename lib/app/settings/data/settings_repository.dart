@@ -9,6 +9,22 @@ import 'package:http/http.dart';
 class SettingsRepository {
   final storage = DependencyInjection.find<AppConfiguration>();
 
+  void setKeepAppPickerOpen(bool value) {
+    storage.put('keep-app-picker-open', value);
+  }
+
+  bool getKeepAppPickerOpen() {
+    return storage.get('keep-app-picker-open') ?? false;
+  }
+
+  void setKeepAliveLauncher(bool value) {
+    storage.put('keep-alive-launcher', value);
+  }
+
+  bool getKeepAliveLauncher() {
+    return storage.get('keep-alive-launcher') ?? false;
+  }
+
   void setDefaultWorkspace(String? name) {
     storage.put('default-workspace', name);
   }

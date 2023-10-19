@@ -29,6 +29,16 @@ class _HomeInitializedStateViewState extends State<HomeInitializedStateView> {
   @override
   void initState() {
     super.initState();
+    onUpdate();
+  }
+
+  @override
+  void didUpdateWidget(covariant HomeInitializedStateView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    onUpdate();
+  }
+
+  void onUpdate() {
     workspaces = widget.controller.getWorkspaces();
   }
 

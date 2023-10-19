@@ -94,6 +94,42 @@ void showSettingsDialog(BuildContext context) {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Text(
+                                    "Always Keep Launcher Alive",
+                                    style: AppTheme.fontSize(14),
+                                  ),
+                                  const SizedBox(width: 67),
+                                  Switch(
+                                    value: settingsRepo.getKeepAliveLauncher(),
+                                    activeColor: AppTheme.switchColor,
+                                    onChanged: (value) async {
+                                      settingsRepo.setKeepAliveLauncher(value);
+                                      setModalState(() {});
+                                    },
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    "Always Keep App Picker Open",
+                                    style: AppTheme.fontSize(14),
+                                  ),
+                                  const SizedBox(width: 53),
+                                  Switch(
+                                    value: settingsRepo.getKeepAppPickerOpen(),
+                                    activeColor: AppTheme.switchColor,
+                                    onChanged: (value) async {
+                                      settingsRepo.setKeepAppPickerOpen(value);
+                                      setModalState(() {});
+                                    },
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
                                     "Choose your theme",
                                     style: AppTheme.fontSize(15),
                                   ),

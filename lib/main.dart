@@ -12,6 +12,7 @@ import 'package:app_fleet/core/dependency_manager.dart';
 import 'package:app_fleet/core/route_service.dart';
 import 'package:app_fleet/core/storage_manager.dart';
 import 'package:app_fleet/utils/show_bug_report_dialog.dart';
+import 'package:app_fleet/utils/utils.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
@@ -29,8 +30,10 @@ void debugPrintApp(String data) {
 
 void main(List<String> args) async {
   if (args.isNotEmpty) {
-    launcherMode = args.contains("--mode") && args.contains("launcher");
     debugMode = args.contains("--debug");
+    launcherMode = args.contains("--mode") &&
+        args.contains("launcher") &&
+        launcherModeCapable();
 
     AppManPage.handleHelpContext(args);
 

@@ -182,7 +182,7 @@ class _WorkspaceAppBoxState extends State<WorkspaceAppBox> {
                   onPressed: () {
                     showAppSelectionDialog(
                       context: context,
-                      onClose: (app) {
+                      onClick: (app) {
                         setState(
                           () {
                             if (app != null) {

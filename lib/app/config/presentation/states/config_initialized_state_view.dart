@@ -11,6 +11,7 @@ import 'package:app_fleet/utils/bottom_bar.dart';
 import 'package:app_fleet/utils/show_app_selection_dialog.dart';
 import 'package:app_fleet/utils/show_confirm_delete_dialog.dart';
 import 'package:app_fleet/utils/show_discard_edits_dialog.dart';
+import 'package:app_fleet/utils/snack_bar_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
@@ -77,7 +78,7 @@ class _ConfigInitializedStateViewState
           const CharacterActivator('f', control: true): () {
             showAppSelectionDialog(
               context: context,
-              onClose: (app) {
+              onClick: (app) {
                 setState(
                   () {
                     if (app != null) {
@@ -175,7 +176,33 @@ class _ConfigInitializedStateViewState
                                       if (widget.configUIMode ==
                                           ConfigUIMode.edit)
                                         AppTooltipBuilder.wrap(
-                                          text: "Mark as Default Workspace",
+                                          text: "Edit in your system",
+                                          child: IconButton(
+                                            onPressed: () {
+                                              showSnackbar(
+                                                  icon: Icon(
+                                                    Icons.info,
+                                                    color: AppTheme.foreground,
+                                                  ),
+                                                  message:
+                                                      "Opening Config in your system ...");
+                                              widget.controller.openInDesktop(
+                                                  widget.workspaceEntity);
+                                            },
+                                            icon: const Icon(
+                                              Icons.open_in_new_rounded,
+                                              color: Colors.grey,
+                                              size: 22,
+                                            ),
+                                          ).animate().scale(
+                                              delay:
+                                                  const Duration(seconds: 1)),
+                                        ),
+                                      if (widget.configUIMode ==
+                                          ConfigUIMode.edit)
+                                        AppTooltipBuilder.wrap(
+                                          text:
+                                              "Execute this workspace on Startup",
                                           child: IconButton(
                                             onPressed: () {
                                               setState(() {
