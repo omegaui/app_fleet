@@ -1,3 +1,13 @@
+## v1.0.0+6
+
+- **NEW** Dark Theme
+- **NEW** LAF of the entire app
+- App Picker Dialog can be optionally kept open.
+- Reload Manager from Disk
+- Pretty Write Configurations
+- Option to keep launcher Alive After Workspace Launch
+- Option to specify which workspace should be switched to after launch completes.
+
 ## v1.0.0+5
 
 - Added App Support Method (Buy Me a Coffee).
