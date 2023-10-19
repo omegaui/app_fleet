@@ -1,8 +1,10 @@
 import 'package:app_fleet/app/config/presentation/config_view.dart';
 import 'package:app_fleet/app/home/presentation/home_view.dart';
 import 'package:app_fleet/app/launcher/presentation/launcher_view.dart';
+import 'package:app_fleet/config/theme/app_theme.dart';
 import 'package:app_fleet/core/app_configuration.dart';
 import 'package:app_fleet/core/dependency_manager.dart';
+import 'package:app_fleet/utils/snack_bar_builder.dart';
 import 'package:flutter/material.dart';
 
 class RouteService {
@@ -63,6 +65,13 @@ class RouteService {
   void reloadApp() {
     DependencyInjection.find<AppConfiguration>().reload();
     gotoRoute(homeRoute);
+    showSnackbar(
+      icon: Icon(
+        Icons.info_outlined,
+        color: AppTheme.foreground,
+      ),
+      message: "Reloading from Disk Completed",
+    );
   }
 
   Route getCurrentRoute() {
