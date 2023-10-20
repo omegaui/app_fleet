@@ -65,12 +65,29 @@ class LinuxAppFinder {
   }
 
   void _cacheIcons() {
-    _cacheFrom('/usr/share/icons');
-    _cacheFrom('${Platform.environment['HOME']}/.local/share/icons');
+    _cacheFrom(
+      '/usr/share/icons',
+      onNotExistEvent: () {
+        debugPrintApp("[Warning] No Primary Icons Directory found");
+      },
+    );
+    _cacheFrom(
+      '${Platform.environment['HOME']}/.local/share/icons',
+      onNotExistEvent: () {
+        debugPrintApp("[Warning] No Local Icons Directory found");
+      },
+    );
   }
 
-  void _cacheFrom(String path) {
+  void _cacheFrom(
+    String path, {
+    required VoidCallback onNotExistEvent,
+  }) {
     Directory iconThemesDir = Directory(path);
+    if (iconThemesDir.existsSync()) {
+      onNotExistEvent();
+      return;
+    }
     var themes = iconThemesDir.listSync();
     for (var theme in themes) {
       if (theme.statSync().type == FileSystemEntityType.directory) {
