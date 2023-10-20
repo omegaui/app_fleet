@@ -1,8 +1,8 @@
 import 'package:app_fleet/config/assets/app_icons.dart';
 import 'package:app_fleet/config/theme/app_theme.dart';
 import 'package:app_fleet/core/app_bug_report.dart';
+import 'package:app_fleet/core/logger.dart';
 import 'package:app_fleet/core/route_service.dart';
-import 'package:app_fleet/main.dart';
 import 'package:app_fleet/utils/app_window_buttons.dart';
 import 'package:app_fleet/utils/utils.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
@@ -16,7 +16,7 @@ void showBugReports() {
     return;
   }
   _visible = true;
-  debugPrintApp(">> Showing Bug Report Dialog");
+  prettyLog(value: ">> Showing Bug Report Dialog");
   showDialog(
     context: RouteService.navigatorKey.currentContext!,
     barrierColor: Colors.transparent,
@@ -132,6 +132,10 @@ Widget linkText({required String text, required String url}) {
         child: GestureDetector(
           onTap: () {
             launchUrlString(url);
+            prettyLog(
+              value: url,
+              type: DebugType.url,
+            );
           },
           child: AnimatedSwitcher(
             duration: const Duration(milliseconds: 250),

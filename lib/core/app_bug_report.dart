@@ -1,6 +1,6 @@
 import 'package:app_fleet/core/app_session.dart';
 import 'package:app_fleet/core/dependency_manager.dart';
-import 'package:app_fleet/main.dart';
+import 'package:app_fleet/core/logger.dart';
 import 'package:app_fleet/utils/markdown_generator.dart';
 import 'package:app_fleet/utils/utils.dart';
 import 'package:intl/intl.dart';
@@ -47,13 +47,17 @@ class AppBugReport {
     generator.addKeyPair("Error", error.toString());
     generator.addCode(stackTrace.toString());
     generator.save();
-    debugPrintApp(
-        "[AppBugReport] Automatic Markdown Formatted bug report has been generated at");
-    debugPrintApp("[AppBugReport] ${getBugReportPath(generator.reportID)}");
-    debugPrintApp(
-        "[AppBugReport] Please take a step in improving App Fleet by uploading");
-    debugPrintApp(
-        "[AppBugReport] this bug report at https://github.com/omegaui/app-fleet/issues/new");
+    prettyLog(
+        tag: "AppBugReport",
+        value: "Automatic Markdown Formatted bug report has been generated at");
+    prettyLog(tag: "AppBugReport", value: getBugReportPath(generator.reportID));
+    prettyLog(
+        tag: "AppBugReport",
+        value: "Please take a step in improving App Fleet by uploading");
+    prettyLog(
+        tag: "AppBugReport",
+        value:
+            "this bug report at https://github.com/omegaui/app-fleet/issues/new");
     reportIDs.add(generator.reportID);
   }
 }

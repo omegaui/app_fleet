@@ -1,6 +1,7 @@
 import 'package:app_fleet/config/assets/app_icons.dart';
 import 'package:app_fleet/config/theme/app_theme.dart';
 import 'package:app_fleet/constants/app_meta_info.dart';
+import 'package:app_fleet/core/logger.dart';
 import 'package:app_fleet/utils/app_tooltip_builder.dart';
 import 'package:app_fleet/utils/app_window_buttons.dart';
 import 'package:app_fleet/utils/show_app_support_dialog.dart';
@@ -88,6 +89,10 @@ void showAppInfo(BuildContext context) {
                                         onPressed: () {
                                           launchUrlString(
                                               AppMetaInfo.sourceCodeUrl);
+                                          prettyLog(
+                                            value: AppMetaInfo.sourceCodeUrl,
+                                            type: DebugType.url,
+                                          );
                                         },
                                         icon: Image.asset(
                                           AppIcons.github,
@@ -147,11 +152,12 @@ void showAppInfo(BuildContext context) {
   );
 }
 
-Widget linkText(
-    {required String text,
-    required String url,
-    double? fontSize,
-    bool italic = true}) {
+Widget linkText({
+  required String text,
+  required String url,
+  double? fontSize,
+  bool italic = true,
+}) {
   bool hover = false;
   return StatefulBuilder(
     builder: (context, setState) {
@@ -161,6 +167,10 @@ Widget linkText(
         child: GestureDetector(
           onTap: () {
             launchUrlString(url);
+            prettyLog(
+              value: url,
+              type: DebugType.url,
+            );
           },
           child: AnimatedSwitcher(
             duration: const Duration(milliseconds: 250),

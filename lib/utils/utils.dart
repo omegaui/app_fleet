@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:app_fleet/app/config/domain/workspace_entity.dart';
 import 'package:app_fleet/core/app_bug_report.dart';
+import 'package:app_fleet/core/logger.dart';
 import 'package:app_fleet/main.dart';
 import 'package:flutter/material.dart';
 
@@ -47,8 +48,10 @@ void executeWorkspaceSwitcher(int workspaceNumber) {
       [workspaceNumber.toString()],
     );
   } catch (error, stackTrace) {
-    debugPrintApp(
-        "[WorkspaceSwitcher] Got an error when trying to switch to workspace number $workspaceNumber");
+    prettyLog(
+        tag: "WorkspaceSwitcher",
+        value:
+            "Got an error when trying to switch to workspace number $workspaceNumber");
     AppBugReport.createReport(
       message:
           "Got an error when trying to switch to workspace number $workspaceNumber",
@@ -70,8 +73,10 @@ Future<void> executeProcessExecutor(String command) async {
       [command],
     );
   } catch (error, stackTrace) {
-    debugPrintApp(
-        "[ProcessExecutor] Got an error when trying to run command: \"$command\"");
+    prettyLog(
+        tag: "ProcessExecutor",
+        value: "Got an error when trying to run command: \"$command\"",
+        type: DebugType.error);
     AppBugReport.createReport(
       message: "Got an error when trying to run command: \"$command\"",
       source: "`utils.dart` - `executeProcessExecutor()`",
@@ -95,8 +100,10 @@ String getSystemTheme() {
     int exitCode = result.exitCode;
     return exitCode == 1 ? 'dark' : 'light';
   } on Exception {
-    debugPrintApp(
-        "[WorkspaceSwitcher] Got an error when trying to identify System Theme");
+    prettyLog(
+        tag: "WorkspaceSwitcher",
+        value: "Got an error when trying to identify System Theme",
+        type: DebugType.error);
   }
   // falling back to light if any error occurs
   return 'light';

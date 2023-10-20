@@ -2,6 +2,7 @@ import 'package:app_fleet/config/assets/app_animations.dart';
 import 'package:app_fleet/config/theme/app_theme.dart';
 import 'package:app_fleet/constants/app_meta_info.dart';
 import 'package:app_fleet/core/app_updater.dart';
+import 'package:app_fleet/core/logger.dart';
 import 'package:app_fleet/core/route_service.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
@@ -69,6 +70,10 @@ void showUpdateAvailableDialog({required UpdateData data}) {
                         TextButton(
                           onPressed: () {
                             launchUrlString(AppMetaInfo.releasePageUrl);
+                            prettyLog(
+                              value: AppMetaInfo.releasePageUrl,
+                              type: DebugType.url,
+                            );
                             Navigator.pop(context);
                           },
                           style: TextButton.styleFrom(

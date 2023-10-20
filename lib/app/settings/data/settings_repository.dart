@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:app_fleet/core/app_configuration.dart';
 import 'package:app_fleet/core/dependency_manager.dart';
-import 'package:app_fleet/main.dart';
+import 'package:app_fleet/core/logger.dart';
 import 'package:app_fleet/utils/utils.dart';
 import 'package:http/http.dart';
 
@@ -80,15 +80,19 @@ class SettingsRepository {
         autostartDesktopEntryBakFile.renameSync(autostartDesktopEntryFile.path);
       } else {
         try {
-          debugPrintApp(
-              '[SettingsUpdater] Downloading the latest autostart desktop entry ...');
+          prettyLog(
+            tag: "SettingsUpdater",
+            value: 'Downloading the latest autostart desktop entry ...',
+          );
           final response = await get(Uri.parse(
               'https://raw.githubusercontent.com/omegaui/app_fleet/main/package/integration/desktop-entries/app-fleet-launcher.desktop'));
           final contents = response.body;
           autostartDesktopEntryFile.writeAsStringSync(contents, flush: true);
         } on Exception {
-          debugPrintApp(
-              '[SettingsUpdater] Cannot download the latest autostart desktop entry.');
+          prettyLog(
+            tag: "SettingsUpdater",
+            value: 'Cannot download the latest autostart desktop entry.',
+          );
         }
       }
     } else {

@@ -6,8 +6,8 @@ import 'package:app_fleet/config/assets/generators/linux_app_finder.dart';
 import 'package:app_fleet/core/app_configuration.dart';
 import 'package:app_fleet/core/app_session.dart';
 import 'package:app_fleet/core/app_updater.dart';
+import 'package:app_fleet/core/logger.dart';
 import 'package:app_fleet/core/route_service.dart';
-import 'package:app_fleet/main.dart';
 import 'package:app_fleet/utils/workspace_launcher.dart';
 import 'package:flutter/foundation.dart';
 
@@ -15,7 +15,7 @@ final class DependencyManager {
   Set<dynamic> dependencies = {};
 
   void put<T>(T t) {
-    debugPrintApp("[Injector] Putting $T ...");
+    prettyLog(tag: "Injector", value: "Putting $T ...");
     dependencies.add(t);
   }
 

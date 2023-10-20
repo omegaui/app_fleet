@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:app_fleet/config/assets/app_icons.dart';
 import 'package:app_fleet/config/assets/generators/linux_app_finder.dart';
@@ -9,6 +8,7 @@ import 'package:app_fleet/core/app_man_page.dart';
 import 'package:app_fleet/core/app_session.dart';
 import 'package:app_fleet/core/app_updater.dart';
 import 'package:app_fleet/core/dependency_manager.dart';
+import 'package:app_fleet/core/logger.dart';
 import 'package:app_fleet/core/route_service.dart';
 import 'package:app_fleet/core/storage_manager.dart';
 import 'package:app_fleet/utils/show_bug_report_dialog.dart';
@@ -21,12 +21,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 bool launcherMode = false;
 bool debugMode = false;
 Size windowSize = const Size(750, 600);
-
-void debugPrintApp(String data) {
-  if (debugMode) {
-    stdout.writeln(data);
-  }
-}
 
 void main(List<String> args) async {
   if (args.isNotEmpty) {
@@ -42,7 +36,7 @@ void main(List<String> args) async {
     }
   }
 
-  debugPrintApp(launcherMode ? ">> Launcher Mode" : ">> Manager Mode");
+  prettyLog(value: launcherMode ? ">> Launcher Mode" : ">> Manager Mode");
 
   WidgetsFlutterBinding.ensureInitialized();
 

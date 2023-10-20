@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:app_fleet/core/app_bug_report.dart';
-import 'package:app_fleet/main.dart';
+import 'package:app_fleet/core/logger.dart';
 import 'package:app_fleet/utils/utils.dart';
 
 class JsonConfigurator {
@@ -31,8 +31,10 @@ class JsonConfigurator {
         onNewCreation();
       }
     } catch (error, stackTrace) {
-      debugPrintApp(
-          "Permission Denied when Creating Configuration: $configName, cannot continue!");
+      prettyLog(
+          value:
+              "Permission Denied when Creating Configuration: $configName, cannot continue!",
+          type: DebugType.error);
       AppBugReport.createReport(
         message: "Unable to write configuration file: $configPath",
         source: "`JsonConfigurator` - `_load()`",
@@ -68,7 +70,7 @@ class JsonConfigurator {
   }
 
   void add(key, value) {
-    debugPrintApp("[JsonConfigurator] Added $value to $key");
+    prettyLog(tag: "JsonConfigurator", value: "Added $value to $key");
     var list = config[key];
     if (list != null) {
       config[key] = {...list, value}.toList();
@@ -98,7 +100,9 @@ class JsonConfigurator {
       File(configPath)
           .writeAsStringSync(jsonEncoder.convert(config), flush: true);
     } catch (error, stackTrace) {
-      debugPrintApp("Permission Denied when Saving Configuration: $configName");
+      prettyLog(
+          value: "Permission Denied when Saving Configuration: $configName",
+          type: DebugType.error);
       AppBugReport.createReport(
         message: "Unable to save configuration file: $configPath",
         source: "`JsonConfigurator` - `save()`",

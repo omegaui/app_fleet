@@ -1,7 +1,6 @@
 import 'package:app_fleet/app/config/domain/workspace_entity.dart';
 import 'package:app_fleet/config/assets/app_icons.dart';
 import 'package:app_fleet/config/theme/app_theme.dart';
-import 'package:app_fleet/main.dart';
 import 'package:app_fleet/utils/app_tooltip_builder.dart';
 import 'package:app_fleet/utils/snack_bar_builder.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
@@ -34,7 +33,6 @@ List<Widget> _buildContent({
             setContentState(() {
               if (app.priority == priority) {
                 var workspaceMap = getWorkspaceMapCallback();
-                debugPrintApp("$priority $maxPriority");
                 if (priority > 0 && priority < maxPriority) {
                   if (workspaceMap[priority]!.length == 1) {
                     showSnackbar(

@@ -1,5 +1,5 @@
 import 'package:app_fleet/config/theme/app_theme.dart';
-import 'package:app_fleet/main.dart';
+import 'package:app_fleet/core/logger.dart';
 import 'package:flutter/foundation.dart';
 
 enum SessionState {
@@ -34,7 +34,7 @@ class AppSession {
 
   void setSessionState(SessionState state) {
     _state = state;
-    debugPrintApp(">> Notifying ${_listeners.length} App Session Listeners");
+    prettyLog(value: ">> Notifying ${_listeners.length} App Session Listeners");
     for (var listener in _listeners) {
       listener();
     }

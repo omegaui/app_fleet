@@ -6,6 +6,7 @@ import 'package:app_fleet/constants/app_meta_info.dart';
 import 'package:app_fleet/constants/request_status.dart';
 import 'package:app_fleet/core/app_bug_report.dart';
 import 'package:app_fleet/core/dependency_manager.dart';
+import 'package:app_fleet/core/logger.dart';
 import 'package:app_fleet/core/storage_manager.dart';
 import 'package:app_fleet/main.dart';
 import 'package:app_fleet/utils/show_update_available_dialog.dart';
@@ -69,7 +70,7 @@ class AppUpdater {
       try {
         response = await get(Uri.parse(updateDataUrl));
       } catch (error, stackTrace) {
-        debugPrintApp('[AppUpdater] Unable to fetch update data');
+        prettyLog(tag: "AppUpdater", value: "Unable to fetch update data");
         AppBugReport.createReport(
           message: "Unable to fetch update data.",
           source: "`AppUpdater` - `checkForUpdates()`",
