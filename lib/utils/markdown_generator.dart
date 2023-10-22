@@ -64,9 +64,9 @@ class MarkdownGenerator {
   }
 
   void save() {
-    File(combinePath(
+    File(combineHomePath(
       [
-        ".config",
+        ".config", "app-fleet",
         "bug-reports",
         "$reportID.md",
       ],

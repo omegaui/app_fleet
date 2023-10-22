@@ -14,7 +14,7 @@ class JsonConfigurator {
     required this.configName,
     this.config,
   }) {
-    configPath = combinePath([".config", configName]);
+    configPath = combineHomePath([".config", "app-fleet", configName]);
     _load();
   }
 

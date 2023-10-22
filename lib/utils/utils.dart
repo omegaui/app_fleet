@@ -41,8 +41,9 @@ Map<String, Color> accentColorMap = {
 void executeWorkspaceSwitcher(int workspaceNumber) {
   try {
     Process.runSync(
-      combinePath([
+      combineHomePath([
         '.config',
+        "app-fleet",
         'workspace-switcher.sh',
       ]),
       [workspaceNumber.toString()],
@@ -66,8 +67,9 @@ void executeWorkspaceSwitcher(int workspaceNumber) {
 Future<void> executeProcessExecutor(String command) async {
   try {
     await Process.start(
-      combinePath([
+      combineHomePath([
         ".config",
+        "app-fleet",
         'unix-process-executor.sh',
       ]),
       [command],
@@ -91,8 +93,9 @@ Future<void> executeProcessExecutor(String command) async {
 String getSystemTheme() {
   try {
     final result = Process.runSync(
-      combinePath([
+      combineHomePath([
         '.config',
+        "app-fleet",
         'theme-detector.sh',
       ]),
       [],
@@ -101,9 +104,10 @@ String getSystemTheme() {
     return exitCode == 1 ? 'dark' : 'light';
   } on Exception {
     prettyLog(
-        tag: "WorkspaceSwitcher",
-        value: "Got an error when trying to identify System Theme",
-        type: DebugType.error);
+      tag: "WorkspaceSwitcher",
+      value: "Got an error when trying to identify System Theme",
+      type: DebugType.error,
+    );
   }
   // falling back to light if any error occurs
   return 'light';
@@ -112,6 +116,11 @@ String getSystemTheme() {
 String combinePath(List<String> locations, {bool absolute = false}) {
   String path = locations.join(Platform.pathSeparator);
   return absolute ? File(path).absolute.path : path;
+}
+
+String combineHomePath(List<String> locations, {bool absolute = false}) {
+  locations.insert(0, Platform.environment['HOME']!);
+  return combinePath(locations, absolute: absolute);
 }
 
 void mkdir(String path, String logMessage) {
@@ -141,16 +150,16 @@ void switchWorkspace(int number) {
 }
 
 String getBugReportPath(String reportID) {
-  return "file://${Platform.environment['HOME']}/app-fleet/.config/bug-reports/$reportID.md";
+  return "file://${Platform.environment['HOME']}/.config/app-fleet/bug-reports/$reportID.md";
 }
 
 String getWorkspacePath(String workspaceName) {
-  return "file://${Platform.environment['HOME']}/app-fleet/.config/workspaces/$workspaceName.json";
+  return "file://${Platform.environment['HOME']}/.config/app-fleet/workspaces/$workspaceName.json";
 }
 
 bool launcherModeCapable() {
   return debugMode ||
-      File('${Platform.environment['HOME']}/app-fleet/.config/app-settings.json')
+      File('${Platform.environment['HOME']}/.config/app-fleet/app-settings.json')
           .existsSync();
 }
 

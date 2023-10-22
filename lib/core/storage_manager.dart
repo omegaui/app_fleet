@@ -14,23 +14,23 @@ class AppStorageManager {
   static bool get storageReady => _eventsScriptsChecked;
 
   static Future<void> initSpace() async {
-    mkdir(combinePath([".config"]), "Initializing App Settings Storage ...");
-    mkdir(combinePath([".config", "workspaces"]),
+    mkdir(combineHomePath([".config", "app-fleet"]), "Initializing App Settings Storage ...");
+    mkdir(combineHomePath([".config", "app-fleet", "workspaces"]),
         "Initializing Workspace Storage ...");
-    mkdir(combinePath([".config", "themes"]), "Initializing Theme Storage ...");
-    mkdir(combinePath([".config", "bug-reports"]),
+    mkdir(combineHomePath([".config", "app-fleet", "themes"]), "Initializing Theme Storage ...");
+    mkdir(combineHomePath([".config", "app-fleet", "bug-reports"]),
         "Initializing Bug Reports Storage ...");
     await checkThemes();
   }
 
   static Future<void> checkThemes() async {
-    final lightTheme = File(combinePath([
-      ".config",
+    final lightTheme = File(combineHomePath([
+      ".config", "app-fleet",
       "themes",
       'light.json',
     ]));
-    final darkTheme = File(combinePath([
-      ".config",
+    final darkTheme = File(combineHomePath([
+      ".config", "app-fleet",
       "themes",
       'dark.json',
     ]));
@@ -49,8 +49,8 @@ class AppStorageManager {
   }
 
   static void checkScripts({required BuildContext context}) async {
-    var path = combinePath([
-      ".config",
+    var path = combineHomePath([
+      ".config", "app-fleet",
       'workspace-switcher.sh',
     ]);
     var workspaceSwitcher = File(path);
@@ -59,16 +59,16 @@ class AppStorageManager {
           await rootBundle.loadString('assets/scripts/workspace-switcher.sh'),
           flush: true);
       // writing process executor for launching apps
-      File(combinePath([
-        ".config",
+      File(combineHomePath([
+        ".config", "app-fleet",
         'unix-process-executor.sh',
       ])).writeAsStringSync(
         await rootBundle.loadString('assets/scripts/unix-process-executor.sh'),
         flush: true,
       );
       // writing theme detector
-      File(combinePath([
-        ".config",
+      File(combineHomePath([
+        ".config", "app-fleet",
         'theme-detector.sh',
       ])).writeAsStringSync(
         await rootBundle.loadString('assets/scripts/theme-detector.sh'),
@@ -82,16 +82,16 @@ class AppStorageManager {
             [
               'chmod',
               '0755',
-              combinePath([
-                ".config",
+              combineHomePath([
+                ".config", "app-fleet",
                 'workspace-switcher.sh',
               ], absolute: true),
-              combinePath([
-                ".config",
+              combineHomePath([
+                ".config", "app-fleet",
                 'unix-process-executor.sh',
               ], absolute: true),
-              combinePath([
-                ".config",
+              combineHomePath([
+                ".config", "app-fleet",
                 'theme-detector.sh',
               ], absolute: true),
             ],

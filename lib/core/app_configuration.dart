@@ -10,15 +10,15 @@ class AppConfiguration extends JsonConfigurator {
   AppConfiguration({required super.configName});
 
   void writeWorkspace(WorkspaceEntity workspaceEntity) {
-    File(combinePath(
-            ['.config', 'workspaces', toWorkspaceStorageName(workspaceEntity)]))
+    File(combineHomePath(
+            ['.config', "app-fleet", 'workspaces', toWorkspaceStorageName(workspaceEntity)]))
         .writeAsStringSync(jsonEncoder.convert(workspaceEntity.toMap()));
     add(StorageKeys.workspacesKey, toWorkspaceStorageName(workspaceEntity));
   }
 
   void deleteWorkspace(WorkspaceEntity workspaceEntity) {
-    final workspaceFile = File(combinePath(
-        ['.config', 'workspaces', toWorkspaceStorageName(workspaceEntity)]));
+    final workspaceFile = File(combineHomePath(
+        ['.config', "app-fleet", 'workspaces', toWorkspaceStorageName(workspaceEntity)]));
     if (workspaceFile.existsSync()) {
       workspaceFile.deleteSync();
     }
@@ -26,8 +26,8 @@ class AppConfiguration extends JsonConfigurator {
   }
 
   WorkspaceEntity readWorkspace(String name) {
-    String data = File(combinePath(
-            ['.config', 'workspaces', fromWorkspaceStorageName(name)]))
+    String data = File(combineHomePath(
+            ['.config', "app-fleet", 'workspaces', fromWorkspaceStorageName(name)]))
         .readAsStringSync();
     return WorkspaceEntity.fromMap(jsonDecode(data));
   }

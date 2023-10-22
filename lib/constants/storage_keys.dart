@@ -4,10 +4,10 @@ class StorageKeys {
   static const workspacesKey = 'workspaces';
   static const nameKey = 'name';
   static const iconPathKey = 'icon';
-  static const defaultWorkspaceKey = 'defaultWorkspace';
+  static const defaultWorkspaceKey = 'default-workspace';
   static const exeKey = 'exe';
-  static const waitTimeKey = 'waitTime';
+  static const waitTimeKey = 'wait-time';
   static const priorityKey = 'priority';
-  static const internallyGeneratedKey = 'internallyGenerated';
+  static const internallyGeneratedKey = 'internally-generated';
   static const appsKey = 'apps';
 }

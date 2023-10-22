@@ -42,9 +42,8 @@ class SettingsRepository {
   }
 
   bool isAutostartEnabled() {
-    return storage.get('autostart') ??
-        File(combinePath([
-          Platform.environment['HOME']!,
+    return (storage.get('autostart') ?? true) &&
+        File(combineHomePath([
           '.config',
           'autostart',
           'app-fleet-launcher.desktop'
@@ -58,15 +57,13 @@ class SettingsRepository {
       return;
     }
 
-    final autostartDesktopEntryFile = File(combinePath([
-      Platform.environment['HOME']!,
+    final autostartDesktopEntryFile = File(combineHomePath([
       '.config',
       'autostart',
       'app-fleet-launcher.desktop'
     ], absolute: true));
 
-    final autostartDesktopEntryBakFile = File(combinePath([
-      Platform.environment['HOME']!,
+    final autostartDesktopEntryBakFile = File(combineHomePath([
       '.config',
       'autostart',
       'app-fleet-launcher.desktop.bak'
@@ -85,9 +82,14 @@ class SettingsRepository {
             value: 'Downloading the latest autostart desktop entry ...',
           );
           final response = await get(Uri.parse(
-              'https://raw.githubusercontent.com/omegaui/app_fleet/main/package/integration/desktop-entries/app-fleet-launcher.desktop'));
+              'https://cdn.jsdelivr.net/gh/omegaui/app_fleet/package/integration/desktop-entries/app-fleet-launcher.desktop'));
           final contents = response.body;
           autostartDesktopEntryFile.writeAsStringSync(contents, flush: true);
+          prettyLog(
+            tag: "SettingsUpdater",
+            value: 'SUCCESS.',
+            type: DebugType.response,
+          );
         } on Exception {
           prettyLog(
             tag: "SettingsUpdater",

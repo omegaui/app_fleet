@@ -13,7 +13,7 @@ class HomeRepository {
     Set<dynamic> configs = storage.get('workspaces').toList()!.toSet();
     Set<WorkspaceEntity> workspaces = {};
     for (var configName in configs) {
-      var contents = File(combinePath(['.config', 'workspaces', configName]))
+      var contents = File(combineHomePath(['.config', "app-fleet", 'workspaces', configName]))
           .readAsStringSync();
       workspaces.add(WorkspaceEntity.fromMap(jsonDecode(contents)));
     }
@@ -25,7 +25,7 @@ class HomeRepository {
     if (configs != null) {
       List<dynamic>? validConfigs = configs
           .where((e) =>
-              File(combinePath(['.config', 'workspaces', e])).existsSync())
+              File(combineHomePath(['.config', "app-fleet", 'workspaces', e])).existsSync())
           .toList();
       configs = validConfigs;
       storage.put('workspaces', configs);

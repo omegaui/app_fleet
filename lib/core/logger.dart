@@ -19,7 +19,7 @@ prettyLog({
       break;
     case DebugType.info:
       stdout.writeln(
-          '\x1B[32m${"⚡ INFO ${tag != null ? "$tag: " : ""}$value"}\x1B[0m');
+          "⚡ INFO ${tag != null ? "$tag: " : ""}$value");
       break;
     case DebugType.warning:
       stdout.writeln(
