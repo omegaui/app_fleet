@@ -6,6 +6,7 @@ import 'package:app_fleet/constants/app_meta_info.dart';
 import 'package:app_fleet/constants/request_status.dart';
 import 'package:app_fleet/core/app_bug_report.dart';
 import 'package:app_fleet/core/dependency_manager.dart';
+import 'package:app_fleet/core/logger.dart';
 import 'package:app_fleet/core/storage_manager.dart';
 import 'package:app_fleet/main.dart';
 import 'package:app_fleet/utils/show_update_available_dialog.dart';
@@ -16,6 +17,9 @@ class UpdateData {
   static const noUpdates = 'No Updates';
 
   late String data;
+  late String url;
+  late String size;
+  late String title;
 
   UpdateData.alreadyLatest() {
     data = noUpdates;
@@ -25,12 +29,12 @@ class UpdateData {
     return data != 'No Updates';
   }
 
-  UpdateData(this.data);
+  UpdateData(this.data, this.url, this.size, this.title);
 }
 
 class AppUpdater {
   final String updateDataUrl =
-      'https://raw.githubusercontent.com/omegaui/app-fleet/main/updates/latest.json';
+      'https://cdn.jsdelivr.net/gh/omegaui/app-fleet@main/updates/latest.json';
 
   // Stores Update Checked Status for current session
   bool _checked = false;
@@ -40,36 +44,40 @@ class AppUpdater {
         .onConnectivityChanged
         .listen((ConnectivityResult result) {
       if (result != ConnectivityResult.none) {
-        checkForUpdates(
-          onComplete: (data, status) {
-            if (status == RequestStatus.success) {
-              if (data!.isUpdateAvailable()) {
-                showUpdateAvailableDialog(data: data);
-              }
-            }
-          },
-        );
+        final settingsRepo = DependencyInjection.find<SettingsRepository>();
+        if (debugMode || !AppStorageManager.storageReady || _checked) {
+          return;
+        }
+        _checked = true;
+        if (!settingsRepo.notifyAboutUpdates()) {
+          return;
+        }
+        checkForUpdatesNow();
       }
     });
+  }
+
+  void checkForUpdatesNow() {
+    checkForUpdates(
+      onComplete: (data, status) {
+        if (status == RequestStatus.success) {
+          if (data!.isUpdateAvailable()) {
+            showUpdateAvailableDialog(data: data);
+          }
+        }
+      },
+    );
   }
 
   void checkForUpdates({
     required void Function(UpdateData? data, RequestStatus status) onComplete,
   }) {
-    final settingsRepo = DependencyInjection.find<SettingsRepository>();
-    if (debugMode || !AppStorageManager.storageReady || _checked) {
-      return;
-    }
-    _checked = true;
-    if (!settingsRepo.notifyAboutUpdates()) {
-      return;
-    }
     Future.delayed(const Duration(seconds: 5), () async {
       Response? response;
       try {
         response = await get(Uri.parse(updateDataUrl));
       } catch (error, stackTrace) {
-        debugPrintApp('[AppUpdater] Unable to fetch update data');
+        prettyLog(tag: "AppUpdater", value: "Unable to fetch update data");
         AppBugReport.createReport(
           message: "Unable to fetch update data.",
           source: "`AppUpdater` - `checkForUpdates()`",
@@ -82,8 +90,13 @@ class AppUpdater {
       if (response.statusCode == 200) {
         final body = jsonDecode(response.body);
         final latestVersion = body['latest'];
+        final bundleUrl = body['url'];
+        final bundleSize = body['size'];
+        final releaseTitle = body['title'];
         if (AppMetaInfo.version != latestVersion) {
-          onComplete(UpdateData(latestVersion), RequestStatus.success);
+          onComplete(
+              UpdateData(latestVersion, bundleUrl, bundleSize, releaseTitle),
+              RequestStatus.success);
         } else {
           onComplete(UpdateData.alreadyLatest(), RequestStatus.success);
         }

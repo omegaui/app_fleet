@@ -139,41 +139,47 @@ class _WorkspaceIconBoxState extends State<WorkspaceIconBox> {
                                   ),
                                 ],
                               ),
-                              Wrap(
-                                children: [
-                                  ...icons.map((e) {
-                                    bool hover = false;
-                                    return GestureDetector(
-                                      onTap: () {
-                                        onSelected(e);
-                                        Navigator.pop(context);
-                                      },
-                                      child: StatefulBuilder(
-                                        builder: (context, setState) {
-                                          return MouseRegion(
-                                            onEnter: (e) =>
-                                                setState(() => hover = true),
-                                            onExit: (e) =>
-                                                setState(() => hover = false),
-                                            child: AnimatedOpacity(
-                                              opacity: hover ? 1.0 : 0.7,
-                                              duration: const Duration(
-                                                  milliseconds: 250),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(10.0),
-                                                child: Image.asset(
-                                                  e,
-                                                  width: 48,
+                              SizedBox(
+                                height: 200,
+                                child: SingleChildScrollView(
+                                  child: Wrap(
+                                    children: [
+                                      ...icons.map((e) {
+                                        bool hover = false;
+                                        return GestureDetector(
+                                          onTap: () {
+                                            onSelected(e);
+                                            Navigator.pop(context);
+                                          },
+                                          child: StatefulBuilder(
+                                            builder: (context, setState) {
+                                              return MouseRegion(
+                                                onEnter: (e) => setState(
+                                                    () => hover = true),
+                                                onExit: (e) => setState(
+                                                    () => hover = false),
+                                                child: AnimatedOpacity(
+                                                  opacity: hover ? 1.0 : 0.7,
+                                                  duration: const Duration(
+                                                      milliseconds: 250),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10.0),
+                                                    child: Image.asset(
+                                                      e,
+                                                      width: 48,
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    );
-                                  }).toList(),
-                                ],
+                                              );
+                                            },
+                                          ),
+                                        );
+                                      }).toList(),
+                                    ],
+                                  ),
+                                ),
                               ),
                             ],
                           ),

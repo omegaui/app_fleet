@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:app_fleet/app/config/domain/workspace_entity.dart';
-import 'package:app_fleet/main.dart';
+import 'package:app_fleet/core/logger.dart';
 import 'package:flutter/foundation.dart';
 
 class LinuxAppFinder {
@@ -12,65 +12,97 @@ class LinuxAppFinder {
 
   void initialize() {
     if (initialized) {
-      debugPrintApp("[LinuxAppFinder] Already initialized ...");
+      prettyLog(tag: "LinuxAppFinder", value: "Already initialized ...");
       return;
     }
-    debugPrintApp("[LinuxAppFinder] Caching Icon Paths ...");
+    prettyLog(tag: "LinuxAppFinder", value: "Caching Icon Paths ...");
     _cacheIcons();
 
     systemIconTheme = getSystemIconThemeSync();
     if (systemIconTheme != null) {
-      debugPrintApp("[LinuxAppFinder] Your Icon Theme is $systemIconTheme");
+      prettyLog(
+          tag: "LinuxAppFinder", value: "Your Icon Theme is $systemIconTheme");
     }
 
-    debugPrintApp("[LinuxAppFinder] Loading Apps ...");
+    prettyLog(tag: "LinuxAppFinder", value: "Loading Apps ...");
 
     // Finding Global Applications
     _addAppsFrom('/usr/share/applications', onNotExistEvent: () {
-      debugPrintApp(
-          "[LinuxAppFinder] Unable to find any global applications ...");
+      prettyLog(
+          tag: "LinuxAppFinder",
+          value: "Unable to find any global applications ...");
     });
 
     // Finding Local Snap Applications
     _addAppsFrom('${Platform.environment['HOME']}/.local/share/applications',
         onNotExistEvent: () {
-      debugPrintApp("[LinuxAppFinder] Unable to find local applications ...");
+      prettyLog(
+          tag: "LinuxAppFinder",
+          value: "Unable to find local applications ...");
     });
 
     // Finding Global Snap Applications
     _addAppsFrom('/var/lib/snapd/desktop/applications', onNotExistEvent: () {
-      debugPrintApp(
-          "[LinuxAppFinder] Unable to find any global snap applications ...");
+      prettyLog(
+          tag: "LinuxAppFinder",
+          value: "Unable to find any global snap applications ...");
     });
 
     // Finding Global Flatpak Applications
     _addAppsFrom('/var/lib/flatpak/exports/share/applications',
         onNotExistEvent: () {
-      debugPrintApp(
-          "[LinuxAppFinder] Unable to find any global flatpak applications ...");
+      prettyLog(
+          tag: "LinuxAppFinder",
+          value: "Unable to find any global flatpak applications ...");
     });
 
     // Finding Local Flatpak Applications
     _addAppsFrom('${Platform.environment['HOME']}/.local/share/flatpak',
         onNotExistEvent: () {
-      debugPrintApp(
-          "[LinuxAppFinder] Unable to find any user level flatpak applications ...");
+      prettyLog(
+          tag: "LinuxAppFinder",
+          value: "Unable to find any user level flatpak applications ...");
     });
 
-    debugPrintApp("[LinuxAppFinder] Loading Apps ... Done!");
+    prettyLog(tag: "LinuxAppFinder", value: "Loading Apps ... Done!");
 
-    debugPrintApp(
-        "[LinuxAppFinder] I have access to ${iconPaths.length} icon files on this system.");
+    prettyLog(
+        tag: "LinuxAppFinder",
+        value:
+            "I have access to ${iconPaths.length} icon files on this system.");
     initialized = true;
   }
 
   void _cacheIcons() {
-    _cacheFrom('/usr/share/icons');
-    _cacheFrom('${Platform.environment['HOME']}/.local/share/icons');
+    _cacheFrom(
+      '/usr/share/icons',
+      onNotExistEvent: () {
+        prettyLog(
+          value: "No Primary Icons Directory found",
+          type: DebugType.error,
+        );
+      },
+    );
+    _cacheFrom(
+      '${Platform.environment['HOME']}/.local/share/icons',
+      onNotExistEvent: () {
+        prettyLog(
+          value: "No Local Icons Directory found",
+          type: DebugType.warning,
+        );
+      },
+    );
   }
 
-  void _cacheFrom(String path) {
+  void _cacheFrom(
+    String path, {
+    required VoidCallback onNotExistEvent,
+  }) {
     Directory iconThemesDir = Directory(path);
+    if (!iconThemesDir.existsSync()) {
+      onNotExistEvent();
+      return;
+    }
     var themes = iconThemesDir.listSync();
     for (var theme in themes) {
       if (theme.statSync().type == FileSystemEntityType.directory) {

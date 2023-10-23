@@ -2,12 +2,13 @@ import 'package:app_fleet/app/config/data/config_repository.dart';
 import 'package:app_fleet/app/home/data/home_repository.dart';
 import 'package:app_fleet/app/launcher/data/launcher_repository.dart';
 import 'package:app_fleet/app/settings/data/settings_repository.dart';
+import 'package:app_fleet/app/update/data/update_repository.dart';
 import 'package:app_fleet/config/assets/generators/linux_app_finder.dart';
 import 'package:app_fleet/core/app_configuration.dart';
 import 'package:app_fleet/core/app_session.dart';
 import 'package:app_fleet/core/app_updater.dart';
+import 'package:app_fleet/core/logger.dart';
 import 'package:app_fleet/core/route_service.dart';
-import 'package:app_fleet/main.dart';
 import 'package:app_fleet/utils/workspace_launcher.dart';
 import 'package:flutter/foundation.dart';
 
@@ -15,7 +16,7 @@ final class DependencyManager {
   Set<dynamic> dependencies = {};
 
   void put<T>(T t) {
-    debugPrintApp("[Injector] Putting $T ...");
+    prettyLog(tag: "Injector", value: "Putting $T ...");
     dependencies.add(t);
   }
 
@@ -52,6 +53,7 @@ final class DependencyInjection {
     _manager.put<HomeRepository>(HomeRepository());
     _manager.put<ConfigRepository>(ConfigRepository());
     _manager.put<LauncherRepository>(LauncherRepository());
+    _manager.put<UpdateRepository>(UpdateRepository());
     onInjectorFinished();
   }
 

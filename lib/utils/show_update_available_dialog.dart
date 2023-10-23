@@ -2,6 +2,8 @@ import 'package:app_fleet/config/assets/app_animations.dart';
 import 'package:app_fleet/config/theme/app_theme.dart';
 import 'package:app_fleet/constants/app_meta_info.dart';
 import 'package:app_fleet/core/app_updater.dart';
+import 'package:app_fleet/core/dependency_manager.dart';
+import 'package:app_fleet/core/logger.dart';
 import 'package:app_fleet/core/route_service.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
@@ -68,8 +70,10 @@ void showUpdateAvailableDialog({required UpdateData data}) {
                       children: [
                         TextButton(
                           onPressed: () {
-                            launchUrlString(AppMetaInfo.releasePageUrl);
                             Navigator.pop(context);
+                            DependencyInjection.find<RouteService>().gotoRoute(
+                                RouteService.updateRoute,
+                                arguments: data);
                           },
                           style: TextButton.styleFrom(
                             backgroundColor:
@@ -78,9 +82,29 @@ void showUpdateAvailableDialog({required UpdateData data}) {
                                 AppTheme.recommendedOptionForeground,
                           ),
                           child: Text(
-                            "See updating",
+                            "Update",
                             style: AppTheme.fontSize(14).makeBold().withColor(
                                 AppTheme.recommendedOptionForeground),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            launchUrlString(AppMetaInfo.releasePageUrl);
+                            prettyLog(
+                              value: AppMetaInfo.releasePageUrl,
+                              type: DebugType.url,
+                            );
+                            Navigator.pop(context);
+                          },
+                          style: TextButton.styleFrom(
+                            backgroundColor: AppTheme.safeOptionBackground,
+                            foregroundColor: AppTheme.safeOptionForeground,
+                          ),
+                          child: Text(
+                            "Update Manually",
+                            style: AppTheme.fontSize(14)
+                                .makeBold()
+                                .withColor(AppTheme.safeOptionForeground),
                           ),
                         ),
                         TextButton(

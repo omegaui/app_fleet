@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:app_fleet/core/app_configuration.dart';
 import 'package:app_fleet/core/dependency_manager.dart';
-import 'package:app_fleet/main.dart';
+import 'package:app_fleet/core/logger.dart';
 import 'package:app_fleet/utils/utils.dart';
 import 'package:http/http.dart';
 
@@ -42,9 +42,8 @@ class SettingsRepository {
   }
 
   bool isAutostartEnabled() {
-    return storage.get('autostart') ??
-        File(combinePath([
-          Platform.environment['HOME']!,
+    return (storage.get('autostart') ?? true) &&
+        File(combineHomePath([
           '.config',
           'autostart',
           'app-fleet-launcher.desktop'
@@ -58,15 +57,16 @@ class SettingsRepository {
       return;
     }
 
-    final autostartDesktopEntryFile = File(combinePath([
-      Platform.environment['HOME']!,
+    mkdir(combineHomePath([".config", "autostart"]),
+        "Creating Autostart directory ...");
+
+    final autostartDesktopEntryFile = File(combineHomePath([
       '.config',
       'autostart',
       'app-fleet-launcher.desktop'
     ], absolute: true));
 
-    final autostartDesktopEntryBakFile = File(combinePath([
-      Platform.environment['HOME']!,
+    final autostartDesktopEntryBakFile = File(combineHomePath([
       '.config',
       'autostart',
       'app-fleet-launcher.desktop.bak'
@@ -80,15 +80,25 @@ class SettingsRepository {
         autostartDesktopEntryBakFile.renameSync(autostartDesktopEntryFile.path);
       } else {
         try {
-          debugPrintApp(
-              '[SettingsUpdater] Downloading the latest autostart desktop entry ...');
+          prettyLog(
+            tag: "SettingsUpdater",
+            value: 'Downloading the latest autostart desktop entry ...',
+          );
           final response = await get(Uri.parse(
-              'https://raw.githubusercontent.com/omegaui/app_fleet/main/package/integration/desktop-entries/app-fleet-launcher.desktop'));
+              'https://cdn.jsdelivr.net/gh/omegaui/app_fleet/package/integration/desktop-entries/app-fleet-launcher.desktop'));
           final contents = response.body;
           autostartDesktopEntryFile.writeAsStringSync(contents, flush: true);
+          prettyLog(
+            tag: "SettingsUpdater",
+            value: 'SUCCESS.',
+            type: DebugType.response,
+          );
         } on Exception {
-          debugPrintApp(
-              '[SettingsUpdater] Cannot download the latest autostart desktop entry.');
+          prettyLog(
+            tag: "SettingsUpdater",
+            value: 'Cannot download the latest autostart desktop entry.',
+          );
+          rethrow;
         }
       }
     } else {

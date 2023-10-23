@@ -5,6 +5,7 @@ import 'package:app_fleet/app/config/domain/workspace_entity.dart';
 import 'package:app_fleet/app/config/presentation/config_state_machine.dart';
 import 'package:app_fleet/constants/request_status.dart';
 import 'package:app_fleet/core/dependency_manager.dart';
+import 'package:app_fleet/core/logger.dart';
 import 'package:app_fleet/core/route_service.dart';
 import 'package:app_fleet/utils/utils.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -37,7 +38,12 @@ class ConfigController {
   }
 
   void openInDesktop(WorkspaceEntity workspaceEntity) {
-    launchUrlString(getWorkspacePath(workspaceEntity.name));
+    final url = getWorkspacePath(workspaceEntity.name);
+    launchUrlString(url);
+    prettyLog(
+      value: url,
+      type: DebugType.url,
+    );
     gotoHomeRoute();
   }
 

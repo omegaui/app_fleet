@@ -13,6 +13,7 @@ class AppIcons {
   static const star = 'assets/icons/star.png';
   static const buyMeACoffee = 'assets/icons/buy-me-a-coffee.png';
   static const qrCode = 'assets/icons/qr-code.png';
+  static const uninstall = 'assets/icons/uninstall.png';
 
   static Future<List<String>> loadPickerIcons() async {
     final assetManifest = await AssetManifest.loadFromAssetBundle(rootBundle);

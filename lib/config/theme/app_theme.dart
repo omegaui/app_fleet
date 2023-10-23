@@ -1,7 +1,7 @@
 import 'package:app_fleet/app/settings/data/settings_repository.dart';
 import 'package:app_fleet/core/dependency_manager.dart';
 import 'package:app_fleet/core/json_configurator.dart';
-import 'package:app_fleet/main.dart';
+import 'package:app_fleet/core/logger.dart';
 import 'package:app_fleet/utils/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -148,8 +148,9 @@ class AppTheme {
     fieldDisabledColor = _theme.getColor('field-disabled-color');
     fieldFocusedColor = _theme.getColor('field-focused-color');
     fieldPrimaryColor = _theme.getColor('field-primary-color');
-    debugPrintApp(
-        "[AppTheme] ${_darkMode ? 'Dark' : 'Light'} Mode applied ...");
+    prettyLog(
+        tag: "AppTheme",
+        value: "${_darkMode ? 'Dark' : 'Light'} Mode applied ...");
   }
 
   static TextStyle get fontBold => TextStyle(

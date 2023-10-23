@@ -5,7 +5,7 @@ import 'package:app_fleet/app/home/data/home_repository.dart';
 import 'package:app_fleet/constants/request_status.dart';
 import 'package:app_fleet/core/app_configuration.dart';
 import 'package:app_fleet/core/dependency_manager.dart';
-import 'package:app_fleet/main.dart';
+import 'package:app_fleet/core/logger.dart';
 import 'package:app_fleet/utils/workspace_launcher.dart';
 
 const launchStartTag = '[Launching]';
@@ -41,10 +41,15 @@ class LauncherRepository {
   RequestStatus launchWorkspaceManager() {
     var executable = '/usr/bin/app-fleet';
     if (!File(executable).existsSync()) {
-      debugPrintApp(
-          "[Launcher] App Fleet hasn't been integrated with the system yet!");
-      debugPrintApp(
-          "[Launcher] place/map the executable to $executable to complete integration!");
+      prettyLog(
+        tag: "Launcher",
+        value: "App Fleet hasn't been integrated with the system yet!",
+      );
+      prettyLog(
+        tag: "Launcher",
+        value:
+            "place/map the executable to $executable to complete integration!",
+      );
       return RequestStatus.failed;
     }
     Process.start(executable, []);
@@ -54,10 +59,14 @@ class LauncherRepository {
   RequestStatus launchWorkspaceLauncher() {
     var executable = '/usr/bin/app-fleet';
     if (!File(executable).existsSync()) {
-      debugPrintApp(
-          "[Launcher] App Fleet hasn't been integrated with the system yet!");
-      debugPrintApp(
-          "[Launcher] place/map the executable to $executable to complete integration!");
+      prettyLog(
+        tag: "Launcher",
+        value: "App Fleet hasn't been integrated with the system yet!",
+      );
+      prettyLog(
+          tag: "Launcher",
+          value:
+              "place/map the executable to $executable to complete integration!");
       return RequestStatus.failed;
     }
     Process.start(executable, ['--mode', 'launcher']);

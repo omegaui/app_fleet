@@ -1,3 +1,12 @@
+## v1.0.0+7
+
+- NEW Self Update/Reinstall System.
+- NEW Uninstall Directly from the App
+- Optimized Icon Caching
+- Migrated to Traditional Linux Config Storage Structure
+- NEW Pretty Logging in Debug Mode
+- More Stable Core
+
 ## v1.0.0+6
 
 - **NEW** Dark Theme
@@ -31,4 +40,4 @@
 
 ## v1.0.0 - Initial Release
 
-- (the initial feature set, visit [project website](https://omegaui.github.io/app_fleet_webpage/))
+- (the initial feature set on [project website](https://omegaui.github.io/app_fleet_webpage/))

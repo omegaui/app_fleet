@@ -13,15 +13,18 @@ void showSnackbar({
       backgroundColor: AppTheme.background,
       elevation: 3,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      content: Row(
-        children: [
-          icon,
-          const SizedBox(width: 10.0),
-          Text(
-            message,
-            style: AppTheme.fontSize(14),
-          ),
-        ],
+      content: Center(
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            icon,
+            const SizedBox(width: 10.0),
+            Text(
+              message,
+              style: AppTheme.fontSize(14),
+            ),
+          ],
+        ),
       ),
     ),
   );

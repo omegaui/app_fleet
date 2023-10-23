@@ -3,8 +3,8 @@ import 'package:app_fleet/app/launcher/data/launcher_repository.dart';
 import 'package:app_fleet/app/settings/data/settings_repository.dart';
 import 'package:app_fleet/core/app_session.dart';
 import 'package:app_fleet/core/dependency_manager.dart';
+import 'package:app_fleet/core/logger.dart';
 import 'package:app_fleet/core/route_service.dart';
-import 'package:app_fleet/main.dart';
 import 'package:app_fleet/utils/utils.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
@@ -49,8 +49,10 @@ class WorkspaceLauncher {
       }
     }
 
-    debugPrintApp(
-        "[Workspace Launcher] ${workspaceMap.keys.length} workspaces can be launched.");
+    prettyLog(
+      tag: "WorkspaceLauncher",
+      value: "${workspaceMap.keys.length} workspaces can be launched.",
+    );
 
     var entries = workspaceMap.entries;
     Future.delayed(
@@ -58,13 +60,11 @@ class WorkspaceLauncher {
       () async {
         for (final e in entries) {
           var status = "Switching to workspace ${e.key + 1}";
-          debugPrintApp(status);
           onProgress("$launchProgressTag $status");
           executeWorkspaceSwitcher(e.key);
           var apps = e.value;
           for (var app in apps) {
             status = "Launching ${app.name}, waiting ${app.waitTime} ms ...";
-            debugPrintApp(status);
             onProgress("$launchProgressTag $status");
             await app.launch();
           }
@@ -73,7 +73,6 @@ class WorkspaceLauncher {
         var status = session.isClean
             ? "Workspace Successfully Launched"
             : "Error Encountered during Workspace Launch!";
-        debugPrintApp(status);
         onProgress("$launchProgressTag $status");
 
         onComplete();
