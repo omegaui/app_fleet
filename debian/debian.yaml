@@ -1,0 +1,14 @@
+flutter_app:
+  command: app-fleet
+  arch: x64
+  parent: /usr/local/lib
+
+control:
+  Package: app-fleet
+  Version: 1.0.0+8
+  Architecture: amd64
+  Essential: no
+  Priority: optional
+  Depends: wmctrl
+  Maintainer: omega ui <omegaui22@gmail.com>
+  Description: A brilliant workspace manager & launch automation tool specially designed for GNOME.

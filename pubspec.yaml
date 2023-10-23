@@ -1,5 +1,5 @@
 name: app_fleet
-description: A brilliant workspace manager & quick launcher specially designed for GNOME.
+description: A brilliant workspace manager & launch automation tool specially designed for GNOME.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
@@ -24,6 +24,7 @@ dependencies:
   linux_plus: ^1.0.1
   connectivity_plus: ^4.0.2
   http: ^1.1.0
+  flutter_to_debian: ^1.0.4
 
 dev_dependencies:
   flutter_test:
