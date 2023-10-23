@@ -111,15 +111,6 @@ cd app-fleet/package
 ./update-from-source.sh
 ```
 
-### Uninstalling
-
-If you have already installed **App Fleet**, and now you want to uninstall,
-then, you can do that by running the following (independent of install the method) :
-
-```shell
-curl https://cdn.jsdelivr.net/gh/omegaui/app-fleet@latest/network-uninstall.sh | bash
-```
-
 ## Contributing
 
 <p style="font-family: Sen">
