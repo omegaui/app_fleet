@@ -89,10 +89,9 @@ class AppUpdater {
       if (response.statusCode == 200) {
         final body = jsonDecode(response.body);
         final latestVersion = body['latest'];
-        final bundleUrl = body['url'] ??
-            "https://github.com/omegaui/app_fleet/releases/download/v1.0.0+6/app-fleet-bundle.zip";
-        final bundleSize = body['size'] ?? "25 MB";
-        final releaseTitle = body['title'] ?? "Super 7";
+        final bundleUrl = body['url'];
+        final bundleSize = body['size'];
+        final releaseTitle = body['title'];
         if (AppMetaInfo.version != latestVersion) {
           onComplete(
               UpdateData(latestVersion, bundleUrl, bundleSize, releaseTitle),
