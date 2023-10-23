@@ -47,19 +47,6 @@ Here comes App Fleet,
 <strong>App Fleet is written using The Flutter Framework.</strong>
 </p>
 
-## Support Me
-
-If you have really liked the project and want to support the development of App Fleet.
-Then, please consider buying me a coffee.
-
-It helps me to work on the project in my free time.
-
-Scan this [**Qr Code**](github/images/qr-code.png) or <br>
-
-Click the button below to Buy Me a Coffee.
-
-<a href="https://www.buymeacoffee.com/imarham" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
-
 ## Features
 
 See [**CHANGELOG**](https://github.com/omegaui/app_fleet/blob/main/CHANGELOG.md) for a full feature list.
@@ -73,7 +60,7 @@ Copy and run the following in your terminal:
 </p>
 
 ```shell
-curl https://cdn.jsdelivr.net/gh/omegaui/app-fleet/network-install.sh | bash
+curl https://cdn.jsdelivr.net/gh/omegaui/app-fleet@main/network-install.sh | bash
 ```
 
 ### Install from Precompiled Bundle
@@ -103,7 +90,7 @@ then, you can simply, update using these three ways:
 ### Update directly from the shell
 
 ```shell
-curl https://cdn.jsdelivr.net/gh/omegaui/app-fleet/network-update.sh | bash
+curl https://cdn.jsdelivr.net/gh/omegaui/app-fleet@main/network-update.sh | bash
 ```
 
 ### Update from Precompiled Bundle
@@ -128,7 +115,7 @@ If you have already installed **App Fleet**, and now you want to uninstall,
 then, you can do that by running the following (independent of install the method) :
 
 ```shell
-curl https://cdn.jsdelivr.net/gh/omegaui/app-fleet/network-uninstall.sh | bash
+curl https://cdn.jsdelivr.net/gh/omegaui/app-fleet@main/network-uninstall.sh | bash
 ```
 
 ## Contributing
@@ -226,6 +213,20 @@ You can even try the latest beta by selecting the branch with `latest` version n
 then, you need to [**install from source**](https://github.com/omegaui/app_fleet/tree/main#install-from-source).
 
 #### See what is [**planned**](https://github.com/omegaui/app_fleet/milestone/1) for the next release.
+
+## Support Me
+
+If you have really liked the project and want to support the development of App Fleet.
+Then, please consider buying me a coffee.
+
+It helps me to work on the project in my free time.
+
+Scan this [**Qr Code**](github/images/qr-code.png) or <br>
+
+Click the button below to Buy Me a Coffee.
+
+<a href="https://www.buymeacoffee.com/imarham" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
 
 <div align="center">
     <h3 style="font-family: Sen">
