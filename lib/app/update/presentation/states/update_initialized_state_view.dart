@@ -54,14 +54,13 @@ class _UpdateInitializedStateViewState
           onComplete: (bytes) {
             setState(() {
               status = "Saving Bundle ...";
-              mkdir(
-                  combineHomePath(
-                    [
-                      ".config",
-                      "app-fleet-releases",
-                    ],
-                  ),
-                  "Creating releases storage ...");
+              final releasesDir = combineHomePath(
+                [
+                  ".config",
+                  "app-fleet-releases",
+                ],
+              );
+              mkdir(releasesDir, "Creating releases storage ...");
               mkdir(
                   combineHomePath(
                     [

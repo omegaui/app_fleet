@@ -32,5 +32,8 @@ sudo cp desktop-entries/* /usr/share/applications
 echo "> Adding Launcher to autostart ..."
 sudo cp desktop-entries/app-fleet-launcher.desktop $HOME/.config/autostart
 echo "> Integration Successful"
+echo "> Removing release data if any"
+rm -rf $HOME/.config/app-fleet-releases
+echo ">> App Fleet is all set to use !!"
 echo "Press enter to exit ..."
 read
