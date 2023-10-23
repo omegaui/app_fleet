@@ -78,10 +78,9 @@ class AppStorageManager {
         const Duration(seconds: 2),
         () async {
           await Process.run(
-            'pkexec',
+            'chmod',
             [
-              'chmod',
-              '0755',
+              '+x',
               combineHomePath([
                 ".config", "app-fleet",
                 'workspace-switcher.sh',
@@ -137,7 +136,7 @@ class AppStorageManager {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "Making Event Scripts Executable\n(please authorize)",
+                              "Making Event Scripts Executable",
                               textAlign: TextAlign.center,
                               style: AppTheme.fontSize(14).makeBold(),
                             ),

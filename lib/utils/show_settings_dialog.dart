@@ -1,10 +1,16 @@
+import 'dart:io';
+
 import 'package:app_fleet/app/settings/data/settings_repository.dart';
 import 'package:app_fleet/config/theme/app_theme.dart';
 import 'package:app_fleet/core/app_session.dart';
 import 'package:app_fleet/core/dependency_manager.dart';
 import 'package:app_fleet/utils/app_tooltip_builder.dart';
+import 'package:app_fleet/utils/show_confirm_uninstall_dialog.dart';
+import 'package:app_fleet/utils/snack_bar_builder.dart';
+import 'package:app_fleet/utils/utils.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void showSettingsDialog(BuildContext context) {
   final settingsRepo = DependencyInjection.find<SettingsRepository>();
@@ -196,6 +202,69 @@ void showSettingsDialog(BuildContext context) {
                                 ],
                               ),
                             ],
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextButton(
+                            onPressed: () {
+                              showConfirmUninstallDialog(
+                                context: context,
+                                onSelection: (uninstall) {
+                                  if (uninstall) {
+                                    Navigator.pop(context); // Closing Settings
+                                    showSnackbar(
+                                        icon: const Icon(Icons.info),
+                                        message: "Removing App Fleet Data ...");
+                                    final appDir = Directory(combineHomePath(
+                                        ['.config', 'app-fleet']));
+                                    appDir.deleteSync(recursive: true);
+                                    showSnackbar(
+                                        icon: const Icon(Icons.info),
+                                        message:
+                                            "Removing Autostart Desktop Entry ...");
+                                    final autoStartDesktopEntry = File(
+                                        combineHomePath([
+                                      '.config',
+                                      'autostart',
+                                      'app-fleet-launcher.desktop'
+                                    ]));
+                                    if (autoStartDesktopEntry.existsSync()) {
+                                      autoStartDesktopEntry.deleteSync();
+                                    }
+                                    showSnackbar(
+                                        icon: const Icon(Icons.info),
+                                        message:
+                                            "Authorize to finish uninstall!!");
+                                    Process.runSync('pkexec', [
+                                      'rm',
+                                      '/usr/share/applications/app-fleet.desktop',
+                                      '/usr/share/applications/app-fleet-launcher.desktop',
+                                      '/usr/bin/app-fleet',
+                                    ]);
+                                    // Closing App Fleet
+                                    appWindow.close();
+                                    SystemNavigator.pop();
+                                    Navigator.pop(context);
+                                  }
+                                },
+                              );
+                            },
+                            style: TextButton.styleFrom(
+                              backgroundColor:
+                                  AppTheme.negativeOptionBackground,
+                              foregroundColor:
+                                  AppTheme.negativeOptionForeground,
+                            ),
+                            child: Text(
+                              "Uninstall",
+                              style: AppTheme.fontSize(12)
+                                  .makeBold()
+                                  .withColor(AppTheme.negativeOptionForeground),
+                            ),
                           ),
                         ),
                       ),

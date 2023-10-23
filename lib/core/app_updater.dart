@@ -8,6 +8,7 @@ import 'package:app_fleet/core/app_bug_report.dart';
 import 'package:app_fleet/core/dependency_manager.dart';
 import 'package:app_fleet/core/logger.dart';
 import 'package:app_fleet/core/storage_manager.dart';
+import 'package:app_fleet/main.dart';
 import 'package:app_fleet/utils/show_update_available_dialog.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:http/http.dart';
@@ -44,7 +45,7 @@ class AppUpdater {
         .listen((ConnectivityResult result) {
       if (result != ConnectivityResult.none) {
         final settingsRepo = DependencyInjection.find<SettingsRepository>();
-        if (!AppStorageManager.storageReady || _checked) {
+        if (debugMode || !AppStorageManager.storageReady || _checked) {
           return;
         }
         _checked = true;
