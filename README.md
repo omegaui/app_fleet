@@ -49,6 +49,8 @@ Here comes App Fleet,
 
 ## Features
 
+> **App Fleet comes with a self-update and uninstall feature.**
+
 See [**CHANGELOG**](https://github.com/omegaui/app_fleet/blob/main/CHANGELOG.md) for a full feature list.
 
 ## Install (Advanced Installation Options)
@@ -146,7 +148,7 @@ You can only see app logs in Dev Mode.
 <p style="font-family: Sen">
 App Fleet is designed to automatically generate Bug Reports.
 <br>
-You can find them at <strong>$PROJECT_ROOT/.config/bug-reports`</strong>.
+You can find them at <strong>$HOME/.config/app-fleet/bug-reports`</strong>.
 </p>
 
 <p style="font-family: Sen">
@@ -179,7 +181,7 @@ your needs (usually system performance).
 <p style="font-family: Sen">
 Configurations are saved in a readable format i.e., json.
 <br>
-You can directly edit the workspace configs located at $HOME/app-fleet/.config/workspaces
+You can directly edit the workspace configs located at $HOME/.config/app-fleet/workspaces
 </p>
 
 ### Hiding Workspace Configs in Launcher
@@ -191,7 +193,7 @@ You can directly edit the workspace configs located at $HOME/app-fleet/.config/w
 <p style="font-family: Sen">
 You can even hide some workspaces from coming the launcher mode by removing them from app-settings.json
 <br>
-this file contains app preferences and is located at $HOME/app-fleet/.config
+this file contains app preferences and is located at $HOME/.config/app-fleet
 </p>
 
 ### Quick Task Launcher
