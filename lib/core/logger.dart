@@ -18,8 +18,7 @@ prettyLog({
           '\x1B[33m${"💎 STATUS CODE ${tag != null ? "$tag: " : ""}$value"}\x1B[0m');
       break;
     case DebugType.info:
-      stdout.writeln(
-          "⚡ INFO ${tag != null ? "$tag: " : ""}$value");
+      stdout.writeln("⚡ ${tag != null ? "$tag: " : ""}$value");
       break;
     case DebugType.warning:
       stdout.writeln(
