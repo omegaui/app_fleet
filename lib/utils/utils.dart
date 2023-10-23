@@ -127,6 +127,7 @@ void mkdir(String path, String logMessage) {
   var dir = Directory(path);
   if (!dir.existsSync()) {
     dir.createSync();
+    prettyLog(value: logMessage);
   }
 }
 

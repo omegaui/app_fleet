@@ -8,7 +8,6 @@ import 'package:app_fleet/core/app_bug_report.dart';
 import 'package:app_fleet/core/dependency_manager.dart';
 import 'package:app_fleet/core/logger.dart';
 import 'package:app_fleet/core/storage_manager.dart';
-import 'package:app_fleet/main.dart';
 import 'package:app_fleet/utils/show_update_available_dialog.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:http/http.dart';
@@ -17,6 +16,9 @@ class UpdateData {
   static const noUpdates = 'No Updates';
 
   late String data;
+  late String url;
+  late String size;
+  late String title;
 
   UpdateData.alreadyLatest() {
     data = noUpdates;
@@ -26,7 +28,7 @@ class UpdateData {
     return data != 'No Updates';
   }
 
-  UpdateData(this.data);
+  UpdateData(this.data, this.url, this.size, this.title);
 }
 
 class AppUpdater {
@@ -41,30 +43,34 @@ class AppUpdater {
         .onConnectivityChanged
         .listen((ConnectivityResult result) {
       if (result != ConnectivityResult.none) {
-        checkForUpdates(
-          onComplete: (data, status) {
-            if (status == RequestStatus.success) {
-              if (data!.isUpdateAvailable()) {
-                showUpdateAvailableDialog(data: data);
-              }
-            }
-          },
-        );
+        final settingsRepo = DependencyInjection.find<SettingsRepository>();
+        if (!AppStorageManager.storageReady || _checked) {
+          return;
+        }
+        _checked = true;
+        if (!settingsRepo.notifyAboutUpdates()) {
+          return;
+        }
+        checkForUpdatesNow();
       }
     });
+  }
+
+  void checkForUpdatesNow() {
+    checkForUpdates(
+      onComplete: (data, status) {
+        if (status == RequestStatus.success) {
+          if (data!.isUpdateAvailable()) {
+            showUpdateAvailableDialog(data: data);
+          }
+        }
+      },
+    );
   }
 
   void checkForUpdates({
     required void Function(UpdateData? data, RequestStatus status) onComplete,
   }) {
-    final settingsRepo = DependencyInjection.find<SettingsRepository>();
-    if (debugMode || !AppStorageManager.storageReady || _checked) {
-      return;
-    }
-    _checked = true;
-    if (!settingsRepo.notifyAboutUpdates()) {
-      return;
-    }
     Future.delayed(const Duration(seconds: 5), () async {
       Response? response;
       try {
@@ -83,8 +89,14 @@ class AppUpdater {
       if (response.statusCode == 200) {
         final body = jsonDecode(response.body);
         final latestVersion = body['latest'];
+        final bundleUrl = body['url'] ??
+            "https://github.com/omegaui/app_fleet/releases/download/v1.0.0+6/app-fleet-bundle.zip";
+        final bundleSize = body['size'] ?? "25 MB";
+        final releaseTitle = body['title'] ?? "Super 7";
         if (AppMetaInfo.version != latestVersion) {
-          onComplete(UpdateData(latestVersion), RequestStatus.success);
+          onComplete(
+              UpdateData(latestVersion, bundleUrl, bundleSize, releaseTitle),
+              RequestStatus.success);
         } else {
           onComplete(UpdateData.alreadyLatest(), RequestStatus.success);
         }

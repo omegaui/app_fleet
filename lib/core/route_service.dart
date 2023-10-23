@@ -1,6 +1,7 @@
 import 'package:app_fleet/app/config/presentation/config_view.dart';
 import 'package:app_fleet/app/home/presentation/home_view.dart';
 import 'package:app_fleet/app/launcher/presentation/launcher_view.dart';
+import 'package:app_fleet/app/update/presentation/update_view.dart';
 import 'package:app_fleet/config/theme/app_theme.dart';
 import 'package:app_fleet/core/app_configuration.dart';
 import 'package:app_fleet/core/dependency_manager.dart';
@@ -13,6 +14,7 @@ class RouteService {
   static const homeRoute = 'home';
   static const createRoute = 'create';
   static const launcherRoute = 'launcher';
+  static const updateRoute = 'update';
 
   final VoidCallback onRebuildRequested;
 
@@ -42,6 +44,12 @@ class RouteService {
     Route(
       name: launcherRoute,
       builder: (arguments) => LauncherView(
+        arguments: arguments,
+      ),
+    ),
+    Route(
+      name: updateRoute,
+      builder: (arguments) => UpdateView(
         arguments: arguments,
       ),
     ),

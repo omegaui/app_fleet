@@ -57,6 +57,9 @@ class SettingsRepository {
       return;
     }
 
+    mkdir(combineHomePath([".config", "autostart"]),
+        "Creating Autostart directory ...");
+
     final autostartDesktopEntryFile = File(combineHomePath([
       '.config',
       'autostart',
@@ -95,6 +98,7 @@ class SettingsRepository {
             tag: "SettingsUpdater",
             value: 'Cannot download the latest autostart desktop entry.',
           );
+          rethrow;
         }
       }
     } else {
