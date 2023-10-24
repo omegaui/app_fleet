@@ -111,6 +111,42 @@ cd app-fleet/package
 ./update-from-source.sh
 ```
 
+### Why there is no Snap/Flatpak/AppImage/Deb/RPM Package?
+
+**Snap/Flatpak Packaging is Unsupported by program like App Fleet**
+
+App Fleet being a workspace launch automation tool requires **system wide read access**,
+the reason is very justifying:
+
+- App Fleet not only launches **Apps** but also **any custom script** the user wants
+  and this script can exist anywhere on the drive or even on the **external** drive.
+- Snap Packaging isn't possible as packaging a flutter app with snap requires **gnome** extension which in turn doesn't
+  supports **classic** confinement, and App Fleet cannot leverage the full system in a **strict** confinement. (I
+  searched a lot about building it under **classic** confinement to get system wide read access but didn't find any way
+  to do it. Any help on this is highly appreciated.)
+- Flatpak Packaging also isn't supported as flatpaks have additional set of hindrance, the `/usr` directory is *
+  *inaccessible** by a flatpak app, and this is the core directory around which App Fleet detects apps and system icons.
+  Not only `/usr` but directories like `/var` where the installed flatpak's metainfo resides is inaccessible, thus, App
+  Fleet won't be able to detect other apps.
+
+Both Snaps and Flatpak are launched in a **SANDBOX**, and App Fleet needs to be directly invoked on the system to be
+able to do what it is meant to do.
+
+> As far as **AppImage** is considered, the sole cause why I planned for packaging was to roll out updates through the
+> native software updater and not by making the user to rerun the update command everytime an update arrives. <br>
+
+Current network installers included on home repo provide a much seamless install and update experience to the users.
+App Fleet already includes a **Self Update** and **In-App Uninstall Option**.
+
+- **Debian/RPM or Native Packaging**
+  - App Fleet can be packaged into .deb or .rpm but the reason why this isn't provided is App Fleet's ability to do a
+    self update, reinstall and install. Elaborating more, when packaged as a deb package, the core of the app needs to
+    placed to `/usr/local/lib` while the config always stays
+    at `~/.config`, App Fleet's current installations are placed inside `~/.config/app-fleet` only, and the
+    self-updater/installer is coded to update it there only. Thus, packaging it as deb package would break the
+    self-updater/installer.
+  - Moreover, current network installers work out of the box, you just have to copy/paste the curl command.
+
 ## Contributing
 
 <p style="font-family: Sen">
