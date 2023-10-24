@@ -1,3 +1,8 @@
+## v1.0.0+8
+
+- Stabilized In-App Updates
+- Removed JSDelivr End Points to ensure the users always get the latest version.
+
 ## v1.0.0+7
 
 - NEW Self Update/Reinstall System.
