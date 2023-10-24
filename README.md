@@ -92,7 +92,7 @@ then, you can simply, update using these three ways:
 ### Update directly from the shell
 
 ```shell
-curl https://raw.githubusercontent.com/omegaui/app_fleet/main/network-install.sh | bash
+curl https://raw.githubusercontent.com/omegaui/app_fleet/main/network-update.sh | bash
 ```
 
 ### Update from Precompiled Bundle
