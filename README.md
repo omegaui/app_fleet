@@ -62,7 +62,7 @@ Copy and run the following in your terminal:
 </p>
 
 ```shell
-curl https://cdn.jsdelivr.net/gh/omegaui/app-fleet@main/network-install.sh | bash
+curl https://raw.githubusercontent.com/omegaui/app_fleet/main/network-install.sh | bash
 ```
 
 ### Install from Precompiled Bundle
@@ -92,7 +92,7 @@ then, you can simply, update using these three ways:
 ### Update directly from the shell
 
 ```shell
-curl https://cdn.jsdelivr.net/gh/omegaui/app-fleet@main/network-update.sh | bash
+curl https://raw.githubusercontent.com/omegaui/app_fleet/main/network-update.sh | bash
 ```
 
 ### Update from Precompiled Bundle
@@ -109,15 +109,6 @@ cd app-fleet/package
 git clone https://github.com/omegaui/app-fleet
 cd app-fleet/package
 ./update-from-source.sh
-```
-
-### Uninstalling
-
-If you have already installed **App Fleet**, and now you want to uninstall,
-then, you can do that by running the following (independent of install the method) :
-
-```shell
-curl https://cdn.jsdelivr.net/gh/omegaui/app-fleet@main/network-uninstall.sh | bash
 ```
 
 ## Contributing
