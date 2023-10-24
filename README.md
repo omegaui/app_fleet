@@ -124,8 +124,9 @@ the reason is very justifying:
   supports **classic** confinement, and App Fleet cannot leverage the full system in a **strict** confinement. (I
   searched a lot about building it under **classic** confinement to get system wide read access but didn't find any way
   to do it. Any help on this is highly appreciated.)
-- Flatpak Packaging also isn't supported as flatpaks have additional set of hindrance, the `/usr` directory is *
-  *inaccessible** by a flatpak app, and this is the core directory around which App Fleet detects apps and system icons.
+- Flatpak Packaging also isn't supported as flatpaks have additional set of hindrance, the `/usr` directory is
+  **inaccessible** by a flatpak app, and this is the core directory around which App Fleet detects apps and system
+  icons.
   Not only `/usr` but directories like `/var` where the installed flatpak's metainfo resides is inaccessible, thus, App
   Fleet won't be able to detect other apps.
 
@@ -139,8 +140,9 @@ Current network installers included on home repo provide a much seamless install
 App Fleet already includes a **Self Update** and **In-App Uninstall Option**.
 
 - **Debian/RPM or Native Packaging**
-  - App Fleet can be packaged into .deb or .rpm but the reason why this isn't provided is App Fleet's ability to do a
-    self update, reinstall and install. Elaborating more, when packaged as a deb package, the core of the app needs to
+  - App Fleet can be packaged into .deb or .rpm but the reason why this isn't done is App Fleet's ability to do a
+    **self update, reinstall and install**. Elaborating more, when packaged as a deb package, the core of the app needs
+    to
     placed to `/usr/local/lib` while the config always stays
     at `~/.config`, App Fleet's current installations are placed inside `~/.config/app-fleet` only, and the
     self-updater/installer is coded to update it there only. Thus, packaging it as deb package would break the
@@ -161,9 +163,12 @@ If you want to contribute to App Fleet, make sure you use IntelliJ-Based project
 The project is built using <i>clean architecture</i>, and there are four launch configurations. 
 </p>
 
-<div align="center">
-    <img src="github/images/run-configurations.png" alt="Run Configurations"/>
-</div>
+- `project-root`
+  - `.run`
+    - `Launcher Dev.run.xml`
+    - `Launcher Prod.run.xml`
+    - `Manager Dev.run.xml`
+    - `Manager Prod.run.xml`
 
 <p style="font-family: Sen">
 The <strong>Prod</strong> configurations are meant for production ready states,
