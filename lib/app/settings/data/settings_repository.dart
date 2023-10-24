@@ -85,7 +85,7 @@ class SettingsRepository {
             value: 'Downloading the latest autostart desktop entry ...',
           );
           final response = await get(Uri.parse(
-              'https://cdn.jsdelivr.net/gh/omegaui/app_fleet/package/integration/desktop-entries/app-fleet-launcher.desktop'));
+              'https://raw.githubusercontent.com/omegaui/app_fleet/main/package/integration/desktop-entries/app-fleet-launcher.desktop'));
           final contents = response.body;
           autostartDesktopEntryFile.writeAsStringSync(contents, flush: true);
           prettyLog(

@@ -34,7 +34,7 @@ class UpdateData {
 
 class AppUpdater {
   final String updateDataUrl =
-      'https://cdn.jsdelivr.net/gh/omegaui/app-fleet@latest/updates/latest.json';
+      'https://raw.githubusercontent.com/omegaui/app_fleet/main/updates/latest.json';
 
   // Stores Update Checked Status for current session
   bool _checked = false;
