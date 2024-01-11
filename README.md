@@ -53,7 +53,17 @@ Here comes App Fleet,
 
 See [**CHANGELOG**](https://github.com/omegaui/app_fleet/blob/main/CHANGELOG.md) for a full feature list.
 
+## Review
+
+![Reviewed by ItsFOSS](https://news.itsfoss.com/content/images/size/w1304/2024/01/appfleet-workspace-automation-tool.png)
+<div align="center">
+  <a href="https://news.itsfoss.com/app-fleet/"><p><strong>Reviewed by ItsFOSS</strong></p></a>
+</div>
+
 ## Install (Advanced Installation Options)
+
+🎗️ Before installing make sure `wmctrl` is installed on your system, or else you will not be able to switch workspace
+using the App Fleet Launcher.
 
 ### Install using your shell
 
