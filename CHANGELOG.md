@@ -1,3 +1,8 @@
+## v1.0.0+9
+
+- Enhanced Dark Mode
+- NEW Empty page Animation.
+
 ## v1.0.0+8
 
 - Stabilized In-App Updates
