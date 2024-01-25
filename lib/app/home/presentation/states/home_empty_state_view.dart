@@ -40,7 +40,7 @@ class HomeEmptyStateView extends StatelessWidget {
               child: Column(
                 children: [
                   appBar(context),
-                  Lottie.asset(AppAnimations.empty, width: 300),
+                  Lottie.asset(AppAnimations.empty, width: 350, repeat: false),
                   Text(
                     "Couldn't find any workspace configs on this system",
                     style: AppTheme.fontSize(14),
