@@ -1,5 +1,5 @@
 {
-  "background": "0xFF191A1E",
+  "background": "0xFF202020",
   "foreground": "0xFFFFFFFF",
   "window-drop-shadow": "0x661E1E1E",
   "dialog-drop-shadow": "0x66000000",
@@ -11,7 +11,7 @@
   "create-new-button-shadow-color": "0xFF000000",
   "info-icon-color": "0xFFFFFFFF",
   "settings-icon-color": "0xFFB9B9B9",
-  "workspace-tile-color": "0xFF191A1E",
+  "workspace-tile-color": "0xFF2A2A2A",
   "floating-app-tile-color": "0xFF1E1E1E",
   "floating-app-tile-drop-shadow-color": "0xCC000000",
   "switch-color": "0xFF69F0AE",
