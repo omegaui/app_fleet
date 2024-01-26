@@ -1,6 +1,6 @@
-<div align="center">
-    <img src="github/banner/github-banner.png" alt="GitHub Banner">
-</div>
+
+https://github.com/omegaui/app_fleet/assets/73544069/6bfe8b68-2886-4c02-80a2-8450f37311a6
+
 
 ## Overview
 
