@@ -129,42 +129,46 @@ class LinuxAppFinder {
     if (!isAppEntry(contents)) {
       return;
     }
-    List<String> lines = contents.split('\n');
-    String name =
-        lines.where((line) => line.startsWith('Name=')).first.substring(5);
-    String icon =
-        lines.where((line) => line.startsWith('Icon=')).first.substring(5);
-    String exe =
-        lines.where((line) => line.startsWith('Exec=')).first.substring(5);
-    // completing icon path if incomplete
-    bool found = icon.contains('/');
-    bool foundInPixmaps = false;
-    if (!found) {
-      Directory pixmapsDir = Directory('/usr/share/pixmaps');
-      var icons = pixmapsDir.listSync();
-      for (var entity in icons) {
-        if (entity.path.contains("/$icon.")) {
-          icon = entity.path;
-          foundInPixmaps = true;
-          break;
+    try {
+      List<String> lines = contents.split('\n').toList();
+      String name =
+          lines.firstWhere((line) => line.startsWith('Name=')).substring(5);
+      String icon =
+          lines.firstWhere((line) => line.startsWith('Icon=')).substring(5);
+      String exe =
+          lines.firstWhere((line) => line.startsWith('Exec=')).substring(5);
+      // completing icon path if incomplete
+      bool found = icon.contains('/');
+      bool foundInPixmaps = false;
+      if (!found) {
+        Directory pixmapsDir = Directory('/usr/share/pixmaps');
+        var icons = pixmapsDir.listSync();
+        for (var entity in icons) {
+          if (entity.path.contains("/$icon.")) {
+            icon = entity.path;
+            foundInPixmaps = true;
+            break;
+          }
         }
       }
-    }
-    if (!foundInPixmaps) {
-      String? inferredIcon = _searchIconsFromIconThemes(icon);
-      if (inferredIcon != null) {
-        icon = inferredIcon;
+      if (!foundInPixmaps) {
+        String? inferredIcon = _searchIconsFromIconThemes(icon);
+        if (inferredIcon != null) {
+          icon = inferredIcon;
+        }
       }
-    }
-    if (File(icon).existsSync()) {
-      if (checkImageValidity(icon)) {
-        apps.add(App(
-          name: name,
-          iconPath: icon,
-          exe: exe,
-          internallyGenerated: true,
-        ));
+      if (File(icon).existsSync()) {
+        if (checkImageValidity(icon)) {
+          apps.add(App(
+            name: name,
+            iconPath: icon,
+            exe: exe,
+            internallyGenerated: true,
+          ));
+        }
       }
+    } catch (e) {
+      // ignore
     }
   }
 
