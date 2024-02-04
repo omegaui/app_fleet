@@ -6,7 +6,7 @@ echo "and will re-add the workspace launcher to $HOME/.config/autostart director
 echo ">> Step 1: Downloading the latest precompiled bundle ..."
 mkdir app-fleet-bundle
 cd app-fleet-bundle
-wget "https://github.com/omegaui/app_fleet/releases/download/v1.0.0%2B9/app-fleet-bundle.zip" --output-document='app-fleet-bundle.zip'
+wget "https://github.com/omegaui/app_fleet/releases/download/v1.0.0%2B10/app-fleet-bundle.zip" --output-document='app-fleet-bundle.zip'
 echo ">> Step 2: Extracting the downloaded bundle ..."
 unzip "app-fleet-bundle.zip"
 echo ">> Step 3: Removing the downloaded bundle to save space ..."
