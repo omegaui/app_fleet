@@ -241,9 +241,9 @@ void showSettingsDialog(BuildContext context) {
                                             "Authorize to finish uninstall!!");
                                     Process.runSync('pkexec', [
                                       'rm',
-                                      '/usr/share/applications/app-fleet.desktop',
-                                      '/usr/share/applications/app-fleet-launcher.desktop',
-                                      '/usr/bin/app-fleet',
+                                      '/usr/local/share/applications/app-fleet.desktop',
+                                      '/usr/local/share/applications/app-fleet-launcher.desktop',
+                                      '/usr/local/bin/app-fleet',
                                     ]);
                                     // Closing App Fleet
                                     appWindow.close();

@@ -39,7 +39,7 @@ class LauncherRepository {
   }
 
   RequestStatus launchWorkspaceManager() {
-    var executable = '/usr/bin/app-fleet';
+    var executable = '/usr/local/bin/app-fleet';
     if (!File(executable).existsSync()) {
       prettyLog(
         tag: "Launcher",
@@ -57,7 +57,7 @@ class LauncherRepository {
   }
 
   RequestStatus launchWorkspaceLauncher() {
-    var executable = '/usr/bin/app-fleet';
+    var executable = '/usr/local/bin/app-fleet';
     if (!File(executable).existsSync()) {
       prettyLog(
         tag: "Launcher",

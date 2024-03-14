@@ -27,7 +27,7 @@ class LinuxAppFinder {
     prettyLog(tag: "LinuxAppFinder", value: "Loading Apps ...");
 
     // Finding Global Applications
-    _addAppsFrom('/usr/share/applications', onNotExistEvent: () {
+    _addAppsFrom('/usr/local/share/applications', onNotExistEvent: () {
       prettyLog(
           tag: "LinuxAppFinder",
           value: "Unable to find any global applications ...");
@@ -75,7 +75,7 @@ class LinuxAppFinder {
 
   void _cacheIcons() {
     _cacheFrom(
-      '/usr/share/icons',
+      '/usr/local/share/icons',
       onNotExistEvent: () {
         prettyLog(
           value: "No Primary Icons Directory found",
@@ -141,7 +141,7 @@ class LinuxAppFinder {
       bool found = icon.contains('/');
       bool foundInPixmaps = false;
       if (!found) {
-        Directory pixmapsDir = Directory('/usr/share/pixmaps');
+        Directory pixmapsDir = Directory('/usr/local/share/pixmaps');
         var icons = pixmapsDir.listSync();
         for (var entity in icons) {
           if (entity.path.contains("/$icon.")) {
