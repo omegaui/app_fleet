@@ -2,7 +2,7 @@
 Name=App Fleet (Launcher)
 Exec=app-fleet --mode launcher
 Icon=app-fleet
-Version=1.0
+Version=1.0.1
 Type=Application
 Categories=Utility
 Terminal=false
