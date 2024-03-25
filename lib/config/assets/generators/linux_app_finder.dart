@@ -9,13 +9,6 @@ class LinuxAppFinder {
   static Set<String> iconPaths = {};
   bool initialized = false;
   String? systemIconTheme;
-  bool tempDebug = false;
-
-  void _tempDebug(e) {
-    if (tempDebug) {
-      print(e);
-    }
-  }
 
   void initialize() {
     if (initialized) {
@@ -33,27 +26,27 @@ class LinuxAppFinder {
 
     prettyLog(tag: "LinuxAppFinder", value: "Loading Apps ...");
 
-    // // Finding Global Applications
-    // _addAppsFrom('/usr/share/applications', onNotExistEvent: () {
-    //   prettyLog(
-    //       tag: "LinuxAppFinder",
-    //       value: "Unable to find any global applications ...");
-    // });
-    //
-    // // Finding Local Snap Applications
-    // _addAppsFrom('${Platform.environment['HOME']}/.local/share/applications',
-    //     onNotExistEvent: () {
-    //   prettyLog(
-    //       tag: "LinuxAppFinder",
-    //       value: "Unable to find local applications ...");
-    // });
-    //
-    // // Finding Global Snap Applications
-    // _addAppsFrom('/var/lib/snapd/desktop/applications', onNotExistEvent: () {
-    //   prettyLog(
-    //       tag: "LinuxAppFinder",
-    //       value: "Unable to find any global snap applications ...");
-    // });
+    // Finding Global Applications
+    _addAppsFrom('/usr/share/applications', onNotExistEvent: () {
+      prettyLog(
+          tag: "LinuxAppFinder",
+          value: "Unable to find any global applications ...");
+    });
+
+    // Finding Local Snap Applications
+    _addAppsFrom('${Platform.environment['HOME']}/.local/share/applications',
+        onNotExistEvent: () {
+      prettyLog(
+          tag: "LinuxAppFinder",
+          value: "Unable to find local applications ...");
+    });
+
+    // Finding Global Snap Applications
+    _addAppsFrom('/var/lib/snapd/desktop/applications', onNotExistEvent: () {
+      prettyLog(
+          tag: "LinuxAppFinder",
+          value: "Unable to find any global snap applications ...");
+    });
 
     // Finding Global Flatpak Applications
     _addAppsFrom('/var/lib/flatpak/exports/share/applications',
