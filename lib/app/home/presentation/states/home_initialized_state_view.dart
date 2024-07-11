@@ -6,6 +6,7 @@ import 'package:app_fleet/config/theme/app_theme.dart';
 import 'package:app_fleet/core/dependency_manager.dart';
 import 'package:app_fleet/utils/app_top_bar.dart';
 import 'package:app_fleet/utils/bottom_bar.dart';
+import 'package:app_fleet/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class HomeInitializedStateView extends StatefulWidget {
@@ -30,6 +31,7 @@ class _HomeInitializedStateViewState extends State<HomeInitializedStateView> {
   void initState() {
     super.initState();
     onUpdate();
+    scanForMissingComponent();
   }
 
   @override

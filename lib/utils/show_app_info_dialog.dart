@@ -104,7 +104,7 @@ void showAppInfo(BuildContext context) {
                                 ),
                                 const SizedBox(width: 10.0),
                                 AppTooltipBuilder.wrap(
-                                  text: "Support the Development of App Fleet",
+                                  text: "Liked it? Give it a star on GitHub",
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(40),
                                     child: Material(
@@ -112,8 +112,7 @@ void showAppInfo(BuildContext context) {
                                       child: IconButton(
                                         onPressed: () {
                                           Navigator.pop(context);
-                                          showAppSupportDialog(
-                                              context: context);
+                                          launchUrlString('https://github.com/omegaui/app-fleet');
                                         },
                                         icon: Image.asset(
                                           AppIcons.buyMeACoffee,
