@@ -2,9 +2,13 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:app_fleet/app/config/domain/workspace_entity.dart';
+import 'package:app_fleet/app/home/data/home_repository.dart';
 import 'package:app_fleet/core/app_bug_report.dart';
+import 'package:app_fleet/core/dependency_manager.dart';
 import 'package:app_fleet/core/logger.dart';
+import 'package:app_fleet/core/route_service.dart';
 import 'package:app_fleet/main.dart';
+import 'package:app_fleet/utils/show_missing_component_dialog.dart';
 import 'package:flutter/material.dart';
 
 const jsonEncoder = JsonEncoder.withIndent('  ');
@@ -181,4 +185,12 @@ String getAccentChar(String name) {
     }
   }
   return maxOccurredChar ?? result;
+}
+
+void scanForMissingComponent() async {
+  final homeRepository = DependencyInjection.find<HomeRepository>();
+  final installed = await homeRepository.isWMCTRLComponentInstalled();
+  if(!installed) {
+    showMissingComponentDialog(RouteService.navigatorKey.currentContext!);
+  }
 }

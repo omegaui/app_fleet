@@ -7,4 +7,5 @@ class AppAnimations {
   static const startUpdate = 'assets/animations/start-update.json';
   static const updating = 'assets/animations/updating.json';
   static const success = 'assets/animations/success.json';
+  static const connection = 'assets/animations/connection.json';
 }

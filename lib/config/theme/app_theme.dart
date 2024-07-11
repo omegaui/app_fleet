@@ -185,6 +185,12 @@ extension ConfigurableTextStyle on TextStyle {
     );
   }
 
+  TextStyle makeMedium() {
+    return copyWith(
+      fontWeight: FontWeight.w500,
+    );
+  }
+
   TextStyle makeItalic() {
     return copyWith(
       fontStyle: FontStyle.italic,
