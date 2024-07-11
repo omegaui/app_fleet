@@ -65,6 +65,21 @@ See [**CHANGELOG**](https://github.com/omegaui/app_fleet/blob/main/CHANGELOG.md)
 🎗️ Before installing make sure `wmctrl` is installed on your system, or else you will not be able to switch workspace
 using the App Fleet Launcher.
 
+#### Hey, Look here
+You need to have `wmctrl` installed on your system, or else app-fleet won't be able to switch workspaces automatically as expected.
+
+On Debian or Ubuntu,
+```shell
+sudo apt install wmctrl
+```
+
+On Fedora,
+```shell
+sudo dnf install wmctrl
+```
+
+For other distributions, look out for instructions.
+
 ### Install using your shell
 
 <p style="font-family: Sen">
