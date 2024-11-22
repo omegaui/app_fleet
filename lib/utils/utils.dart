@@ -169,7 +169,7 @@ bool launcherModeCapable() {
 }
 
 String getAccentChar(String name) {
-  var result = name[0];
+  var result = name.trim()[0];
   String? maxOccurredChar;
   int lastWeight = 0;
   for (var char in name.characters) {
@@ -184,7 +184,10 @@ String getAccentChar(String name) {
       maxOccurredChar = char;
     }
   }
-  return maxOccurredChar ?? result;
+  if(maxOccurredChar != null && maxOccurredChar!.trim().isNotEmpty) {
+    return maxOccurredChar;
+  }
+  return result;
 }
 
 void scanForMissingComponent() async {
