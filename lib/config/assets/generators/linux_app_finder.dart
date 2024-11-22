@@ -27,10 +27,17 @@ class LinuxAppFinder {
     prettyLog(tag: "LinuxAppFinder", value: "Loading Apps ...");
 
     // Finding Global Applications
-    _addAppsFrom('/usr/local/share/applications', onNotExistEvent: () {
+    _addAppsFrom('/usr/share/applications', onNotExistEvent: () {
       prettyLog(
           tag: "LinuxAppFinder",
           value: "Unable to find any global applications ...");
+    });
+
+    // Finding User Applications
+    _addAppsFrom('/usr/local/share/applications', onNotExistEvent: () {
+      prettyLog(
+          tag: "LinuxAppFinder",
+          value: "Unable to find any user applications ...");
     });
 
     // Finding Local Snap Applications
@@ -74,6 +81,15 @@ class LinuxAppFinder {
   }
 
   void _cacheIcons() {
+    _cacheFrom(
+      '/usr/share/icons',
+      onNotExistEvent: () {
+        prettyLog(
+          value: "No Global Icons Directory found",
+          type: DebugType.error,
+        );
+      },
+    );
     _cacheFrom(
       '/usr/local/share/icons',
       onNotExistEvent: () {
@@ -150,13 +166,27 @@ class LinuxAppFinder {
       bool found = icon.contains('/');
       bool foundInPixmaps = false;
       if (!found) {
-        Directory pixmapsDir = Directory('/usr/local/share/pixmaps');
-        var icons = pixmapsDir.listSync();
-        for (var entity in icons) {
-          if (entity.path.contains("/$icon.")) {
-            icon = entity.path;
-            foundInPixmaps = true;
-            break;
+        Directory userPixmapsDir = Directory('/usr/local/share/pixmaps');
+        if(userPixmapsDir.existsSync()) {
+          var icons = userPixmapsDir.listSync();
+          for (var entity in icons) {
+            if (entity.path.contains("/$icon.")) {
+              icon = entity.path;
+              foundInPixmaps = true;
+              break;
+            }
+          }
+        } else {
+          Directory globalPixmapsDir = Directory('/usr/share/pixmaps');
+          if(globalPixmapsDir.existsSync()) {
+            var icons = globalPixmapsDir.listSync();
+            for (var entity in icons) {
+              if (entity.path.contains("/$icon.")) {
+                icon = entity.path;
+                foundInPixmaps = true;
+                break;
+              }
+            }
           }
         }
       }
@@ -227,7 +257,7 @@ class LinuxAppFinder {
   }
 
   bool checkImageValidity(path) {
-    return !path.endsWith(".xpm");
+    return !path.endsWith(".xpm") && !path.endsWith(".svgz");
   }
 
   String? getSystemIconThemeSync() {

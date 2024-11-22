@@ -44,7 +44,9 @@ class HomeRepository {
     } catch (e) {
       prettyLog(
         value:
-            "Couldn't detect 'wmctrl' on this computer, APP FLEET WONT BE ABLE TO SWITCH WORKSPACES !!!",
+            "Couldn't detect `wmctrl` on PATH, APP FLEET WONT BE ABLE TO SWITCH WORKSPACES !!!"
+            "\nIf you are on a debian based distro, or have access to the apt or dnf package manager, "
+            "try running `sudo apt install wmctrl` or `sudo dnf install wmctrl`.",
         type: DebugType.error,
       );
       result = false;

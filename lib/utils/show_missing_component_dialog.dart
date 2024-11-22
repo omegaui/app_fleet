@@ -60,7 +60,7 @@ void showMissingComponentDialog(BuildContext context) async {
                               style: AppTheme.fontSize(12).makeBold(),
                             ),
                             Text(
-                              "couldn't switch workspaces",
+                              "cannot switch workspaces",
                               style: AppTheme.fontSize(12).makeBold(),
                             ),
                             const SizedBox(height: 5),
