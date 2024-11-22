@@ -7,7 +7,7 @@ echo "Do you have more than one flutter sdk installed? Or Does your SDK version 
 echo "Press any key to continue with building using the default Flutter SDK ..."
 read
 echo "> Building Linux Bundle ..."
-/home/omegaui/dev/tools/flutter/bin/flutter build linux --release
+flutter build linux --release
 echo "> Removing Old Bundle ..."
 rm -rf package/integration/bundle/*
 echo "> Copying Bundle ..."
