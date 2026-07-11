@@ -95,7 +95,7 @@ class _WorkspaceIconBoxState extends State<WorkspaceIconBox> {
     );
   }
 
-  showIconPicker({required void Function(String? path) onSelected}) {
+  void showIconPicker({required void Function(String? path) onSelected}) {
     icons.shuffle();
     bool hoverX = false;
     showDialog(
@@ -176,7 +176,7 @@ class _WorkspaceIconBoxState extends State<WorkspaceIconBox> {
                                             },
                                           ),
                                         );
-                                      }).toList(),
+                                      }),
                                     ],
                                   ),
                                 ),
@@ -198,7 +198,7 @@ class _WorkspaceIconBoxState extends State<WorkspaceIconBox> {
                                 }
 
                                 FilePickerResult? result =
-                                    await FilePicker.platform.pickFiles(
+                                    await FilePicker.pickFiles(
                                   type: FileType.image,
                                 );
                                 if (result != null) {

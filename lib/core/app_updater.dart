@@ -39,11 +39,11 @@ class AppUpdater {
   // Stores Update Checked Status for current session
   bool _checked = false;
 
-  StreamSubscription<ConnectivityResult> init() {
+  StreamSubscription<List<ConnectivityResult>> init() {
     return Connectivity()
         .onConnectivityChanged
-        .listen((ConnectivityResult result) {
-      if (result != ConnectivityResult.none) {
+        .listen((result) {
+      if (result.isNotEmpty) {
         final settingsRepo = DependencyInjection.find<SettingsRepository>();
         if (debugMode || !AppStorageManager.storageReady || _checked) {
           return;

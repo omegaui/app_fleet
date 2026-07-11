@@ -64,7 +64,7 @@ class AppFleet extends StatefulWidget {
 class _AppFleetState extends State<AppFleet> {
   bool initialized = false;
   late RouteService routeService;
-  StreamSubscription<ConnectivityResult>? connectivitySubscription;
+  StreamSubscription<List<ConnectivityResult>>? connectivitySubscription;
 
   @override
   void initState() {

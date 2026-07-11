@@ -184,7 +184,7 @@ String getAccentChar(String name) {
       maxOccurredChar = char;
     }
   }
-  if(maxOccurredChar != null && maxOccurredChar!.trim().isNotEmpty) {
+  if(maxOccurredChar != null && maxOccurredChar.trim().isNotEmpty) {
     return maxOccurredChar;
   }
   return result;

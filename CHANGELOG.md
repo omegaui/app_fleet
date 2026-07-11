@@ -1,3 +1,7 @@
+## v1.0.4+14
+
+- SDK upgrade
+
 ## v1.0.0+9
 
 - Enhanced Dark Mode

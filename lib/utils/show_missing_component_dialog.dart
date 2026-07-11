@@ -1,11 +1,7 @@
 import 'package:app_fleet/config/assets/app_animations.dart';
-import 'package:app_fleet/config/assets/app_icons.dart';
 import 'package:app_fleet/config/theme/app_theme.dart';
-import 'package:app_fleet/constants/app_meta_info.dart';
 import 'package:app_fleet/core/logger.dart';
-import 'package:app_fleet/utils/app_tooltip_builder.dart';
 import 'package:app_fleet/utils/app_window_buttons.dart';
-import 'package:app_fleet/utils/show_app_support_dialog.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';

@@ -4,7 +4,7 @@ import 'package:app_fleet/main.dart';
 
 enum DebugType { error, info, warning, url, response, statusCode }
 
-prettyLog({
+void prettyLog({
   String? tag,
   required dynamic value,
   DebugType type = DebugType.info,

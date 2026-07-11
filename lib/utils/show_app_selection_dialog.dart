@@ -144,7 +144,7 @@ void showAppSelectionDialog({
                                               },
                                             ),
                                           );
-                                        }).toList(),
+                                        }),
                                       ],
                                     ),
                                   ),

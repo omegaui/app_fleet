@@ -55,7 +55,7 @@ See [**CHANGELOG**](https://github.com/omegaui/app_fleet/blob/main/CHANGELOG.md)
 
 ## Review
 
-![Reviewed by ItsFOSS](https://itsfoss.com/content/images/size/w1304/2024/01/appfleet-workspace-automation-tool.png)
+![Reviewed by ItsFOSS](.github/images/review.png)
 <div align="center">
   <a href="https://news.itsfoss.com/app-fleet/"><p><strong>Reviewed by ItsFOSS</strong></p></a>
 </div>

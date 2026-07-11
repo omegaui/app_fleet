@@ -96,7 +96,7 @@ void showAppDialog({
                                         GestureDetector(
                                           onTap: () async {
                                             FilePickerResult? result =
-                                                await FilePicker.platform
+                                                await FilePicker
                                                     .pickFiles(
                                               type: FileType.image,
                                             );
